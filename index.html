@@ -14,144 +14,38 @@
 }
 html,body{height:100%;overflow:hidden}
 body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6}
-
-/* ── TOP BAR ── */
 .topbar{position:fixed;top:0;left:0;right:0;height:50px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1rem;gap:.35rem;z-index:999}
 .logo{font-weight:900;font-size:.93rem;color:#fff;white-space:nowrap;margin-right:.5rem;display:flex;align-items:center;gap:.32rem}
-.tabs{display:flex;gap:.15rem;flex:1;overflow-x:auto}
-.tabs::-webkit-scrollbar{display:none}
+.tabs{display:flex;gap:.15rem;flex:1;overflow-x:auto}.tabs::-webkit-scrollbar{display:none}
 .tab{display:flex;align-items:center;gap:.28rem;padding:.28rem .7rem;border:none;border-radius:7px;background:transparent;color:var(--dim);font-size:.8rem;font-weight:700;cursor:pointer;transition:all .18s;font-family:inherit;white-space:nowrap;border-bottom:2px solid transparent}
 .tab:hover{background:rgba(0,180,216,.1);color:var(--blue2)}
 .tab.active{background:rgba(0,180,216,.18);color:var(--blue);border-bottom-color:var(--blue)}
-
-/* ── CONTENT ── */
 .content{position:fixed;top:50px;left:0;right:0;bottom:0;overflow-y:auto;padding:.9rem 1.1rem}
-.panel{max-width:820px;margin:0 auto;display:none}
-.panel.active{display:block}
-
-/* ── Cards ── */
+.panel{max-width:820px;margin:0 auto;display:none}.panel.active{display:block}
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:.8rem .95rem;margin-bottom:.65rem}
-
-/* ── Titles ── */
 .stitle{font-size:1.05rem;font-weight:900;margin-bottom:.8rem;padding-bottom:.32rem;border-bottom:2px solid var(--blue);display:flex;align-items:center;gap:.42rem}
-
-/* ── Grid ── */
 .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
 .mat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:.5rem}
 .mat-item{text-align:center;padding:.6rem .3rem;background:var(--card);border:1px solid var(--border);border-radius:var(--r)}
-.mat-item .mi{font-size:1.55rem;margin-bottom:.18rem}
-.mat-item .mn{font-size:.76rem;color:var(--dim)}
-
-/* ── Goal cards ── */
-.goal-card{padding:.65rem .85rem}
-.goal-icon{font-size:1.45rem;margin-bottom:.22rem}
-.goal-title{font-weight:700;font-size:.88rem;margin-bottom:.1rem}
-.goal-desc{font-size:.8rem;color:var(--dim)}
-
-/* ── Exp badge ── */
+.mat-item .mi{font-size:1.55rem;margin-bottom:.18rem}.mat-item .mn{font-size:.76rem;color:var(--dim)}
+.goal-card{padding:.65rem .85rem}.goal-icon{font-size:1.45rem;margin-bottom:.22rem}
+.goal-title{font-weight:700;font-size:.88rem;margin-bottom:.1rem}.goal-desc{font-size:.8rem;color:var(--dim)}
 .ebadge{display:inline-flex;align-items:center;gap:.28rem;padding:.14rem .58rem;border-radius:999px;font-size:.73rem;font-weight:700;margin-bottom:.65rem}
 .b1{background:rgba(0,180,216,.14);border:1px solid var(--blue);color:var(--blue2)}
 .b2{background:rgba(247,127,0,.14);border:1px solid var(--orange);color:var(--orange)}
-
-/* ── Step header ── */
-.shd{display:flex;align-items:center;gap:.45rem;font-size:.86rem;font-weight:700;color:var(--blue3);margin-bottom:.5rem}
-.sn{width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:.73rem;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-
-/* ── Prediction ── */
-.pred-opts{display:flex;flex-direction:column;gap:.38rem;margin:.5rem 0}
-.pred-opt{display:flex;align-items:center;gap:.52rem;padding:.5rem .8rem;background:rgba(255,255,255,.04);border:1.5px solid var(--border);border-radius:8px;cursor:pointer;font-size:.86rem;transition:all .18s}
-.pred-opt:hover{border-color:var(--blue);background:rgba(0,180,216,.08)}
-.pred-opt.sel{border-color:var(--blue);background:rgba(0,180,216,.12)}
-.pred-opt input{accent-color:var(--blue);flex-shrink:0}
-.pred-res{margin-top:.5rem;padding:.5rem .78rem;border-radius:8px;font-weight:700;font-size:.83rem;display:flex;align-items:center;gap:.48rem}
-.ph{background:rgba(45,198,83,.1);border:1px solid rgba(45,198,83,.32);color:var(--green)}
-.pm{background:rgba(0,180,216,.07);border:1px solid var(--border);color:var(--blue3)}
-
-/* ── Buttons ── */
 .btn{padding:.42rem 1.05rem;font-size:.83rem;font-weight:700;border:none;border-radius:999px;cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:.28rem;font-family:inherit}
 .bp{background:var(--blue);color:#fff}.bp:hover{background:#0090ad}
 .bo{background:transparent;border:2px solid var(--blue);color:var(--blue)}.bo:hover{background:var(--blue);color:#fff}
 .borg{background:var(--orange);color:#fff}.borg:hover{filter:brightness(1.1)}
-.bgreen{background:var(--green);color:#fff}.bgreen:hover{filter:brightness(1.1)}
-
-/* ── Video ── */
-.vid-wrap{position:relative;width:100%;padding-bottom:56.25%;border-radius:var(--r);overflow:hidden;background:#000}
-.vid-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
-
-/* ── Scenario buttons ── */
-.scene-btns{display:grid;grid-template-columns:repeat(4,1fr);gap:.45rem;margin-bottom:.75rem}
-.sbtn{padding:.55rem .4rem;border:2px solid var(--border);border-radius:9px;background:rgba(255,255,255,.04);color:var(--dim);font-size:.78rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;text-align:center;line-height:1.4}
-.sbtn .si{font-size:1.4rem;display:block;margin-bottom:.18rem}
-.sbtn:hover{border-color:var(--blue);background:rgba(0,180,216,.1);color:var(--blue2)}
-.sbtn.active{border-color:var(--blue);background:rgba(0,180,216,.18);color:var(--blue)}
-.sbtn.air-btn.active{border-color:#90e0ef;background:rgba(144,224,239,.12);color:#90e0ef}
-.sbtn.water-btn.active{border-color:#0096c7;background:rgba(0,150,200,.18);color:#48cae4}
-.sbtn.oil-btn.active{border-color:#d4a017;background:rgba(212,160,23,.15);color:#e0b84a}
-.sbtn.all-btn.active{border-color:#a855f7;background:rgba(168,85,247,.14);color:#c084fc}
-
-/* ── Chop layout ── */
-.chop-layout{display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:start}
-@media(max-width:600px){.chop-layout{grid-template-columns:1fr}}
-.chop-info{display:flex;flex-direction:column;gap:.6rem}
-.layer-badge{display:flex;align-items:center;gap:.5rem;padding:.45rem .7rem;border-radius:8px;font-size:.82rem}
-.layer-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
-.layer-n{font-size:.75rem;color:var(--dim);margin-left:auto;font-variant-numeric:tabular-nums}
-.info-desc{font-size:.83rem;line-height:1.65;padding:.65rem .8rem;background:rgba(0,100,160,.12);border-left:3px solid var(--blue);border-radius:0 8px 8px 0}
-.refract-cnt{font-size:.78rem;color:var(--dim);margin-top:.35rem}
-.refract-cnt strong{color:var(--orange)}
-
-/* ── Coin layout ── */
-.coin-layout{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;align-items:start}
-@media(max-width:600px){.coin-layout{grid-template-columns:1fr}}
-.coin-info{font-size:.83rem;line-height:1.65;display:flex;flex-direction:column;gap:.55rem}
-.coin-badge{padding:.5rem .7rem;border-radius:8px;font-size:.82rem}
-.cbadge-real{background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.3)}
-.cbadge-virt{background:rgba(0,180,216,.1);border:1px solid rgba(0,180,216,.25)}
-
-/* ── Compare boxes ── */
-.cmp-row{display:flex;gap:.6rem;margin-top:.55rem}
-.cmp-box{flex:1;text-align:center;padding:.55rem;border-radius:8px;font-size:.8rem;background:rgba(255,255,255,.04);border:1px solid var(--border)}
-.cmp-box strong{display:block;font-size:.85rem;margin-bottom:.2rem}
-
-/* ── Canvas controls ── */
-.cvctrl{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;justify-content:center}
-input[type=range]{accent-color:var(--blue);width:130px}
-select.csel{background:var(--bg2);color:var(--text);border:1px solid var(--border);border-radius:7px;padding:.22rem .5rem;font-family:inherit;font-size:.82rem}
-
-/* ── Explain box ── */
 .ebox{background:rgba(0,100,160,.12);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;padding:.6rem .88rem;margin:.5rem 0;font-size:.86rem}
 .ebox p+p{margin-top:.28rem}
-
-/* ── Compare cards ── */
 .ca{background:rgba(0,180,216,.08);border:1px solid rgba(0,180,216,.25);border-radius:8px;padding:.65rem}
 .cb{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:.65rem}
-.ct{font-weight:700;font-size:.86rem;margin-bottom:.18rem}
-.cd{font-size:.8rem;color:var(--dim)}
-
-/* ── Summary ── */
+.ct{font-weight:700;font-size:.86rem;margin-bottom:.18rem}.cd{font-size:.8rem;color:var(--dim)}
 .sumg{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.6rem;margin-top:.75rem}
 .sc{padding:.85rem;border-radius:var(--r);text-align:center;background:rgba(0,100,160,.1);border:1px solid rgba(0,180,216,.2)}
-.sc .sb{font-size:1.8rem;margin-bottom:.22rem}
-.sc .st{font-weight:700;font-size:.86rem;margin-bottom:.1rem}
-.sc .sd{font-size:.78rem;color:var(--dim)}
-
-/* ── Life Applications ── */
-.life-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:.75rem}
-@media(max-width:640px){.life-grid{grid-template-columns:repeat(2,1fr)}}
-.life-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:.85rem;cursor:pointer;transition:all .22s;position:relative;overflow:hidden}
-.life-card:hover{border-color:var(--blue2);background:rgba(0,180,216,.08);transform:translateY(-2px)}
-.life-card.expanded{border-color:var(--blue);background:rgba(0,180,216,.1)}
-.lc-icon{font-size:2.2rem;margin-bottom:.35rem}
-.lc-title{font-weight:900;font-size:.9rem;margin-bottom:.22rem}
-.lc-brief{font-size:.78rem;color:var(--dim);line-height:1.55}
-.lc-detail{font-size:.8rem;line-height:1.65;margin-top:.55rem;padding-top:.55rem;border-top:1px solid var(--border);color:var(--blue3);display:none}
-.life-card.expanded .lc-detail{display:block}
-.lc-tap{font-size:.72rem;color:var(--dim);margin-top:.45rem;opacity:.7}
-.life-card.expanded .lc-tap{display:none}
-.lc-canvas{border-radius:7px;max-width:100%;display:block;margin:.45rem auto 0}
-
-/* ── Record ── */
+.sc .sb{font-size:1.8rem;margin-bottom:.22rem}.sc .st{font-weight:700;font-size:.86rem;margin-bottom:.1rem}.sc .sd{font-size:.78rem;color:var(--dim)}
 .rtbl{width:100%;border-collapse:collapse;font-size:.82rem}
 .rtbl th,.rtbl td{border:1px solid rgba(72,202,228,.22);padding:.48rem .65rem;text-align:left}
 .rtbl th{background:rgba(0,180,216,.11);color:var(--blue3);font-weight:700}
@@ -160,30 +54,72 @@ select.csel{background:var(--bg2);color:var(--text);border:1px solid var(--borde
 .ri:focus{outline:none;border-color:var(--blue)}
 .ni{background:rgba(255,255,255,.06);border:1px solid rgba(72,202,228,.22);border-radius:5px;padding:.26rem .48rem;color:var(--text);font-size:.83rem;font-family:inherit}
 .ni:focus{outline:none;border-color:var(--blue)}
-
-/* ── Hidden / Reveal ── */
 .hidden{display:none!important}
 .reveal{animation:fadeIn .38s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .nxt{text-align:right;margin-top:.6rem}
 
-/* ── Print ── */
+/* ── Lab interactive styles ── */
+.lab-strip{display:flex;gap:.8rem;flex-wrap:wrap;padding:.65rem .8rem;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:9px;margin-bottom:.7rem;align-items:flex-end}
+.ctrl-grp{display:flex;flex-direction:column;gap:.28rem}
+.cg-lbl{font-size:.76rem;color:var(--dim);font-weight:700;white-space:nowrap}
+.liq-row{display:flex;gap:.32rem;flex-wrap:wrap}
+.lbtn{padding:.32rem .7rem;border:1.5px solid var(--border);border-radius:7px;background:rgba(255,255,255,.04);color:var(--dim);font-size:.78rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .18s;white-space:nowrap}
+.lbtn:hover{border-color:var(--blue);color:var(--blue2);background:rgba(0,180,216,.08)}
+.lbtn.on{background:rgba(0,180,216,.2);border-color:var(--blue);color:var(--blue)}
+.lbtn.on-water{background:rgba(0,140,210,.2);border-color:#0096c7;color:#48cae4}
+.lbtn.on-oil{background:rgba(210,160,0,.2);border-color:#d4a017;color:#e0b84a}
+.lbtn.on-cmp{background:rgba(168,85,247,.18);border-color:#a855f7;color:#c084fc}
+.lbtn.air-fix{pointer-events:none;opacity:.65}
+.lbtn.clr{border-color:rgba(230,57,70,.4);color:rgba(230,57,70,.75)}
+.lbtn.clr:hover{border-color:var(--red);color:var(--red);background:rgba(230,57,70,.1)}
+.lbtn.on-box{background:rgba(0,180,216,.18);border-color:var(--blue);color:var(--blue)}
+input[type=range]{accent-color:var(--blue);width:130px;display:block}
+.lab-main{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:start}
+.lab-side{display:flex;flex-direction:column;gap:.5rem;min-width:0}
+.side-blk{padding:.55rem .7rem;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px}
+.sb-ttl{font-size:.77rem;font-weight:700;color:var(--blue3);margin-bottom:.35rem}
+.layer-row{display:flex;align-items:center;gap:.4rem;padding:.18rem 0;font-size:.82rem}
+.ld{width:11px;height:11px;border-radius:50%;flex-shrink:0;border:1px solid rgba(255,255,255,.2)}
+.obs-ta{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(72,202,228,.22);border-radius:6px;padding:.28rem .45rem;color:var(--text);font-size:.8rem;font-family:inherit;resize:none;height:60px}
+.obs-ta:focus{outline:none;border-color:var(--blue)}
+.cv-label{font-size:.72rem;color:var(--dim);text-align:center;margin-top:.25rem}
+.chk-lbl{display:flex;align-items:center;gap:.35rem;font-size:.8rem;color:var(--dim);cursor:pointer}
+.chk-lbl input{accent-color:var(--blue)}
+.vid-det{margin-top:.6rem}
+.vid-det summary{font-size:.82rem;font-weight:700;color:var(--dim);cursor:pointer;padding:.38rem .65rem;background:rgba(255,255,255,.04);border-radius:8px;border:1px solid var(--border);list-style:none;display:flex;align-items:center;gap:.4rem;user-select:none}
+.vid-det[open] summary{color:var(--blue2);border-color:var(--blue)}
+.vid-wrap{position:relative;width:100%;padding-bottom:56.25%;border-radius:var(--r);overflow:hidden;background:#000;margin-top:.55rem}
+.vid-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+
+/* life cards */
+.life-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:.7rem}
+@media(max-width:640px){.life-grid{grid-template-columns:repeat(2,1fr)}}
+.life-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:.8rem;cursor:pointer;transition:all .22s}
+.life-card:hover{border-color:var(--blue2);background:rgba(0,180,216,.08);transform:translateY(-2px)}
+.life-card.expanded{border-color:var(--blue);background:rgba(0,180,216,.1)}
+.lc-icon{font-size:2rem;margin-bottom:.3rem}.lc-title{font-weight:900;font-size:.88rem;margin-bottom:.2rem}
+.lc-brief{font-size:.76rem;color:var(--dim);line-height:1.55}
+.lc-detail{font-size:.78rem;line-height:1.65;margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--border);color:var(--blue3);display:none}
+.life-card.expanded .lc-detail{display:block}
+.lc-tap{font-size:.7rem;color:var(--dim);margin-top:.4rem;opacity:.7}
+.life-card.expanded .lc-tap{display:none}
+.lc-canvas{border-radius:6px;max-width:100%;display:block;margin:.4rem auto 0}
+
+/* print */
 @media print{
   body{background:#fff;color:#000;overflow:auto}
-  .topbar,.btn,.cvw,.vid-wrap,.pred-opts,.pred-res,.shd,.nxt,.scene-btns,canvas{display:none!important}
-  .content{position:static;overflow:visible}
-  .panel{display:none!important}
+  .topbar,.btn,.lab-strip,canvas,.vid-det{display:none!important}
+  .content{position:static;overflow:visible}.panel{display:none!important}
   #tab-record{display:block!important}
-  .card{border:1px solid #bbb}
-  .rtbl th{background:#ddd;color:#000}
+  .card{border:1px solid #bbb}.rtbl th{background:#ddd;color:#000}
   .ri,.ni{border:1px solid #999;background:#fff;color:#000}
 }
-@media(max-width:600px){.g3{grid-template-columns:1fr}.g2{grid-template-columns:1fr}.scene-btns{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:660px){.lab-main{grid-template-columns:1fr}.g3{grid-template-columns:1fr}.g2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<!-- ── TOP BAR ── -->
 <header class="topbar">
   <div class="logo">🔬 光的折射</div>
   <nav class="tabs">
@@ -220,159 +156,140 @@ select.csel{background:var(--bg2);color:var(--text);border:1px solid var(--borde
   <div class="nxt"><button class="btn bp" onclick="go('exp1')">開始實驗一 →</button></div>
 </div>
 
-<!-- ════ EXP 1: CHOPSTICK ════ -->
+<!-- ════ EXP 1: CHOPSTICK — fully interactive ════ -->
 <div class="panel" id="tab-exp1">
   <div class="ebadge b1">🥢 實驗一</div>
-  <h2 class="stitle">竹籤插入不同介質，會發生什麼事？</h2>
+  <h2 class="stitle">竹籤在不同介質中的折射</h2>
+  <div class="card">
 
-  <!-- Predict -->
-  <div class="card" id="e1s1">
-    <div class="shd"><span class="sn">1</span>先猜猜看！</div>
-    <p style="font-size:.86rem;margin-bottom:.5rem">把竹籤<strong>斜插入裝了水</strong>的方形盒，從<strong>水面上方</strong>觀察，看起來會怎樣？</p>
-    <div class="pred-opts">
-      <label class="pred-opt"><input type="radio" name="e1p" value="bent"> 竹籤好像在水面的地方斷掉了</label>
-      <label class="pred-opt"><input type="radio" name="e1p" value="same"> 竹籤完全沒有變化，看起來是直的</label>
-      <label class="pred-opt"><input type="radio" name="e1p" value="dunno"> 我不確定，要看了才知道</label>
-    </div>
-    <button class="btn bp" onclick="doPred('e1','bent','e1s2')">✓ 確認我的猜測</button>
-    <div id="e1pr" class="hidden pred-res"></div>
-  </div>
-
-  <!-- Video -->
-  <div class="card hidden" id="e1s2">
-    <div class="shd"><span class="sn">2</span>觀看實驗示範影片 <span style="font-size:.76rem;color:var(--dim);font-weight:400">（00:40 開始）</span></div>
-    <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/NvYKnm3iRVs?start=40" allowfullscreen loading="lazy"></iframe></div>
-    <div class="nxt"><button class="btn bp" onclick="show('e1s3');initChop()">我看完了 →</button></div>
-  </div>
-
-  <!-- Main Interactive -->
-  <div class="card hidden" id="e1s3">
-    <div class="shd"><span class="sn">3</span>互動觀察：選擇介質，觀察竹籤的彎折</div>
-    <div class="scene-btns" id="sceneBtns">
-      <button class="sbtn air-btn active" onclick="setScene('air')"><span class="si">💨</span>只有空氣</button>
-      <button class="sbtn water-btn" onclick="setScene('water')"><span class="si">💧</span>空氣 + 水</button>
-      <button class="sbtn oil-btn" onclick="setScene('oil')"><span class="si">🫒</span>空氣 + 食用油</button>
-      <button class="sbtn all-btn" onclick="setScene('all')"><span class="si">🌊</span>空氣 + 油 + 水</button>
-    </div>
-    <div class="chop-layout">
-      <canvas id="cvChop" width="340" height="285"></canvas>
-      <div class="chop-info">
-        <div id="layerBadges"></div>
-        <div class="info-desc" id="sceneDesc"></div>
-        <div class="refract-cnt" id="refractCnt"></div>
+    <!-- Controls -->
+    <div class="lab-strip">
+      <div class="ctrl-grp">
+        <span class="cg-lbl">🧪 加入液體（可多選）</span>
+        <div class="liq-row">
+          <span class="lbtn air-fix">💨 空氣（固定）</span>
+          <button class="lbtn" id="bWater" onclick="toggleLiq('water')">＋ 加入水</button>
+          <button class="lbtn" id="bOil"   onclick="toggleLiq('oil')">＋ 加入食用油</button>
+          <button class="lbtn clr" onclick="clearLiq()">🗑️ 清空</button>
+        </div>
+      </div>
+      <div class="ctrl-grp">
+        <span class="cg-lbl">🥢 竹籤角度：<strong id="angDisp" style="color:var(--blue)">38°</strong></span>
+        <input type="range" id="slAng" min="8" max="68" value="38" oninput="e1Upd()">
+      </div>
+      <div class="ctrl-grp">
+        <span class="cg-lbl">🔭 比較模式</span>
+        <button class="lbtn" id="bCmp" onclick="toggleCmp()">空氣 vs 目前配置</button>
       </div>
     </div>
-    <div class="cvctrl" style="margin-top:.65rem">
-      <span style="font-size:.78rem;color:var(--dim)">竹籤角度</span>
-      <input type="range" id="slAngle" min="8" max="68" value="38" oninput="redrawChop()">
-      <span id="angVal" style="font-weight:700;color:var(--blue);font-size:.86rem">38°</span>
+
+    <!-- Canvas + side panel -->
+    <div class="lab-main">
+      <div>
+        <canvas id="cvChop" width="355" height="292"></canvas>
+        <div class="cv-label">拖動滑桿改變角度，切換液體觀察折射變化</div>
+      </div>
+      <div class="lab-side">
+        <div class="side-blk">
+          <div class="sb-ttl">📐 介質組成與折射率</div>
+          <div id="layerInfo"></div>
+        </div>
+        <div class="side-blk">
+          <div class="sb-ttl">🔴 折射狀況</div>
+          <div id="rfInfo" style="font-size:.82rem;line-height:1.6"></div>
+        </div>
+        <div class="side-blk">
+          <div class="sb-ttl">✏️ 你觀察到什麼？</div>
+          <textarea class="obs-ta" placeholder="描述竹籤看起來的樣子…"></textarea>
+        </div>
+        <button class="btn bo" style="width:100%;font-size:.8rem" onclick="revE1()">💡 了解折射原因</button>
+        <div id="e1exp" class="hidden ebox">
+          <p>光從空氣（n=1.00）進入水（n=1.33）或油（n=1.47）時，速度<strong>減慢</strong>，傳播方向<strong>靠近法線</strong>，產生折射。</p>
+          <p>光必須先穿過水面才能到達眼睛，讓竹籤水中的影像「偏移」，看起來在界面處<strong>斷掉了</strong>！</p>
+          <p>介質越多、界面越多，竹籤看起來就斷成越多段。</p>
+        </div>
+      </div>
     </div>
-    <div class="nxt"><button class="btn bp" onclick="show('e1s4');drawExp1()">看原理說明 →</button></div>
   </div>
 
-  <!-- Explanation -->
-  <div class="card hidden" id="e1s4">
-    <div class="shd"><span class="sn">4</span>為什麼看起來斷掉了？</div>
-    <div class="ebox">
-      <p>📌 <strong>光的折射：</strong>光從空氣進入水或油時，速度改變，傳播方向就會「彎折」，稱為折射。</p>
-      <p>光穿過水面時，竹籤在水中的影像會「偏移」，從上方看就好像在水面處斷掉！</p>
-    </div>
-    <canvas id="cvExp1" width="450" height="150" style="border-radius:8px;max-width:100%;display:block;margin:.45rem auto"></canvas>
-    <div class="g2" style="margin-top:.5rem">
-      <div class="ca"><div class="ct" style="color:var(--blue2)">👆 從水面上方看</div><div class="cd">光穿過水面折射 → 竹籤<strong>看起來斷掉</strong></div></div>
-      <div class="cb"><div class="ct" style="color:var(--dim)">👉 從容器側面看</div><div class="cd">光不穿水面 → <strong>看不到</strong>明顯彎折</div></div>
-    </div>
-    <div class="nxt"><button class="btn bp" onclick="go('exp2')">前往實驗二 →</button></div>
-  </div>
+  <details class="vid-det">
+    <summary>📹 參考實驗影片（00:40 開始，四種介質示範）</summary>
+    <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/NvYKnm3iRVs?start=40" allowfullscreen loading="lazy"></iframe></div>
+  </details>
+  <div class="nxt" style="margin-top:.65rem"><button class="btn bp" onclick="go('exp2')">前往實驗二 →</button></div>
 </div>
 
-<!-- ════ EXP 2: COIN ════ -->
+<!-- ════ EXP 2: COIN — fully interactive ════ -->
 <div class="panel" id="tab-exp2">
   <div class="ebadge b2">🪙 實驗二</div>
-  <h2 class="stitle">硬幣放入水中，為什麼變成兩個？</h2>
+  <h2 class="stitle">硬幣放入水中：找到真正的硬幣！</h2>
+  <div class="card">
 
-  <!-- Predict -->
-  <div class="card" id="e2s1">
-    <div class="shd"><span class="sn">1</span>先猜猜看！</div>
-    <p style="font-size:.86rem;margin-bottom:.5rem">把一枚硬幣放在方形盒底部，<strong>慢慢加水</strong>，我們會看到幾個硬幣的影像？</p>
-    <div class="pred-opts">
-      <label class="pred-opt"><input type="radio" name="e2p" value="1"> 還是 1 個硬幣</label>
-      <label class="pred-opt"><input type="radio" name="e2p" value="2"> 會看到 2 個硬幣的影像</label>
-      <label class="pred-opt"><input type="radio" name="e2p" value="3"> 會看到 3 個或更多</label>
+    <!-- Controls -->
+    <div class="lab-strip">
+      <div class="ctrl-grp">
+        <span class="cg-lbl">📦 容器大小</span>
+        <div class="liq-row">
+          <button class="lbtn on-box" id="bLarge" onclick="setBox('large')">大方形盒</button>
+          <button class="lbtn" id="bSmall" onclick="setBox('small')">小方形盒</button>
+        </div>
+      </div>
+      <div class="ctrl-grp">
+        <span class="cg-lbl">💧 水位：<strong id="wPct" style="color:var(--blue)">0%</strong></span>
+        <input type="range" id="slWater" min="0" max="100" value="0" oninput="setWater(+this.value)">
+      </div>
+      <div class="ctrl-grp">
+        <span class="cg-lbl">⚙️ 顯示選項</span>
+        <label class="chk-lbl"><input type="checkbox" id="showRays" onchange="redrawE2()"> 光線路徑</label>
+      </div>
+      <div class="ctrl-grp">
+        <span class="cg-lbl">&nbsp;</span>
+        <button class="lbtn" id="bAuto" onclick="autoFill()">▶ 自動加水</button>
+      </div>
     </div>
-    <button class="btn borg" onclick="doPred('e2','2','e2s2')">✓ 確認我的猜測</button>
-    <div id="e2pr" class="hidden pred-res"></div>
-  </div>
 
-  <!-- Video -->
-  <div class="card hidden" id="e2s2">
-    <div class="shd"><span class="sn">2</span>觀看實驗示範影片 <span style="font-size:.76rem;color:var(--dim);font-weight:400">（02:46 開始）</span></div>
-    <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/NvYKnm3iRVs?start=166" allowfullscreen loading="lazy"></iframe></div>
-    <div class="nxt"><button class="btn borg" onclick="show('e2s3')">我看完了 →</button></div>
-  </div>
-
-  <!-- Main Interactive -->
-  <div class="card hidden" id="e2s3">
-    <div class="shd"><span class="sn">3</span>互動觀察：加水後硬幣的變化</div>
-    <div class="coin-layout">
+    <!-- Canvas + side panel -->
+    <div class="lab-main">
       <div>
-        <!-- Box size toggle -->
-        <div style="display:flex;gap:.45rem;margin-bottom:.6rem">
-          <button class="sbtn water-btn active" id="btnLarge" style="flex:1" onclick="setCoinBox('large')"><span class="si">📦</span>大方形盒</button>
-          <button class="sbtn" id="btnSmall" style="flex:1" onclick="setCoinBox('small')"><span class="si">📦</span>小方形盒</button>
-        </div>
-        <canvas id="cvCoin" width="320" height="295"></canvas>
-        <div class="cvctrl" style="margin-top:.55rem;gap:.55rem">
-          <button class="btn bo" style="font-size:.8rem;padding:.38rem .9rem" onclick="addWater()">💧 加水</button>
-          <button class="btn bo" style="font-size:.8rem;padding:.38rem .9rem" onclick="resetCoin()">🔄 重置</button>
-          <label style="display:flex;align-items:center;gap:.35rem;font-size:.8rem;color:var(--dim);cursor:pointer">
-            <input type="checkbox" id="showRays" onchange="redrawCoin()" style="accent-color:var(--blue)"> 光線路徑
-          </label>
-        </div>
+        <canvas id="cvCoin" width="325" height="305" style="cursor:crosshair"></canvas>
+        <div class="cv-label">👆 點擊圖中，指出你認為硬幣<strong>真正在的位置</strong></div>
       </div>
-      <div class="coin-info">
-        <div class="coin-badge cbadge-real">
-          <div style="font-weight:700;font-size:.85rem;margin-bottom:.2rem">🪙 真正的硬幣</div>
-          <div style="font-size:.8rem;color:var(--dim)">放在容器底部，<strong>實際位置</strong>就在這裡</div>
+      <div class="lab-side">
+        <!-- Observation -->
+        <div class="side-blk">
+          <div class="sb-ttl">👁️ 你看到幾個硬幣？</div>
+          <div id="coinObs" style="font-size:.82rem;color:var(--dim);line-height:1.65">加水後仔細觀察...</div>
         </div>
-        <div class="coin-badge cbadge-virt" id="virtBadge" style="opacity:.4">
-          <div style="font-weight:700;font-size:.85rem;margin-bottom:.2rem">👻 折射產生的虛像</div>
-          <div style="font-size:.8rem;color:var(--dim)">光穿過水面折射後，<strong>看起來</strong>比實際位置偏高</div>
+        <!-- Find game -->
+        <div class="side-blk">
+          <div class="sb-ttl">🎯 尋找真正的硬幣</div>
+          <p style="font-size:.78rem;color:var(--dim)">點擊圖中，你認為硬幣<strong>真正在哪裡</strong>？</p>
+          <div id="coinFB" style="min-height:2.2rem;margin-top:.4rem;font-size:.82rem;font-weight:700;line-height:1.55"></div>
         </div>
-        <div id="waterPctBox" style="font-size:.82rem;color:var(--dim)">水位：0%</div>
-        <div class="ebox" style="margin-top:.3rem">
-          <p style="font-size:.8rem">加水後你看到幾個硬幣？<br>拖動「光線路徑」勾選，看看光怎麼傳播！</p>
+        <!-- Size compare -->
+        <div class="side-blk">
+          <div class="sb-ttl">📊 大小方形盒比較</div>
+          <div style="font-size:.8rem;line-height:1.65;color:var(--dim)">
+            兩種容器加水後，都會看到<strong style="color:var(--text)">兩個硬幣</strong>的影像，現象<strong style="color:var(--text)">相似</strong>。<br>
+            折射效果與容器大小<strong style="color:var(--orange)">無關</strong>，取決於<strong style="color:var(--text)">水的深度</strong>。
+          </div>
         </div>
-        <!-- Size comparison -->
-        <div style="font-weight:700;font-size:.82rem;margin-top:.3rem;color:var(--blue3)">📊 大小方形盒比較</div>
-        <div class="cmp-row">
-          <div class="cmp-box"><strong>大方形盒</strong>硬幣→2個<br>水位較高</div>
-          <div class="cmp-box" style="border-color:rgba(247,127,0,.35)"><strong>小方形盒</strong>硬幣→2個<br>水位相近！</div>
+        <button class="btn bo" style="width:100%;font-size:.8rem" onclick="revE2()">💡 了解折射原因</button>
+        <div id="e2exp" class="hidden ebox">
+          <p>硬幣的光沿<strong>兩條路徑</strong>進入眼睛：</p>
+          <p>① 穿過水面（折射）→ 影像偏高 = <strong>虛像</strong></p>
+          <p>② 不穿水面 → 位置接近真實硬幣</p>
+          <p>所以看到<strong>兩個影像</strong>！</p>
         </div>
-        <div style="font-size:.78rem;color:var(--dim);margin-top:.3rem">💡 兩種方形盒現象相似，折射效果與<strong>容器大小無關</strong>。</div>
       </div>
     </div>
-    <div class="nxt"><button class="btn borg" onclick="show('e2s4')">看原理說明 →</button></div>
   </div>
 
-  <!-- Explanation -->
-  <div class="card hidden" id="e2s4">
-    <div class="shd"><span class="sn">4</span>為什麼硬幣變成兩個？</div>
-    <div class="ebox">
-      <p>🪙 硬幣的影像沿著<strong>兩條不同路徑</strong>進入眼睛，所以看到兩個影像：</p>
-    </div>
-    <div class="g2">
-      <div style="background:rgba(247,127,0,.09);border:1px solid rgba(247,127,0,.26);border-radius:8px;padding:.65rem">
-        <div class="ct" style="color:var(--orange)">📍 上方的虛像</div>
-        <div class="cd">光穿過水面折射，影像偏高，比實際位置高</div>
-      </div>
-      <div class="ca">
-        <div class="ct" style="color:var(--blue2)">📍 下方的實際影像</div>
-        <div class="cd">光不穿水面，位置接近真實硬幣</div>
-      </div>
-    </div>
-    <div class="nxt"><button class="btn bp" onclick="go('principle')">前往折射原理 →</button></div>
-  </div>
+  <details class="vid-det">
+    <summary>📹 參考實驗影片（02:46 開始，大小方形盒比較）</summary>
+    <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/NvYKnm3iRVs?start=166" allowfullscreen loading="lazy"></iframe></div>
+  </details>
+  <div class="nxt" style="margin-top:.65rem"><button class="btn bp" onclick="go('principle')">前往折射原理 →</button></div>
 </div>
 
 <!-- ════ PRINCIPLE ════ -->
@@ -393,100 +310,57 @@ select.csel{background:var(--bg2);color:var(--text);border:1px solid var(--borde
   <div class="nxt"><button class="btn bp" onclick="go('life')">前往生活應用 →</button></div>
 </div>
 
-<!-- ════ LIFE APPLICATIONS ════ -->
+<!-- ════ LIFE ════ -->
 <div class="panel" id="tab-life">
   <h2 class="stitle">🌍 光的折射在生活中</h2>
-  <p style="font-size:.86rem;color:var(--dim);margin-bottom:.85rem">我們在實驗中發現的折射現象，其實每天都出現在你身邊！點擊每張卡片，看看更多說明。</p>
+  <p style="font-size:.84rem;color:var(--dim);margin-bottom:.75rem">折射現象每天都在你身邊！點擊卡片看更多說明。</p>
   <div class="life-grid">
-
-    <!-- Card 1: Straw -->
     <div class="life-card" onclick="toggleCard(this)">
-      <div class="lc-icon">🥤</div>
-      <div class="lc-title">吸管看起來彎了</div>
-      <div class="lc-brief">把吸管插入飲料，吸管在液面看起來彎折了！</div>
-      <div class="lc-detail">
-        光從水中往空氣傳播，在水面折射，讓吸管的影像「偏移」。
-        我們的大腦以為光是直線傳播的，所以覺得吸管在水面處斷掉了。
-        <canvas class="lc-canvas" id="lcCv1" width="180" height="110"></canvas>
-      </div>
+      <div class="lc-icon">🥤</div><div class="lc-title">吸管看起來彎了</div>
+      <div class="lc-brief">吸管插入飲料，在液面看起來彎折了！</div>
+      <div class="lc-detail">光從水中往空氣傳播，在水面折射，讓吸管影像「偏移」。大腦以為光是直線，所以覺得吸管在水面斷掉了。<canvas class="lc-canvas" id="lcCv1" width="175" height="105"></canvas></div>
       <div class="lc-tap">👆 點擊看更多</div>
     </div>
-
-    <!-- Card 2: Pool -->
     <div class="life-card" onclick="toggleCard(this)">
-      <div class="lc-icon">🏊</div>
-      <div class="lc-title">游泳池底看起來很淺</div>
-      <div class="lc-brief">站在泳池邊，水底看起來比實際淺，要小心！</div>
-      <div class="lc-detail">
-        水底的光往上傳，在水面折射，讓水底影像「往上浮」。
-        眼睛看到的水深只有實際的 ¾（約 75%），容易誤判深度！
-        <canvas class="lc-canvas" id="lcCv2" width="180" height="110"></canvas>
-      </div>
+      <div class="lc-icon">🏊</div><div class="lc-title">游泳池底看起來很淺</div>
+      <div class="lc-brief">站在池邊，水底看起來比實際淺！</div>
+      <div class="lc-detail">水底的光往上折射，讓水底影像「往上浮」。眼睛看到的水深只有實際的約 75%，容易誤判深度！<canvas class="lc-canvas" id="lcCv2" width="175" height="105"></canvas></div>
       <div class="lc-tap">👆 點擊看更多</div>
     </div>
-
-    <!-- Card 3: Rainbow -->
     <div class="life-card" onclick="toggleCard(this)">
-      <div class="lc-icon">🌈</div>
-      <div class="lc-title">彩虹的形成</div>
-      <div class="lc-brief">雨後陽光穿過水珠，不同顏色折射角度不同，形成彩虹！</div>
-      <div class="lc-detail">
-        白光包含所有顏色，進入水珠時，紫色光折射最多、紅色光最少，分散形成七色彩虹。
-        彩虹永遠出現在太陽的對面，因為光在水珠內被反射後折射回來。
-      </div>
+      <div class="lc-icon">🌈</div><div class="lc-title">彩虹的形成</div>
+      <div class="lc-brief">陽光穿過水珠，不同顏色折射角度不同！</div>
+      <div class="lc-detail">白光包含所有顏色，進入水珠時紫色光折射最多、紅色光最少，分散形成七色彩虹。彩虹永遠在太陽的對面。</div>
       <div class="lc-tap">👆 點擊看更多</div>
     </div>
-
-    <!-- Card 4: Mirage -->
     <div class="life-card" onclick="toggleCard(this)">
-      <div class="lc-icon">🏜️</div>
-      <div class="lc-title">沙漠海市蜃樓</div>
-      <div class="lc-brief">沙漠中，遠處好像有水面——其實是光折射造成的幻象！</div>
-      <div class="lc-detail">
-        地面熱空氣密度較低，光從冷空氣進入熱空氣時折射方向改變，
-        遠處天空的光彎曲向上，被我們看到時好像從地面「反射」來的，
-        形成看起來像水面的幻象。
-      </div>
+      <div class="lc-icon">🏜️</div><div class="lc-title">沙漠海市蜃樓</div>
+      <div class="lc-brief">沙漠中好像有水面——其實是折射幻象！</div>
+      <div class="lc-detail">地面熱空氣密度低，光從冷空氣進入熱空氣折射彎曲，讓遠處天空的光看起來像從地面「反射」來的，形成水面幻象。</div>
       <div class="lc-tap">👆 點擊看更多</div>
     </div>
-
-    <!-- Card 5: Fish -->
     <div class="life-card" onclick="toggleCard(this)">
-      <div class="lc-icon">🐟</div>
-      <div class="lc-title">水族箱裡的魚</div>
-      <div class="lc-brief">從側面看水族箱，魚的位置和實際位置不同！</div>
-      <div class="lc-detail">
-        光從水中穿過玻璃進入空氣，在界面折射，讓我們看到的魚偏離了實際位置。
-        這也是漁夫用魚叉捕魚時要「往前瞄準」的原因——魚實際上比看起來更深！
-      </div>
+      <div class="lc-icon">🐟</div><div class="lc-title">水族箱裡的魚</div>
+      <div class="lc-brief">從側面看，魚的位置和實際位置不同！</div>
+      <div class="lc-detail">光從水中穿過玻璃進入空氣折射，讓魚看起來偏離了實際位置。漁夫用魚叉捕魚要「往前瞄準」，就是因為這個！</div>
       <div class="lc-tap">👆 點擊看更多</div>
     </div>
-
-    <!-- Card 6: Glasses -->
     <div class="life-card" onclick="toggleCard(this)">
-      <div class="lc-icon">👓</div>
-      <div class="lc-title">眼鏡矯正視力</div>
-      <div class="lc-brief">眼鏡利用折射原理，讓光線正確聚焦在視網膜上！</div>
-      <div class="lc-detail">
-        近視鏡片（凹透鏡）讓光線發散，遠視鏡片（凸透鏡）讓光線會聚。
-        光穿過玻璃鏡片時發生折射，改變焦距，幫助眼睛看清楚。
-        隱形眼鏡的原理完全相同！
-      </div>
+      <div class="lc-icon">👓</div><div class="lc-title">眼鏡矯正視力</div>
+      <div class="lc-brief">眼鏡利用折射讓光線正確聚焦在視網膜！</div>
+      <div class="lc-detail">近視鏡片（凹透鏡）讓光線發散，遠視鏡片（凸透鏡）讓光線會聚。光穿過鏡片發生折射，改變焦距，幫助眼睛看清楚。</div>
       <div class="lc-tap">👆 點擊看更多</div>
     </div>
-
   </div>
-
-  <!-- Principle summary table -->
-  <div class="card" style="margin-top:.85rem">
-    <div style="font-weight:700;font-size:.9rem;margin-bottom:.65rem">📊 折射現象總整理</div>
+  <div class="card" style="margin-top:.8rem">
+    <div style="font-weight:700;font-size:.88rem;margin-bottom:.55rem">📊 折射現象總整理</div>
     <div style="overflow-x:auto">
-      <table class="rtbl" style="font-size:.78rem">
+      <table class="rtbl" style="font-size:.77rem">
         <thead><tr><th>生活現象</th><th>介質變化</th><th>折射效果</th></tr></thead>
         <tbody>
           <tr><td>吸管/竹籤看起來彎折</td><td>空氣 → 水</td><td>光靠近法線，影像偏移</td></tr>
           <tr><td>游泳池底看起來較淺</td><td>水 → 空氣</td><td>光遠離法線，影像偏上</td></tr>
-          <tr><td>硬幣看起來變兩個</td><td>水 → 空氣</td><td>光走兩條路徑，產生虛像</td></tr>
+          <tr><td>硬幣看起來變兩個</td><td>水 → 空氣（兩條路徑）</td><td>產生虛像，偏離真實位置</td></tr>
           <tr><td>彩虹</td><td>空氣 → 水珠 → 空氣</td><td>不同顏色折射率不同</td></tr>
           <tr><td>海市蜃樓</td><td>冷空氣 → 熱空氣</td><td>連續折射，光線彎曲</td></tr>
         </tbody>
@@ -531,402 +405,316 @@ select.csel{background:var(--bg2);color:var(--text);border:1px solid var(--borde
 <script>
 'use strict';
 
-/* ════════════════════════
-   SCENARIO DATA
-════════════════════════ */
-const SCENES = {
-  air: {
-    label:'只有空氣', btnClass:'air-btn',
-    layers:[{label:'空氣',bg:'rgba(200,235,255,0.07)',n:1.00,dot:'#90e0ef',tc:'rgba(180,225,255,0.68)'}],
-    desc:'竹籤插在空氣中，光只在空氣裡傳播，<strong>沒有穿越不同介質的界面</strong>，所以竹籤看起來完全正常、沒有彎折。',
-    refract:0
-  },
-  water:{
-    label:'空氣 + 水', btnClass:'water-btn',
-    layers:[
-      {label:'空氣',bg:'rgba(200,235,255,0.07)',n:1.00,dot:'#90e0ef',tc:'rgba(180,225,255,0.68)',hR:0.44},
-      {label:'水',bg:'rgba(0,110,200,0.28)',n:1.33,dot:'#0096c7',tc:'rgba(100,200,255,0.78)',hR:0.56}
-    ],
-    desc:'竹籤在水面<strong>看起來彎折了</strong>！光從空氣（n=1.00）進入水中（n=1.33），速度減慢，方向靠近法線，形成一個明顯的彎折點。',
-    refract:1
-  },
-  oil:{
-    label:'空氣 + 食用油', btnClass:'oil-btn',
-    layers:[
-      {label:'空氣',bg:'rgba(200,235,255,0.07)',n:1.00,dot:'#90e0ef',tc:'rgba(180,225,255,0.68)',hR:0.44},
-      {label:'食用油',bg:'rgba(200,158,0,0.30)',n:1.47,dot:'#d4a017',tc:'rgba(220,185,40,0.82)',hR:0.56}
-    ],
-    desc:'食用油折射率（n=1.47）<strong>比水更高</strong>，光速在油中更慢，彎折角度更大！竹籤看起來比在水中更「斷」。',
-    refract:1
-  },
-  all:{
-    label:'空氣 + 油 + 水', btnClass:'all-btn',
-    layers:[
-      {label:'空氣',bg:'rgba(200,235,255,0.07)',n:1.00,dot:'#90e0ef',tc:'rgba(180,225,255,0.68)',hR:0.30},
-      {label:'食用油',bg:'rgba(200,158,0,0.30)',n:1.47,dot:'#d4a017',tc:'rgba(220,185,40,0.82)',hR:0.30},
-      {label:'水',bg:'rgba(0,110,200,0.28)',n:1.33,dot:'#0096c7',tc:'rgba(100,200,255,0.78)',hR:0.40}
-    ],
-    desc:'三種介質分層（油比水輕，浮在上方），竹籤穿越<strong>兩個界面</strong>，每個界面都發生折射，看起來<strong>斷成了三段</strong>！',
-    refract:2
-  }
-};
-
-let curScene = 'air';
-let wavePhase = 0;
-let waveAnimId = null;
-
-/* ── Tab switching ── */
+/* ── Tab switch ── */
 function go(id){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelector(`.tab[data-tab="${id}"]`).classList.add('active');
   document.getElementById('tab-'+id).classList.add('active');
   document.getElementById('content').scrollTop=0;
-  if(id==='exp1') setTimeout(()=>{initChop(); redrawChop();},50);
-  if(id==='exp2') setTimeout(redrawCoin,50);
   if(id==='principle') setTimeout(()=>drawPrin(1),50);
-  if(id==='life') setTimeout(drawLifeCanvases,80);
+  if(id==='life') setTimeout(drawLifeCvs,80);
 }
 
-/* ── Step reveal ── */
-function show(id){
-  const el=document.getElementById(id);
-  if(!el)return;
-  el.classList.remove('hidden'); el.classList.add('reveal');
-  setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'nearest'}),80);
+function toggleCard(c){
+  const was=c.classList.contains('expanded');
+  document.querySelectorAll('.life-card').forEach(x=>x.classList.remove('expanded'));
+  if(!was){c.classList.add('expanded');setTimeout(drawLifeCvs,60);}
 }
 
-/* ── Prediction ── */
-document.querySelectorAll('.pred-opt').forEach(opt=>{
-  opt.addEventListener('click',()=>{
-    opt.closest('.pred-opts').querySelectorAll('.pred-opt').forEach(o=>o.classList.remove('sel'));
-    opt.classList.add('sel');
-  });
-});
-function doPred(exp,correct,nextId){
-  const opts=document.querySelectorAll(`input[name="${exp}p"]`);
-  let chosen=null; opts.forEach(o=>{if(o.checked)chosen=o.value;});
-  if(!chosen){alert('請先選擇你的猜測！');return;}
-  const ok=chosen===correct;
-  const el=document.getElementById(`${exp}pr`);
-  el.className=`pred-res ${ok?'ph':'pm'}`;
-  el.innerHTML=ok?'✅ 猜對了！你的觀察力很棒，讓我們看看影片來驗證吧！':'🔍 讓我們一起看看實驗影片，結果可能會讓你驚訝！';
-  el.classList.remove('hidden');
-  setTimeout(()=>show(nextId),450);
-}
+/* ═══════════════════════════════
+   EXP 1 — CHOPSTICK
+═══════════════════════════════ */
+let hasWater=false, hasOil=false, cmpMode=false;
 
-/* ── Life card toggle ── */
-function toggleCard(card){
-  const wasOpen = card.classList.contains('expanded');
-  document.querySelectorAll('.life-card').forEach(c=>c.classList.remove('expanded'));
-  if(!wasOpen){
-    card.classList.add('expanded');
-    setTimeout(drawLifeCanvases,60);
+function toggleLiq(t){
+  if(t==='water'){
+    hasWater=!hasWater;
+    const b=document.getElementById('bWater');
+    b.classList.toggle('on-water',hasWater);
+    b.textContent=hasWater?'💧 水（點擊移除）':'＋ 加入水';
+  } else {
+    hasOil=!hasOil;
+    const b=document.getElementById('bOil');
+    b.classList.toggle('on-oil',hasOil);
+    b.textContent=hasOil?'🫒 油（點擊移除）':'＋ 加入食用油';
   }
+  e1Upd();
 }
 
-/* ════════════════════════
-   CANVAS: CHOPSTICK
-════════════════════════ */
-function initChop(){
-  setScene('air');
+function clearLiq(){
+  hasWater=false; hasOil=false;
+  const bw=document.getElementById('bWater'), bo=document.getElementById('bOil');
+  bw.classList.remove('on-water'); bw.textContent='＋ 加入水';
+  bo.classList.remove('on-oil'); bo.textContent='＋ 加入食用油';
+  e1Upd();
 }
 
-function setScene(key){
-  curScene = key;
-  document.querySelectorAll('.sbtn').forEach(b=>b.classList.remove('active'));
-  const sc = SCENES[key];
-  document.querySelectorAll('#sceneBtns .sbtn').forEach((b,i)=>{
-    const keys=['air','water','oil','all'];
-    if(keys[i]===key) b.classList.add('active');
-  });
-  // Update info panel
-  const badgesEl = document.getElementById('layerBadges');
-  badgesEl.innerHTML = sc.layers.map(l=>`
-    <div class="layer-badge" style="background:${l.bg.replace(/[\d.]+\)$/,'0.25)')};border:1px solid ${l.dot}44">
-      <span class="layer-dot" style="background:${l.dot}"></span>
-      <span style="font-weight:700;font-size:.83rem">${l.label}</span>
-      <span class="layer-n">n = ${l.n.toFixed(2)}</span>
-    </div>
-  `).join('');
-  document.getElementById('sceneDesc').innerHTML = sc.desc;
-  const rc = document.getElementById('refractCnt');
-  if(sc.refract===0) rc.innerHTML='🟢 <strong>0 個</strong>折射界面 — 竹籤看起來是直的';
-  else if(sc.refract===1) rc.innerHTML=`🔴 <strong>1 個</strong>折射界面 — 竹籤在界面處有 <strong style="color:var(--orange)">1 個彎折點</strong>`;
-  else rc.innerHTML=`🔴 <strong>2 個</strong>折射界面 — 竹籤有 <strong style="color:var(--orange)">2 個彎折點</strong>，看起來斷成三段！`;
-  redrawChop();
+function toggleCmp(){
+  cmpMode=!cmpMode;
+  const b=document.getElementById('bCmp');
+  b.classList.toggle('on-cmp',cmpMode);
+  e1Upd();
 }
 
-function redrawChop(){
-  const deg = +document.getElementById('slAngle').value;
-  document.getElementById('angVal').textContent = deg+'°';
-  drawChopMain(curScene, deg);
+function e1Upd(){
+  const deg=+document.getElementById('slAng').value;
+  document.getElementById('angDisp').textContent=deg+'°';
+  const layers=getLayers();
+  updateLayerPanel(layers);
+  drawChopScene(deg,layers,cmpMode);
 }
 
-function drawChopMain(sceneKey, angleDeg){
-  const cv = document.getElementById('cvChop'); if(!cv) return;
-  const ctx = cv.getContext('2d'), W=cv.width, H=cv.height;
-  const sc = SCENES[sceneKey];
-  const layers = sc.layers;
+function getLayers(){
+  if(!hasWater&&!hasOil) return [{label:'空氣',bg:'rgba(200,235,255,0.07)',n:1.00,tc:'#90e0ef',hR:1}];
+  if(hasWater&&!hasOil) return [
+    {label:'空氣',bg:'rgba(200,235,255,0.07)',n:1.00,tc:'#90e0ef',hR:0.44},
+    {label:'水',bg:'rgba(0,110,200,0.27)',n:1.33,tc:'#48cae4',hR:0.56}
+  ];
+  if(!hasWater&&hasOil) return [
+    {label:'空氣',bg:'rgba(200,235,255,0.07)',n:1.00,tc:'#90e0ef',hR:0.44},
+    {label:'食用油',bg:'rgba(200,158,0,0.30)',n:1.47,tc:'#e0b84a',hR:0.56}
+  ];
+  return [
+    {label:'空氣',bg:'rgba(200,235,255,0.07)',n:1.00,tc:'#90e0ef',hR:0.30},
+    {label:'食用油',bg:'rgba(200,158,0,0.30)',n:1.47,tc:'#e0b84a',hR:0.30},
+    {label:'水',bg:'rgba(0,110,200,0.27)',n:1.33,tc:'#48cae4',hR:0.40}
+  ];
+}
+
+function updateLayerPanel(layers){
+  const nI=layers.length-1;
+  document.getElementById('layerInfo').innerHTML=layers.map(l=>
+    `<div class="layer-row">
+      <span class="ld" style="background:${l.tc}"></span>
+      <span style="font-weight:700">${l.label}</span>
+      <span style="margin-left:auto;font-size:.75rem;color:var(--dim)">n = ${l.n.toFixed(2)}</span>
+    </div>`
+  ).join('');
+  const msgs=['🟢 無折射界面 — 竹籤看起來<strong>完全是直的</strong>',
+    '🔴 1 個折射界面 — 竹籤在界面有 <strong style="color:var(--orange)">1 個彎折點</strong>，看起來斷一次',
+    '🔴🔴 2 個折射界面 — 竹籤有 <strong style="color:var(--orange)">2 個彎折點</strong>，看起來<strong>斷成三段</strong>！'];
+  document.getElementById('rfInfo').innerHTML=msgs[nI]||'';
+}
+
+function revE1(){document.getElementById('e1exp').classList.toggle('hidden');}
+
+/* draw chopstick canvas */
+let waveT=0;
+
+function drawChopScene(deg,layers,cmp){
+  const cv=document.getElementById('cvChop'); if(!cv)return;
+  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
   ctx.clearRect(0,0,W,H);
-
-  // Background
   ctx.fillStyle='#060f1e'; ctx.roundRect(0,0,W,H,10); ctx.fill();
-
-  // Container
-  const bx=30, by=14, bw=230, bh=H-28;
-
-  // Fill layers
-  let ly = by;
-  layers.forEach(l=>{
-    const lh = (l.hR || 1.0) * bh;
-    ctx.fillStyle = l.bg;
-    ctx.fillRect(bx, ly, bw, lh);
-    ly += lh;
-  });
-
-  // Wave interfaces
-  ly = by;
-  for(let i=0;i<layers.length-1;i++){
-    ly += (layers[i].hR||1)*bh;
-    ctx.save();
-    ctx.beginPath(); ctx.rect(bx,by,bw,bh); ctx.clip();
-    ctx.strokeStyle='rgba(120,210,255,0.72)'; ctx.lineWidth=2; ctx.setLineDash([]);
-    ctx.beginPath();
-    for(let x=bx;x<=bx+bw;x+=2){
-      const wx=((x-bx)/bw)*Math.PI*7;
-      const wy=ly+Math.sin(wx+wavePhase)*2.2;
-      if(x===bx)ctx.moveTo(x,wy); else ctx.lineTo(x,wy);
-    }
-    ctx.stroke(); ctx.restore();
+  if(cmp&&(hasWater||hasOil)){
+    const airL=[{label:'空氣',bg:'rgba(200,235,255,0.07)',n:1.00,tc:'#90e0ef',hR:1}];
+    drawCont(ctx,18,14,140,H-28,airL,deg);
+    drawCont(ctx,182,14,140,H-28,layers,deg);
+    ctx.fillStyle='rgba(200,220,255,.5)'; ctx.font='bold 11px sans-serif'; ctx.textAlign='center';
+    ctx.fillText('只有空氣',88,H-5); ctx.fillText('目前配置',252,H-5);
+    ctx.strokeStyle='rgba(72,202,228,.18)'; ctx.lineWidth=1; ctx.setLineDash([4,4]);
+    ctx.beginPath(); ctx.moveTo(168,16); ctx.lineTo(168,H-16); ctx.stroke(); ctx.setLineDash([]);
+  } else {
+    drawCont(ctx,38,14,238,H-28,layers,deg);
   }
+}
 
-  // Glass shine
-  const shine=ctx.createLinearGradient(bx,by,bx+18,by);
-  shine.addColorStop(0,'rgba(255,255,255,0.1)'); shine.addColorStop(1,'rgba(255,255,255,0)');
-  ctx.fillStyle=shine; ctx.fillRect(bx,by,18,bh);
-
-  // Container border
-  ctx.strokeStyle='rgba(72,202,228,0.55)'; ctx.lineWidth=2; ctx.strokeRect(bx,by,bw,bh);
-
-  // Draw chopstick with Snell's law
-  const rad = angleDeg*Math.PI/180;
-  let curAng=rad, curN=layers[0].n;
-  const firstH=(layers[0].hR||1)*bh;
-  let cx=bx+bw*0.55-Math.tan(rad)*(firstH-8), cy=by+6;
-
-  const ifPts=[]; // interface refraction points
-
-  ctx.lineCap='round';
-  ly=by;
-  layers.forEach((l,i)=>{
+function drawCont(ctx,bx,by,bw,bh,layers,deg){
+  let ly=by;
+  layers.forEach(l=>{
     const lh=(l.hR||1)*bh;
-    const eyY = i<layers.length-1 ? ly+lh : ly+lh-8;
-    const dy=eyY-cy, ex=cx+Math.tan(curAng)*dy;
-
-    // Draw stick segment with gradient
-    const grad2=ctx.createLinearGradient(cx,cy,ex,eyY);
-    grad2.addColorStop(0,'#e0aa78'); grad2.addColorStop(1,'#b8804a');
-    ctx.strokeStyle=grad2; ctx.lineWidth=8;
-    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(ex,eyY); ctx.stroke();
-    // Highlight stripe
-    const hl=ctx.createLinearGradient(cx-3,cy,cx+3,cy);
-    hl.addColorStop(0,'rgba(255,230,180,0.5)'); hl.addColorStop(1,'rgba(255,230,180,0)');
-    ctx.strokeStyle=hl; ctx.lineWidth=3;
-    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(ex,eyY); ctx.stroke();
-
-    if(i<layers.length-1){
-      ifPts.push({x:ex,y:eyY});
-      const sn=Math.sin(curAng)*curN/layers[i+1].n;
-      curAng=Math.abs(sn)<=1?Math.asin(sn):curAng;
-      curN=layers[i+1].n;
-    }
-    cx=ex; cy=eyY; ly+=lh;
+    ctx.fillStyle=l.bg; ctx.fillRect(bx,ly,bw,lh); ly+=lh;
   });
-
-  // Refraction point dots
-  ifPts.forEach(pt=>{
-    ctx.fillStyle='rgba(255,70,60,0.85)';
-    ctx.strokeStyle='rgba(255,160,150,0.6)'; ctx.lineWidth=1.5;
-    ctx.beginPath(); ctx.arc(pt.x,pt.y,5.5,0,Math.PI*2); ctx.fill(); ctx.stroke();
-  });
-
-  // Right-side labels
+  // interfaces (wavy)
   ly=by;
-  layers.forEach(l=>{
-    const lh=(l.hR||1)*bh, my=ly+lh/2;
-    ctx.fillStyle=l.tc; ctx.font='bold 12px "Noto Sans TC",sans-serif'; ctx.textAlign='left';
-    ctx.fillText(l.label, bx+bw+11, my-5);
-    ctx.fillStyle='rgba(160,205,255,0.52)'; ctx.font='10px monospace';
-    ctx.fillText(`n=${l.n}`, bx+bw+11, my+10);
-    ly+=lh;
-  });
-}
-
-// Wave animation
-function startWave(){
-  if(waveAnimId) return;
-  function tick(){
-    wavePhase+=0.06;
-    const cv=document.getElementById('cvChop');
-    if(cv && document.getElementById('tab-exp1').classList.contains('active')){
-      drawChopMain(curScene, +document.getElementById('slAngle').value);
-      waveAnimId=requestAnimationFrame(tick);
-    } else {
-      waveAnimId=null;
-    }
-  }
-  waveAnimId=requestAnimationFrame(tick);
-}
-
-/* ════════════════════════
-   CANVAS: EXPLAIN (top vs side)
-════════════════════════ */
-function drawExp1(){
-  const cv=document.getElementById('cvExp1'); if(!cv)return;
-  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
-  ctx.clearRect(0,0,W,H); ctx.fillStyle='#060f1e'; ctx.roundRect(0,0,W,H,8); ctx.fill();
-  function pan(ox,oy,pw,ph,ref,l1,l2){
-    const wY=oy+ph*.5;
-    ctx.fillStyle='rgba(200,235,255,.055)'; ctx.fillRect(ox,oy,pw,wY-oy);
-    ctx.fillStyle='rgba(0,110,200,.22)'; ctx.fillRect(ox,wY,pw,oy+ph-wY);
-    ctx.strokeStyle='rgba(72,202,228,.4)'; ctx.lineWidth=1.5; ctx.strokeRect(ox,oy,pw,ph);
-    ctx.strokeStyle='rgba(120,210,255,.55)'; ctx.lineWidth=1.5; ctx.setLineDash([]);
-    ctx.beginPath(); ctx.moveTo(ox,wY); ctx.lineTo(ox+pw,wY); ctx.stroke();
-    ctx.fillStyle='rgba(200,220,255,.42)'; ctx.font='10px sans-serif'; ctx.textAlign='left';
-    ctx.fillText('空氣',ox+4,oy+13); ctx.fillText('水',ox+4,wY+13);
-    const ang=38*Math.PI/180,eX=ox+pw*.54,eY=wY,len=55;
-    ctx.lineCap='round';
-    if(ref){
-      const rA=Math.asin(Math.sin(ang)/1.33);
-      ctx.strokeStyle='#c8916c'; ctx.lineWidth=5;
-      ctx.beginPath(); ctx.moveTo(eX-Math.sin(ang)*len,eY-Math.cos(ang)*len); ctx.lineTo(eX,eY); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(eX,eY); ctx.lineTo(eX+Math.sin(rA)*len,eY+Math.cos(rA)*len); ctx.stroke();
-      ctx.fillStyle='rgba(255,70,60,.75)'; ctx.beginPath(); ctx.arc(eX,eY,4,0,Math.PI*2); ctx.fill();
-      ctx.font='16px sans-serif'; ctx.textAlign='center'; ctx.fillText('👁️',eX-len*.55,oy+15);
-    } else {
-      ctx.strokeStyle='#c8916c'; ctx.lineWidth=5;
-      ctx.beginPath(); ctx.moveTo(eX-Math.sin(ang)*len,eY-Math.cos(ang)*len); ctx.lineTo(eX+Math.sin(ang)*len,eY+Math.cos(ang)*len); ctx.stroke();
-      ctx.font='16px sans-serif'; ctx.textAlign='center'; ctx.fillText('👁️',ox+pw-5,eY+4);
-    }
-    ctx.fillStyle=ref?'rgba(255,210,50,.85)':'rgba(160,160,160,.65)';
-    ctx.font='bold 12px "Noto Sans TC",sans-serif'; ctx.textAlign='center';
-    ctx.fillText(l1,ox+pw/2,oy+ph+17);
-    ctx.fillStyle=ref?'rgba(45,198,83,.8)':'rgba(130,130,130,.55)';
-    ctx.font='10px "Noto Sans TC",sans-serif';
-    ctx.fillText(l2,ox+pw/2,oy+ph+30);
-  }
-  pan(20,14,175,110,true,'從水面上方看','✓ 有折射（看起來斷掉）');
-  pan(240,14,175,110,false,'從容器側面看','✗ 看不到折射');
-}
-
-/* ════════════════════════
-   CANVAS: COIN
-════════════════════════ */
-let coinW=0, coinTick=null, coinBoxW=280;
-
-function setCoinBox(type){
-  document.getElementById('btnLarge').classList.remove('active');
-  document.getElementById('btnSmall').classList.remove('active');
-  document.getElementById('btn'+type.charAt(0).toUpperCase()+type.slice(1)).classList.add('active');
-  coinBoxW = type==='large' ? 280 : 190;
-  resetCoin();
-}
-
-function addWater(){
-  if(coinTick)return;
-  coinTick=setInterval(()=>{
-    coinW=Math.min(coinW+1.5,100); redrawCoin();
-    if(coinW>=100){clearInterval(coinTick);coinTick=null;}
-  },22);
-}
-function resetCoin(){
-  if(coinTick){clearInterval(coinTick);coinTick=null;}
-  coinW=0; redrawCoin();
-  document.getElementById('virtBadge').style.opacity='0.4';
-}
-
-function redrawCoin(){
-  const cv=document.getElementById('cvCoin'); if(!cv)return;
-  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
-  const sr=document.getElementById('showRays')?.checked;
-  ctx.clearRect(0,0,W,H); ctx.fillStyle='#060f1e'; ctx.roundRect(0,0,W,H,10); ctx.fill();
-
-  const bw=coinBoxW, bh=H-36, bx=(W-bw)/2, by=18, bBot=by+bh;
-  const wHmax=bh-14, wH=(coinW/100)*wHmax, wY=bBot-wH;
-
-  // Water
-  if(coinW>0){
-    const g=ctx.createLinearGradient(bx,wY,bx,bBot);
-    g.addColorStop(0,'rgba(0,120,210,0.12)'); g.addColorStop(1,'rgba(0,70,165,0.32)');
-    ctx.fillStyle=g; ctx.fillRect(bx,wY,bw,wH);
-    // surface
-    ctx.strokeStyle='rgba(120,210,255,0.65)'; ctx.lineWidth=2; ctx.setLineDash([]);
+  for(let i=0;i<layers.length-1;i++){
+    ly+=(layers[i].hR||1)*bh;
+    ctx.strokeStyle='rgba(120,210,255,0.68)'; ctx.lineWidth=1.8; ctx.setLineDash([]);
     ctx.beginPath();
     for(let x=bx;x<=bx+bw;x+=2){
-      const wy=wY+Math.sin(((x-bx)/bw)*Math.PI*6+wavePhase)*1.8;
-      if(x===bx)ctx.moveTo(x,wy); else ctx.lineTo(x,wy);
+      const wy=ly+Math.sin(((x-bx)/bw)*Math.PI*6+waveT)*2;
+      x===bx?ctx.moveTo(x,wy):ctx.lineTo(x,wy);
     }
     ctx.stroke();
   }
+  // glass shine
+  const sh=ctx.createLinearGradient(bx,by,bx+14,by);
+  sh.addColorStop(0,'rgba(255,255,255,.1)'); sh.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle=sh; ctx.fillRect(bx,by,14,bh);
+  // border
+  ctx.strokeStyle='rgba(72,202,228,.52)'; ctx.lineWidth=2; ctx.strokeRect(bx,by,bw,bh);
+  // labels
+  ly=by;
+  const fs=Math.max(10,Math.min(12,bw*0.065));
+  layers.forEach(l=>{
+    const lh=(l.hR||1)*bh, my=ly+lh/2;
+    ctx.fillStyle=l.tc; ctx.font=`bold ${fs}px "Noto Sans TC",sans-serif`; ctx.textAlign='left';
+    ctx.fillText(l.label,bx+6,my-3);
+    ctx.fillStyle='rgba(160,205,255,.5)'; ctx.font=`${fs-1}px monospace`;
+    ctx.fillText('n='+l.n,bx+6,my+11);
+    ly+=lh;
+  });
+  // chopstick
+  const rad=deg*Math.PI/180;
+  let curAng=rad, curN=layers[0].n;
+  const f1h=(layers[0].hR||1)*bh;
+  let cx2=bx+bw*0.56-Math.tan(rad)*(f1h-7), cy2=by+5;
+  const ifPts=[];
+  ctx.lineCap='round'; ly=by;
+  layers.forEach((l,i)=>{
+    const lh=(l.hR||1)*bh;
+    const ey=i<layers.length-1?ly+lh:ly+lh-7;
+    const dy=ey-cy2, ex=cx2+Math.tan(curAng)*dy;
+    const g=ctx.createLinearGradient(cx2,cy2,ex,ey);
+    g.addColorStop(0,'#e0aa78'); g.addColorStop(1,'#b8804a');
+    ctx.strokeStyle=g; ctx.lineWidth=Math.max(5,bw*0.028);
+    ctx.beginPath(); ctx.moveTo(cx2,cy2); ctx.lineTo(ex,ey); ctx.stroke();
+    if(i<layers.length-1){
+      ifPts.push({x:ex,y:ey});
+      const sn=Math.sin(curAng)*curN/layers[i+1].n;
+      curAng=Math.abs(sn)<=1?Math.asin(sn):curAng; curN=layers[i+1].n;
+    }
+    cx2=ex; cy2=ey; ly+=lh;
+  });
+  // refraction dots
+  ifPts.forEach(p=>{
+    ctx.fillStyle='rgba(255,60,50,.9)'; ctx.strokeStyle='rgba(255,150,140,.6)'; ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.arc(p.x,p.y,Math.max(4,bw*0.022),0,Math.PI*2); ctx.fill(); ctx.stroke();
+  });
+}
 
-  // Container
-  ctx.strokeStyle='rgba(72,202,228,0.52)'; ctx.lineWidth=2; ctx.strokeRect(bx,by,bw,bh);
+/* ═══════════════════════════════
+   EXP 2 — COIN
+═══════════════════════════════ */
+let coinW2=0, coinBox='large', autoId=null;
 
-  // Coin (real)
-  const cX=bx+bw/2, cY=bBot-20, rX=Math.min(bw*0.32,22), rY=Math.min(rX*0.42,8);
-  const coinGrad=ctx.createRadialGradient(cX-rX*0.3,cY-rY*0.5,1,cX,cY,rX);
-  coinGrad.addColorStop(0,'#f0c94a'); coinGrad.addColorStop(0.7,'#d4a020'); coinGrad.addColorStop(1,'#a07010');
-  ctx.fillStyle=coinGrad; ctx.strokeStyle='#8a6010'; ctx.lineWidth=1.5;
+function setBox(t){
+  coinBox=t;
+  document.getElementById('bLarge').classList.toggle('on-box',t==='large');
+  document.getElementById('bSmall').classList.toggle('on-box',t==='small');
+  redrawE2();
+}
+
+function setWater(v){
+  coinW2=v;
+  document.getElementById('wPct').textContent=v+'%';
+  updCoinObs();
+  redrawE2();
+}
+
+function autoFill(){
+  if(autoId){clearInterval(autoId);autoId=null;document.getElementById('bAuto').textContent='▶ 自動加水';return;}
+  document.getElementById('bAuto').textContent='⏹ 停止';
+  autoId=setInterval(()=>{
+    if(coinW2<100){
+      coinW2++; document.getElementById('slWater').value=coinW2;
+      document.getElementById('wPct').textContent=coinW2+'%';
+      updCoinObs(); redrawE2();
+    } else {clearInterval(autoId);autoId=null;document.getElementById('bAuto').textContent='▶ 自動加水';}
+  },45);
+}
+
+function updCoinObs(){
+  const el=document.getElementById('coinObs');
+  if(coinW2<5) el.innerHTML='容器裡只有空氣，硬幣正常地待在底部。';
+  else if(coinW2<30) el.innerHTML='水位還低，硬幣看起來還是 <strong>1 個</strong>...';
+  else if(coinW2<55) el.innerHTML='咦？仔細看，好像出現了 <strong style="color:var(--orange)">2 個硬幣</strong>？';
+  else el.innerHTML='可以清楚看到 <strong style="color:var(--green)">2 個硬幣</strong>的影像！<br>上面那個（虛線）是折射產生的虛像。';
+}
+
+function revE2(){document.getElementById('e2exp').classList.toggle('hidden');}
+
+function redrawE2(){
+  const cv=document.getElementById('cvCoin'); if(!cv)return;
+  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
+  const rays=document.getElementById('showRays')?.checked;
+  ctx.clearRect(0,0,W,H); ctx.fillStyle='#060f1e'; ctx.roundRect(0,0,W,H,10); ctx.fill();
+  const bw=coinBox==='large'?235:165;
+  const bx=(W-bw)/2,by=18,bh=H-36,bBot=by+bh;
+  const wH=(coinW2/100)*(bh-12),wY=bBot-wH;
+  if(coinW2>0){
+    const g=ctx.createLinearGradient(bx,wY,bx,bBot);
+    g.addColorStop(0,'rgba(0,120,210,.12)'); g.addColorStop(1,'rgba(0,70,165,.33)');
+    ctx.fillStyle=g; ctx.fillRect(bx,wY,bw,wH);
+    ctx.strokeStyle='rgba(120,210,255,.65)'; ctx.lineWidth=2;
+    ctx.beginPath();
+    for(let x=bx;x<=bx+bw;x+=2){
+      const wy=wY+Math.sin(((x-bx)/bw)*Math.PI*5+waveT)*1.8;
+      x===bx?ctx.moveTo(x,wy):ctx.lineTo(x,wy);
+    }
+    ctx.stroke();
+  }
+  ctx.strokeStyle='rgba(72,202,228,.52)'; ctx.lineWidth=2; ctx.strokeRect(bx,by,bw,bh);
+  const cX=bx+bw/2,cY=bBot-18,rX=Math.min(bw*.3,24),rY=Math.min(rX*.42,9);
+  const cg=ctx.createRadialGradient(cX-rX*.3,cY-rY*.5,1,cX,cY,rX);
+  cg.addColorStop(0,'#f0c94a'); cg.addColorStop(.7,'#d4a020'); cg.addColorStop(1,'#a07010');
+  ctx.fillStyle=cg; ctx.strokeStyle='#8a6010'; ctx.lineWidth=1.5;
   ctx.beginPath(); ctx.ellipse(cX,cY,rX,rY,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
-  ctx.fillStyle='rgba(0,0,0,.3)'; ctx.font=`bold ${Math.round(rX*0.5)}px sans-serif`; ctx.textAlign='center';
-  ctx.fillText('$',cX,cY+rX*0.18);
-
-  // Virtual image
-  if(coinW>18){
-    const depth=cY-wY, vY=wY-depth*(1/1.33)*(Math.min(coinW,100)/100);
-    const al=Math.min((coinW-18)/45,1);
-
-    // Light rays
-    if(sr&&coinW>28){
-      const eX=bx+bw+45, eY=by+35;
+  ctx.fillStyle='rgba(0,0,0,.3)'; ctx.font=`bold ${Math.round(rX*.5)}px sans-serif`;
+  ctx.textAlign='center'; ctx.fillText('$',cX,cY+rX*.18);
+  if(coinW2>18){
+    const depth=cY-wY;
+    const vY2=depth>0?wY-depth*(1/1.33)*(coinW2/100):cY;
+    const al=Math.min((coinW2-18)/45,1);
+    if(rays&&coinW2>28){
+      const eX=bx+bw+42,eY=by+28;
       ctx.setLineDash([4,4]);
-      [[bx+bw*0.35,eY],[bx+bw*0.65,eY+14]].forEach(([rx,ey])=>{
-        ctx.strokeStyle=`rgba(255,210,40,${al*.65})`; ctx.lineWidth=1.4;
+      [[bx+bw*.36,eY],[bx+bw*.64,eY+14]].forEach(([rx,ey])=>{
+        ctx.strokeStyle=`rgba(255,210,40,${al*.62})`; ctx.lineWidth=1.4;
         ctx.beginPath(); ctx.moveTo(cX,cY); ctx.lineTo(rx,wY); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(rx,wY); ctx.lineTo(eX,ey); ctx.stroke();
-        ctx.strokeStyle=`rgba(255,210,40,${al*.2})`;
-        ctx.beginPath(); ctx.moveTo(rx,wY); ctx.lineTo(cX,vY-12); ctx.stroke();
+        ctx.strokeStyle=`rgba(255,210,40,${al*.18})`;
+        ctx.beginPath(); ctx.moveTo(rx,wY); ctx.lineTo(cX,vY2-10); ctx.stroke();
       });
       ctx.setLineDash([]);
       ctx.font='20px sans-serif'; ctx.textAlign='left';
-      ctx.fillStyle=`rgba(255,255,255,${al})`; ctx.fillText('👁️',eX,eY+18);
+      ctx.fillStyle=`rgba(255,255,255,${al})`; ctx.fillText('👁️',eX,eY+16);
     }
-
-    // Virtual coin
-    ctx.fillStyle=`rgba(212,168,40,${al*0.35})`; ctx.strokeStyle=`rgba(200,155,20,${al*0.62})`; ctx.lineWidth=1.5;
+    ctx.fillStyle=`rgba(212,168,40,${al*.35})`; ctx.strokeStyle=`rgba(200,155,20,${al*.6})`; ctx.lineWidth=1.5;
     ctx.setLineDash([4,4]);
-    ctx.beginPath(); ctx.ellipse(cX,vY,rX,rY,0,0,Math.PI*2); ctx.fill(); ctx.stroke(); ctx.setLineDash([]);
-    ctx.fillStyle=`rgba(144,224,239,${al})`; ctx.font=`bold ${Math.round(rX*0.45)}px "Noto Sans TC",sans-serif`;
-    ctx.textAlign='center'; ctx.fillText('虛像',cX,vY-rY-6);
-
-    // Activate badge
-    if(coinW>40) document.getElementById('virtBadge').style.opacity='1';
-    document.getElementById('waterPctBox').textContent=`水位：${Math.round(coinW)}%`;
-  } else {
-    document.getElementById('waterPctBox').textContent=`水位：${Math.round(coinW)}%`;
+    ctx.beginPath(); ctx.ellipse(cX,vY2,rX,rY,0,0,Math.PI*2); ctx.fill(); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle=`rgba(144,224,239,${al})`; ctx.font=`bold ${Math.round(rX*.45)}px "Noto Sans TC",sans-serif`;
+    ctx.textAlign='center'; ctx.fillText('虛像',cX,vY2-rY-6);
   }
-
-  // Labels
   ctx.fillStyle='rgba(200,220,255,.45)'; ctx.font='11px "Noto Sans TC",sans-serif'; ctx.textAlign='left';
   ctx.fillText('空氣',bx+4,by+14);
-  if(coinW>4){ctx.fillStyle='rgba(100,185,255,.48)'; ctx.fillText('水',bx+4,wY+14);}
+  if(coinW2>4){ctx.fillStyle='rgba(100,185,255,.48)'; ctx.fillText('水',bx+4,wY+14);}
+  ctx.fillStyle='rgba(72,202,228,.72)'; ctx.font='bold 11px sans-serif'; ctx.textAlign='right';
+  ctx.fillText(`水位 ${Math.round(coinW2)}%`,bx+bw-5,by+14);
 }
 
-/* ════════════════════════
-   CANVAS: PRINCIPLE
-════════════════════════ */
-let prinAnim=null, prinP=1;
+/* coin canvas click — "find the real coin" game */
+document.addEventListener('DOMContentLoaded',()=>{
+  const cv=document.getElementById('cvCoin'); if(!cv)return;
+  cv.addEventListener('click',e=>{
+    if(coinW2<20){setCoinFB('先加一些水（至少 20%），再來找找看！','var(--dim)');return;}
+    const rect=cv.getBoundingClientRect();
+    const mx=(e.clientX-rect.left)*(cv.width/rect.width);
+    const my=(e.clientY-rect.top)*(cv.height/rect.height);
+    const bw=coinBox==='large'?235:165;
+    const bx=(cv.width-bw)/2,by=18,bh=cv.height-36,bBot=by+bh;
+    const wH=(coinW2/100)*(bh-12),wY=bBot-wH;
+    const cX=bx+bw/2,cY=bBot-18;
+    const depth=cY-wY;
+    const vY2=depth>0?wY-depth*(1/1.33)*(coinW2/100):cY;
+    const dR=Math.hypot(mx-cX,my-cY);
+    const dV=Math.hypot(mx-cX,my-vY2);
+    if(dR<28) setCoinFB('🎉 答對了！那才是硬幣<strong>真正的位置</strong>！','var(--green)');
+    else if(dV<28) setCoinFB('那是折射產生的<strong>虛像</strong>！硬幣實際上在更下面，再試一次！','var(--orange)');
+    else setCoinFB('沒點到！再試試看，仔細觀察上下的影像。','var(--dim)');
+  });
+});
+
+function setCoinFB(msg,color){
+  const el=document.getElementById('coinFB');
+  el.innerHTML=msg; el.style.color=color;
+}
+
+/* ═══════════════════════════════
+   PRINCIPLE CANVAS
+═══════════════════════════════ */
+let prinAnim=null,prinP=1;
 function animPrin(){if(prinAnim)cancelAnimationFrame(prinAnim);prinP=0;(function s(){prinP+=.014;drawPrin(Math.min(prinP,1));if(prinP<1)prinAnim=requestAnimationFrame(s);})();}
 function drawPrin(p=1){
   const cv=document.getElementById('cvPrin'); if(!cv)return;
@@ -944,19 +732,19 @@ function drawPrin(p=1){
   ctx.beginPath(); ctx.moveTo(mX,iY-90); ctx.lineTo(mX,iY+100); ctx.stroke(); ctx.setLineDash([]);
   ctx.fillStyle='rgba(220,100,100,.68)'; ctx.font='12px "Noto Sans TC",sans-serif'; ctx.textAlign='center';
   ctx.fillText('法線',mX+46,iY-80);
-  const iA=42*Math.PI/180, rL=105, sx=mX-Math.sin(iA)*rL, sy=iY-Math.cos(iA)*rL, ip=Math.min(p*2,1);
+  const iA=42*Math.PI/180,rL=105,sx=mX-Math.sin(iA)*rL,sy=iY-Math.cos(iA)*rL,ip=Math.min(p*2,1);
   ctx.strokeStyle='rgba(255,215,40,.9)'; ctx.lineWidth=3; ctx.lineCap='round';
   ctx.beginPath(); ctx.moveTo(sx,sy); ctx.lineTo(sx+(mX-sx)*ip,sy+(iY-sy)*ip); ctx.stroke();
   if(p>.5){
-    const rP=Math.min((p-.5)*2,1), rA=Math.asin(Math.sin(iA)/1.33);
-    const ex=mX+Math.sin(rA)*rL, ey=iY+Math.cos(rA)*rL;
+    const rP=Math.min((p-.5)*2,1),rA=Math.asin(Math.sin(iA)/1.33);
+    const ex=mX+Math.sin(rA)*rL,ey=iY+Math.cos(rA)*rL;
     ctx.strokeStyle='rgba(255,130,30,.9)'; ctx.lineWidth=3;
     ctx.beginPath(); ctx.moveTo(mX,iY); ctx.lineTo(mX+(ex-mX)*rP,iY+(ey-iY)*rP); ctx.stroke();
     if(rP>.65){
       ctx.strokeStyle='rgba(255,215,40,.48)'; ctx.lineWidth=1.5;
       ctx.beginPath(); ctx.arc(mX,iY,46,-Math.PI/2-iA,-Math.PI/2); ctx.stroke();
-      ctx.fillStyle='rgba(255,215,40,.9)'; ctx.font='bold 12px "Noto Sans TC",sans-serif';
-      ctx.textAlign='center'; ctx.fillText('入射角',mX-55,iY-32);
+      ctx.fillStyle='rgba(255,215,40,.9)'; ctx.font='bold 12px "Noto Sans TC",sans-serif'; ctx.textAlign='center';
+      ctx.fillText('入射角',mX-55,iY-32);
       ctx.strokeStyle='rgba(255,130,30,.48)'; ctx.lineWidth=1.5;
       ctx.beginPath(); ctx.arc(mX,iY,46,Math.PI/2,Math.PI/2+rA); ctx.stroke();
       ctx.fillStyle='rgba(255,130,30,.9)'; ctx.fillText('折射角',mX+57,iY+38);
@@ -967,107 +755,76 @@ function drawPrin(p=1){
   if(ip>.85){const ang=Math.atan2(iY-sy,mX-sx),s=9;ctx.fillStyle='rgba(255,215,40,.9)';ctx.beginPath();ctx.moveTo(mX,iY);ctx.lineTo(mX-s*Math.cos(ang-.4),iY-s*Math.sin(ang-.4));ctx.lineTo(mX-s*Math.cos(ang+.4),iY-s*Math.sin(ang+.4));ctx.closePath();ctx.fill();}
 }
 
-/* ════════════════════════
-   LIFE APPLICATION CANVASES
-════════════════════════ */
-function drawLifeCanvases(){
-  drawStrawCanvas();
-  drawPoolCanvas();
-}
+/* ═══════════════════════════════
+   LIFE APP CANVASES
+═══════════════════════════════ */
+function drawLifeCvs(){drawStraw();drawPool();}
 
-function drawStrawCanvas(){
-  const cv=document.getElementById('lcCv1'); if(!cv||cv.offsetWidth===0)return;
+function drawStraw(){
+  const cv=document.getElementById('lcCv1'); if(!cv||!cv.offsetParent)return;
   const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
   ctx.clearRect(0,0,W,H); ctx.fillStyle='#060f1e'; ctx.roundRect(0,0,W,H,7); ctx.fill();
-  // Glass
-  const gx=45,gy=15,gw=90,gh=80;
-  const waterY=gy+gh*0.45;
-  ctx.fillStyle='rgba(200,235,255,.055)'; ctx.fillRect(gx,gy,gw,waterY-gy);
-  const wg=ctx.createLinearGradient(gx,waterY,gx,gy+gh);
+  const gx=45,gy=14,gw=85,gh=76,wY=gy+gh*.44;
+  ctx.fillStyle='rgba(200,235,255,.055)'; ctx.fillRect(gx,gy,gw,wY-gy);
+  const wg=ctx.createLinearGradient(gx,wY,gx,gy+gh);
   wg.addColorStop(0,'rgba(0,120,210,.15)'); wg.addColorStop(1,'rgba(0,70,160,.35)');
-  ctx.fillStyle=wg; ctx.fillRect(gx,waterY,gw,gy+gh-waterY);
+  ctx.fillStyle=wg; ctx.fillRect(gx,wY,gw,gy+gh-wY);
   ctx.strokeStyle='rgba(72,202,228,.5)'; ctx.lineWidth=1.5; ctx.strokeRect(gx,gy,gw,gh);
-  ctx.strokeStyle='rgba(120,210,255,.6)'; ctx.lineWidth=1; ctx.beginPath();
-  ctx.moveTo(gx,waterY); ctx.lineTo(gx+gw,waterY); ctx.stroke();
-  // Straw (with refraction)
-  const sx=gx+gw*.65, sy=gy+4, ang=40*Math.PI/180;
-  const intX=sx-Math.tan(ang)*(waterY-sy), intY=waterY;
-  const rA=Math.asin(Math.sin(ang)/1.33);
-  const bX=intX+Math.tan(rA)*(gy+gh-intY-8), bY=gy+gh-8;
-  ctx.lineCap='round'; ctx.lineWidth=5;
-  ctx.strokeStyle='rgba(200,230,200,.85)';
-  ctx.beginPath(); ctx.moveTo(sx,sy); ctx.lineTo(intX,intY); ctx.stroke();
-  ctx.strokeStyle='rgba(200,230,200,.85)';
-  ctx.beginPath(); ctx.moveTo(intX,intY); ctx.lineTo(bX,bY); ctx.stroke();
-  ctx.fillStyle='rgba(255,70,60,.8)'; ctx.beginPath(); ctx.arc(intX,intY,3.5,0,Math.PI*2); ctx.fill();
-  ctx.fillStyle='rgba(200,220,255,.55)'; ctx.font='10px "Noto Sans TC",sans-serif'; ctx.textAlign='center';
-  ctx.fillText('吸管',sx+10,sy+5); ctx.fillText('折射點',intX-18,intY-4);
+  ctx.strokeStyle='rgba(120,210,255,.6)'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(gx,wY); ctx.lineTo(gx+gw,wY); ctx.stroke();
+  const ang=38*Math.PI/180,sx=gx+gw*.65,sy=gy+4;
+  const iX=sx-Math.tan(ang)*(wY-sy),rA=Math.asin(Math.sin(ang)/1.33);
+  const bX=iX+Math.tan(rA)*(gy+gh-iX-8);
+  ctx.lineCap='round'; ctx.lineWidth=5; ctx.strokeStyle='rgba(200,230,200,.85)';
+  ctx.beginPath(); ctx.moveTo(sx,sy); ctx.lineTo(iX,wY); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(iX,wY); ctx.lineTo(bX,gy+gh-8); ctx.stroke();
+  ctx.fillStyle='rgba(255,70,60,.85)'; ctx.beginPath(); ctx.arc(iX,wY,4,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='rgba(200,220,255,.55)'; ctx.font='9px sans-serif'; ctx.textAlign='center';
+  ctx.fillText('折射點',iX-16,wY-5);
 }
 
-function drawPoolCanvas(){
-  const cv=document.getElementById('lcCv2'); if(!cv||cv.offsetWidth===0)return;
+function drawPool(){
+  const cv=document.getElementById('lcCv2'); if(!cv||!cv.offsetParent)return;
   const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
   ctx.clearRect(0,0,W,H); ctx.fillStyle='#060f1e'; ctx.roundRect(0,0,W,H,7); ctx.fill();
-  const px=20,py=20,pw=140,ph=75;
-  const wY=py+20;
-  ctx.fillStyle='rgba(200,235,255,.06)'; ctx.fillRect(px,py,pw,wY-py);
+  const px=18,py=18,pw=140,ph=72,wY=py+18;
+  ctx.fillStyle='rgba(200,235,255,.055)'; ctx.fillRect(px,py,pw,wY-py);
   const wg=ctx.createLinearGradient(px,wY,px,py+ph);
   wg.addColorStop(0,'rgba(0,120,210,.15)'); wg.addColorStop(1,'rgba(0,70,160,.32)');
   ctx.fillStyle=wg; ctx.fillRect(px,wY,pw,ph-(wY-py));
   ctx.strokeStyle='rgba(72,202,228,.45)'; ctx.lineWidth=1.5; ctx.strokeRect(px,py,pw,ph);
-  ctx.strokeStyle='rgba(120,210,255,.55)'; ctx.lineWidth=1; ctx.beginPath();
-  ctx.moveTo(px,wY); ctx.lineTo(px+pw,wY); ctx.stroke();
-  // Real bottom
-  const realY=py+ph-6;
+  ctx.strokeStyle='rgba(120,210,255,.55)'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(px,wY); ctx.lineTo(px+pw,wY); ctx.stroke();
+  const realY=py+ph-5,appY=wY+(realY-wY)*.75;
   ctx.strokeStyle='rgba(180,140,60,.8)'; ctx.lineWidth=3;
   ctx.beginPath(); ctx.moveTo(px+5,realY); ctx.lineTo(px+pw-5,realY); ctx.stroke();
-  ctx.fillStyle='rgba(180,140,60,.7)'; ctx.font='9px "Noto Sans TC",sans-serif'; ctx.textAlign='right';
-  ctx.fillText('實際底部',px+pw-3,realY-3);
-  // Apparent bottom
-  const appY=wY+(realY-wY)*0.75;
+  ctx.fillStyle='rgba(180,140,60,.7)'; ctx.font='9px sans-serif'; ctx.textAlign='right';
+  ctx.fillText('實際底部',px+pw-4,realY-3);
   ctx.strokeStyle='rgba(144,224,239,.65)'; ctx.lineWidth=2; ctx.setLineDash([4,3]);
   ctx.beginPath(); ctx.moveTo(px+5,appY); ctx.lineTo(px+pw-5,appY); ctx.stroke(); ctx.setLineDash([]);
   ctx.fillStyle='rgba(144,224,239,.65)'; ctx.textAlign='right';
-  ctx.fillText('看起來的底部 (約75%深)',px+pw-3,appY-3);
-  // Eye
-  ctx.font='16px sans-serif'; ctx.textAlign='center';
-  ctx.fillText('👁️',px+pw/2,py-4);
-  // Arrow
-  ctx.strokeStyle='rgba(144,224,239,.5)'; ctx.lineWidth=1; ctx.setLineDash([]);
-  const ax=px+pw+8;
-  ctx.beginPath(); ctx.moveTo(ax,appY); ctx.lineTo(ax,realY); ctx.stroke();
-  ctx.fillStyle='rgba(255,80,80,.8)'; ctx.font='9px sans-serif'; ctx.textAlign='left';
-  ctx.fillText('差距',ax+2,(appY+realY)/2);
+  ctx.fillText('看起來的底部',px+pw-4,appY-3);
+  ctx.font='16px sans-serif'; ctx.textAlign='center'; ctx.fillText('👁️',px+pw/2,py-2);
 }
 
-/* ════════════════════════
+/* ═══════════════════════════════
    WAVE ANIMATION LOOP
-════════════════════════ */
-function waveLoop(){
-  wavePhase+=0.055;
-  const exp1Active=document.getElementById('tab-exp1')?.classList.contains('active');
-  const exp2Active=document.getElementById('tab-exp2')?.classList.contains('active');
-  if(exp1Active && document.getElementById('e1s3') && !document.getElementById('e1s3').classList.contains('hidden')){
-    drawChopMain(curScene, +document.getElementById('slAngle').value);
-  }
-  if(exp2Active && document.getElementById('e2s3') && !document.getElementById('e2s3').classList.contains('hidden')){
-    redrawCoin();
-  }
-  requestAnimationFrame(waveLoop);
-}
+═══════════════════════════════ */
+(function loop(){
+  waveT+=0.055;
+  const e1=document.getElementById('tab-exp1')?.classList.contains('active');
+  const e2=document.getElementById('tab-exp2')?.classList.contains('active');
+  if(e1) drawChopScene(+document.getElementById('slAng').value,getLayers(),cmpMode);
+  if(e2) redrawE2();
+  requestAnimationFrame(loop);
+})();
 
-/* ── Init ── */
+/* init */
 window.addEventListener('load',()=>{
-  document.querySelectorAll('.pred-opt').forEach(opt=>{
-    opt.addEventListener('click',()=>{
-      opt.closest('.pred-opts').querySelectorAll('.pred-opt').forEach(o=>o.classList.remove('sel'));
-      opt.classList.add('sel');
-    });
-  });
-  initChop();
-  redrawCoin();
+  updateLayerPanel(getLayers());
+  drawChopScene(38,getLayers(),false);
+  redrawE2();
   drawPrin();
-  waveLoop();
 });
 </script>
 </body>
