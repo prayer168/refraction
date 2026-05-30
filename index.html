@@ -139,6 +139,21 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
 .result-list{display:flex;flex-direction:column;gap:.45rem;margin:.8rem 0;text-align:left}
 .rli{font-size:.92rem;padding:.3rem 0;display:flex;gap:.6rem;align-items:flex-start}
 
+/* ── Exp1 & Exp2 only: fill viewport, no scroll
+   Intro / Principle / Life / Record pages scroll normally ── */
+#tab-exp1,#tab-exp2{display:flex;flex-direction:column;height:calc(100vh - 50px - 1.8rem);overflow:hidden}
+#tab-exp1>.ebadge,#tab-exp1>.stitle,#tab-exp1>.nxt,
+#tab-exp2>.ebadge,#tab-exp2>.stitle,#tab-exp2>.nxt{flex-shrink:0}
+#tab-exp1>.stitle,#tab-exp2>.stitle{margin-bottom:.5rem}
+#tab-exp1>.card,#tab-exp2>.card{flex:1;min-height:0;display:flex;flex-direction:column;margin-bottom:0;overflow:hidden}
+#tab-exp1 .lab-strip,#tab-exp2 .lab-strip{flex-shrink:0}
+#tab-exp1 .lab-main,#tab-exp2 .lab-main{flex:1;min-height:0;align-items:stretch!important}
+#tab-exp1 .lab-main>div:first-child,#tab-exp2 .lab-main>div:first-child{display:flex;flex-direction:column;min-height:0}
+#tab-exp1 #cvChop,#tab-exp2 #cvCoin{flex:1;min-height:0;width:100%;display:block}
+#tab-exp1 .cv-label,#tab-exp2 .cv-label{flex-shrink:0;font-size:.75rem}
+#tab-exp1 .lab-side,#tab-exp2 .lab-side{overflow-y:auto;min-height:0}
+#tab-exp1>.nxt,#tab-exp2>.nxt{padding-top:.35rem}
+
 /* ── Life sidebar ── */
 .life-layout{display:grid;grid-template-columns:195px 1fr;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:var(--card);margin-bottom:.65rem}
 .life-sb{border-right:1px solid var(--border);padding:.4rem 0}
@@ -343,7 +358,7 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
       </div>
     </div>
   </div>
-  <div class="sumg">
+  <div class="sumg" style="display:none">
     <div class="sc" style="padding:.6rem">
       <canvas id="cvP1" width="300" height="175" style="border-radius:9px;max-width:100%;display:block;margin:0 auto"></canvas>
       <div class="st" style="margin-top:.55rem;font-size:1rem">空氣 → 水的折射</div>
@@ -482,9 +497,33 @@ function go(id){
   document.querySelector(`.tab[data-tab="${id}"]`).classList.add('active');
   document.getElementById('tab-'+id).classList.add('active');
   document.getElementById('content').scrollTop=0;
+  if(id==='exp1') setTimeout(resizeChopCv,80);
+  if(id==='exp2') setTimeout(resizeCoinCv,80);
   if(id==='principle') setTimeout(()=>{drawPrin(1);drawPCards();},60);
   if(id==='life') setTimeout(()=>selLife(curLife),60);
   if(id==='record') setTimeout(initQuiz,50);
+}
+
+/* ── Dynamic canvas resize for no-scroll panels ── */
+function resizeChopCv(){
+  const cv=document.getElementById('cvChop');if(!cv)return;
+  requestAnimationFrame(()=>{
+    const w=Math.round(cv.clientWidth),h=Math.round(cv.clientHeight);
+    if(!w||!h)return;
+    delete cv.dataset.lw;delete cv.dataset.lh;
+    cv.setAttribute('width',w);cv.setAttribute('height',h);
+    e1Upd();
+  });
+}
+function resizeCoinCv(){
+  const cv=document.getElementById('cvCoin');if(!cv)return;
+  requestAnimationFrame(()=>{
+    const w=Math.round(cv.clientWidth),h=Math.round(cv.clientHeight);
+    if(!w||!h)return;
+    delete cv.dataset.lw;delete cv.dataset.lh;
+    cv.setAttribute('width',w);cv.setAttribute('height',h);
+    redrawE2();
+  });
 }
 
 function toggleCard(c){
@@ -1315,53 +1354,24 @@ function drawLFish(cv){
   ctx.fillText('折射讓魚看起來比實際更靠近玻璃',W/2,H-5);
 }
 
-/* ── Glasses ── */
+/* ── Glasses (ChatGPT image) ── */
+let _glassImg=null;
 function drawLGlasses(cv){
-  const{ctx,W,H}=lbg(cv,430,225);
-  function half(ox,ow,title,concave){
-    const cx=ox+ow*.38,lx=ox+ow*.55,ex=ox+ow-20,ey=H/2;
-    // title
-    ctx.fillStyle='rgba(200,220,255,.7)';ctx.font='bold 10px "Noto Sans TC",sans-serif';ctx.textAlign='center';
-    ctx.fillText(title,ox+ow/2,15);
-    // parallel rays (3 rays)
-    const rays=[-20,0,20];
-    rays.forEach(dy=>{
-      const ry=ey+dy;
-      // ray in
-      ctx.strokeStyle='rgba(255,215,40,.65)';ctx.lineWidth=1.4;ctx.lineCap='round';
-      ctx.beginPath();ctx.moveTo(ox+8,ry);ctx.lineTo(lx,ry);ctx.stroke();
-      // lens bends ray toward/away from eye
-      let targetY=ey; // converge to focal point
-      if(concave) targetY=ey+dy*1.8; // diverge
-      ctx.strokeStyle='rgba(255,165,30,.75)';
-      ctx.beginPath();ctx.moveTo(lx,ry);ctx.lineTo(ex,targetY);ctx.stroke();
-    });
-    // lens shape
-    ctx.strokeStyle='rgba(100,210,255,.7)';ctx.lineWidth=2;
-    if(concave){
-      // concave lens
-      ctx.beginPath();ctx.moveTo(lx-6,H*.15);
-      ctx.bezierCurveTo(lx+6,H*.35,lx+6,H*.65,lx-6,H*.85);ctx.stroke();
-      ctx.beginPath();ctx.moveTo(lx+6,H*.15);
-      ctx.bezierCurveTo(lx-6,H*.35,lx-6,H*.65,lx+6,H*.85);ctx.stroke();
-    } else {
-      // convex lens
-      ctx.beginPath();ctx.moveTo(lx-6,H*.15);
-      ctx.bezierCurveTo(lx+10,H*.35,lx+10,H*.65,lx-6,H*.85);ctx.stroke();
-      ctx.beginPath();ctx.moveTo(lx+6,H*.15);
-      ctx.bezierCurveTo(lx-10,H*.35,lx-10,H*.65,lx+6,H*.85);ctx.stroke();
-    }
-    // eye
-    ctx.font='20px sans-serif';ctx.textAlign='center';ctx.fillText('👁️',ex,ey+8);
-    // focal/retina note
-    ctx.fillStyle='rgba(144,224,239,.6)';ctx.font='8px "Noto Sans TC",sans-serif';
-    ctx.textAlign='center';ctx.fillText(concave?'近視（凹透鏡）':'遠視（凸透鏡）',ox+ow/2,H-5);
+  if(!_glassImg){
+    _glassImg=new Image();
+    _glassImg.onload=()=>drawLGlasses(cv);
+    _glassImg.onerror=()=>{_glassImg=null;};
+    _glassImg.src='./glasses.png';
+    return;
   }
-  // divider
-  ctx.strokeStyle='rgba(72,202,228,.2)';ctx.lineWidth=1;ctx.setLineDash([4,4]);
-  ctx.beginPath();ctx.moveTo(W/2,10);ctx.lineTo(W/2,H-10);ctx.stroke();ctx.setLineDash([]);
-  half(0,W/2,'近視矯正',true);
-  half(W/2,W/2,'遠視矯正',false);
+  if(!_glassImg.complete||!_glassImg.naturalWidth)return;
+  const{ctx,W,H}=lbg(cv,430,225);
+  // Fit image maintaining aspect ratio (letterbox)
+  const ir=_glassImg.naturalWidth/_glassImg.naturalHeight,cr=W/H;
+  let dw,dh,dx,dy;
+  if(ir>cr){dw=W;dh=W/ir;dx=0;dy=(H-dh)/2;}
+  else{dh=H;dw=H*ir;dx=(W-dw)/2;dy=0;}
+  ctx.drawImage(_glassImg,dx,dy,dw,dh);
 }
 
 /* ═══════════════════════════════
@@ -1587,12 +1597,17 @@ function launchConfetti(){
 /* init */
 window.addEventListener('load',()=>{
   updateLayerPanel(getLayers(),38);
-  drawChopScene(38,getLayers(),false);
   redrawE2();
   drawPrin();
-  // init principle angle display
   const slP=document.getElementById('slPrinAng');
   if(slP){ const rA=Math.asin(Math.sin(+slP.value*Math.PI/180)/1.33); document.getElementById('prinRefVal').textContent=Math.round(rA*180/Math.PI)+'°'; }
+  // Canvas sizing for no-scroll panels
+  setTimeout(resizeChopCv,120);
+});
+
+window.addEventListener('resize',()=>{
+  if(document.getElementById('tab-exp1')?.classList.contains('active')) resizeChopCv();
+  if(document.getElementById('tab-exp2')?.classList.contains('active')) resizeCoinCv();
 });
 </script>
 </body>
