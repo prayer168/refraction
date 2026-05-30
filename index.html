@@ -75,7 +75,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text
 .lbtn.clr:hover{border-color:var(--red);color:var(--red);background:rgba(230,57,70,.1)}
 .lbtn.on-box{background:rgba(0,180,216,.18);border-color:var(--blue);color:var(--blue)}
 input[type=range]{accent-color:var(--blue);width:130px;display:block}
-.lab-main{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:start}
+.lab-main{display:grid;grid-template-columns:2fr 1fr;gap:.8rem;align-items:start}
 .lab-side{display:flex;flex-direction:column;gap:.5rem;min-width:0}
 .side-blk{padding:.55rem .7rem;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px}
 .sb-ttl{font-size:.77rem;font-weight:700;color:var(--blue3);margin-bottom:.35rem}
@@ -240,7 +240,7 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
     <!-- Canvas + side panel -->
     <div class="lab-main">
       <div>
-        <canvas id="cvChop" width="355" height="292"></canvas>
+        <canvas id="cvChop" width="520" height="428" style="max-width:100%"></canvas>
         <div class="cv-label">拖動滑桿改變角度，切換液體觀察折射變化</div>
       </div>
       <div class="lab-side">
@@ -294,7 +294,7 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
     <!-- Two-box canvas + side panel -->
     <div class="lab-main">
       <div>
-        <canvas id="cvCoin" width="440" height="275" style="cursor:crosshair;max-width:100%"></canvas>
+        <canvas id="cvCoin" width="520" height="325" style="cursor:crosshair;max-width:100%"></canvas>
         <div class="cv-label">👆 點擊圖中，找找硬幣<strong>真正在的位置</strong>（兩個容器都可以點）</div>
       </div>
       <div class="lab-side">
@@ -604,7 +604,7 @@ let waveT=0;
 
 function drawChopScene(deg,layers,cmp){
   const cv=document.getElementById('cvChop'); if(!cv)return;
-  const {ctx,W,H}=lbg(cv);
+  const {ctx,W,H}=lbg(cv,355,292);
   if(cmp&&(hasWater||hasOil)){
     const airL=[{label:'空氣',bg:'rgba(200,235,255,0.07)',n:1.00,tc:'#90e0ef',hR:1}];
     drawCont(ctx,18,14,140,H-28,airL,deg);
@@ -814,7 +814,7 @@ function drawBox(ctx,box,rays){
 
 function redrawE2(){
   const cv=document.getElementById('cvCoin'); if(!cv)return;
-  const {ctx,W,H}=lbg(cv);
+  const {ctx,W,H}=lbg(cv,440,275);
   const rays=document.getElementById('showRays')?.checked;
   drawBox(ctx,BOX_L,rays);
   drawBox(ctx,BOX_S,rays);
@@ -829,8 +829,9 @@ document.addEventListener('DOMContentLoaded',()=>{
   cv.addEventListener('click',e=>{
     if(coinW2<20){setCoinFB('先加一些水（至少 20%），再來找找看！','var(--dim)');return;}
     const rect=cv.getBoundingClientRect();
-    const mx=(e.clientX-rect.left)*(cv.width/rect.width);
-    const my=(e.clientY-rect.top)*(cv.height/rect.height);
+    // Normalize to design space (440×275) regardless of canvas size/DPR
+    const mx=(e.clientX-rect.left)*(440/rect.width);
+    const my=(e.clientY-rect.top)*(275/rect.height);
     function check(box){
       const {bx,by,bw,bh}=box;
       const bBot=by+bh, wH=(coinW2/100)*(bh-12), wY=bBot-wH;
