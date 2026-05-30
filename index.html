@@ -139,20 +139,20 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
 .result-list{display:flex;flex-direction:column;gap:.45rem;margin:.8rem 0;text-align:left}
 .rli{font-size:.92rem;padding:.3rem 0;display:flex;gap:.6rem;align-items:flex-start}
 
-/* ── Exp1 & Exp2 only: fill viewport, no scroll
-   Intro / Principle / Life / Record pages scroll normally ── */
-#tab-exp1,#tab-exp2{display:flex;flex-direction:column;height:calc(100vh - 50px - 1.8rem);overflow:hidden}
-#tab-exp1>.ebadge,#tab-exp1>.stitle,#tab-exp1>.nxt,
-#tab-exp2>.ebadge,#tab-exp2>.stitle,#tab-exp2>.nxt{flex-shrink:0}
-#tab-exp1>.stitle,#tab-exp2>.stitle{margin-bottom:.5rem}
-#tab-exp1>.card,#tab-exp2>.card{flex:1;min-height:0;display:flex;flex-direction:column;margin-bottom:0;overflow:hidden}
-#tab-exp1 .lab-strip,#tab-exp2 .lab-strip{flex-shrink:0}
-#tab-exp1 .lab-main,#tab-exp2 .lab-main{flex:1;min-height:0;align-items:stretch!important}
-#tab-exp1 .lab-main>div:first-child,#tab-exp2 .lab-main>div:first-child{display:flex;flex-direction:column;min-height:0}
-#tab-exp1 #cvChop,#tab-exp2 #cvCoin{flex:1;min-height:0;width:100%;display:block}
-#tab-exp1 .cv-label,#tab-exp2 .cv-label{flex-shrink:0;font-size:.75rem}
-#tab-exp1 .lab-side,#tab-exp2 .lab-side{overflow-y:auto;min-height:0}
-#tab-exp1>.nxt,#tab-exp2>.nxt{padding-top:.35rem}
+/* ── Exp1 & Exp2: fill viewport, no scroll — ONLY when .active
+   (Must add .active so ID-selector doesn't override .panel{display:none}) ── */
+#tab-exp1.active,#tab-exp2.active{display:flex!important;flex-direction:column;height:calc(100vh - 50px - 1.8rem);overflow:hidden}
+#tab-exp1.active>.ebadge,#tab-exp1.active>.stitle,#tab-exp1.active>.nxt,
+#tab-exp2.active>.ebadge,#tab-exp2.active>.stitle,#tab-exp2.active>.nxt{flex-shrink:0}
+#tab-exp1.active>.stitle,#tab-exp2.active>.stitle{margin-bottom:.5rem}
+#tab-exp1.active>.card,#tab-exp2.active>.card{flex:1;min-height:0;display:flex;flex-direction:column;margin-bottom:0;overflow:hidden}
+#tab-exp1.active .lab-strip,#tab-exp2.active .lab-strip{flex-shrink:0}
+#tab-exp1.active .lab-main,#tab-exp2.active .lab-main{flex:1;min-height:0;align-items:stretch!important}
+#tab-exp1.active .lab-main>div:first-child,#tab-exp2.active .lab-main>div:first-child{display:flex;flex-direction:column;min-height:0}
+#tab-exp1.active #cvChop,#tab-exp2.active #cvCoin{flex:1;min-height:0;width:100%;display:block}
+#tab-exp1.active .cv-label,#tab-exp2.active .cv-label{flex-shrink:0;font-size:.75rem}
+#tab-exp1.active .lab-side,#tab-exp2.active .lab-side{overflow-y:auto;min-height:0}
+#tab-exp1.active>.nxt,#tab-exp2.active>.nxt{padding-top:.35rem}
 
 /* ── Life sidebar ── */
 .life-layout{display:grid;grid-template-columns:195px 1fr;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:var(--card);margin-bottom:.65rem}
