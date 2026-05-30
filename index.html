@@ -106,6 +106,16 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
 .life-card.expanded .lc-tap{display:none}
 .lc-canvas{border-radius:6px;max-width:100%;display:block;margin:.4rem auto 0}
 
+/* ── Life sidebar ── */
+.life-layout{display:grid;grid-template-columns:165px 1fr;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:var(--card);margin-bottom:.65rem}
+.life-sb{border-right:1px solid var(--border);padding:.3rem 0}
+.life-ni{display:flex;align-items:center;gap:.52rem;padding:.58rem .85rem;cursor:pointer;font-size:.82rem;font-weight:700;color:var(--dim);transition:all .18s;border-left:3px solid transparent}
+.life-ni:hover{background:rgba(0,180,216,.08);color:var(--blue2)}
+.life-ni.on{background:rgba(0,180,216,.15);color:var(--blue);border-left-color:var(--blue)}
+.life-ni-ic{font-size:1.12rem;flex-shrink:0}
+.life-ct{padding:.75rem;display:flex;flex-direction:column;gap:.55rem;min-width:0}
+@media(max-width:600px){.life-layout{grid-template-columns:1fr}.life-sb{display:grid;grid-template-columns:repeat(3,1fr);border-right:none;border-bottom:1px solid var(--border)}}
+
 /* print */
 @media print{
   body{background:#fff;color:#000;overflow:auto}
@@ -224,18 +234,11 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
     <!-- Controls -->
     <div class="lab-strip">
       <div class="ctrl-grp">
-        <span class="cg-lbl">📦 容器大小</span>
-        <div class="liq-row">
-          <button class="lbtn on-box" id="bLarge" onclick="setBox('large')">大方形盒</button>
-          <button class="lbtn" id="bSmall" onclick="setBox('small')">小方形盒</button>
-        </div>
-      </div>
-      <div class="ctrl-grp">
         <span class="cg-lbl">💧 水位：<strong id="wPct" style="color:var(--blue)">0%</strong></span>
         <input type="range" id="slWater" min="0" max="100" value="0" oninput="setWater(+this.value)">
       </div>
       <div class="ctrl-grp">
-        <span class="cg-lbl">⚙️ 顯示選項</span>
+        <span class="cg-lbl">⚙️ 顯示</span>
         <label class="chk-lbl"><input type="checkbox" id="showRays" onchange="redrawE2()"> 光線路徑</label>
       </div>
       <div class="ctrl-grp">
@@ -244,31 +247,25 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
       </div>
     </div>
 
-    <!-- Canvas + side panel -->
+    <!-- Two-box canvas + side panel -->
     <div class="lab-main">
       <div>
-        <canvas id="cvCoin" width="325" height="305" style="cursor:crosshair"></canvas>
-        <div class="cv-label">👆 點擊圖中，指出你認為硬幣<strong>真正在的位置</strong></div>
+        <canvas id="cvCoin" width="440" height="275" style="cursor:crosshair;max-width:100%"></canvas>
+        <div class="cv-label">👆 點擊圖中，找找硬幣<strong>真正在的位置</strong>（兩個容器都可以點）</div>
       </div>
       <div class="lab-side">
-        <!-- Observation -->
         <div class="side-blk">
           <div class="sb-ttl">👁️ 你看到幾個硬幣？</div>
           <div id="coinObs" style="font-size:.82rem;color:var(--dim);line-height:1.65">加水後仔細觀察...</div>
         </div>
-        <!-- Find game -->
         <div class="side-blk">
           <div class="sb-ttl">🎯 尋找真正的硬幣</div>
           <p style="font-size:.78rem;color:var(--dim)">點擊圖中，你認為硬幣<strong>真正在哪裡</strong>？</p>
           <div id="coinFB" style="min-height:2.2rem;margin-top:.4rem;font-size:.82rem;font-weight:700;line-height:1.55"></div>
         </div>
-        <!-- Size compare -->
         <div class="side-blk">
           <div class="sb-ttl">📊 大小方形盒比較</div>
-          <div style="font-size:.8rem;line-height:1.65;color:var(--dim)">
-            兩種容器加水後，都會看到<strong style="color:var(--text)">兩個硬幣</strong>的影像，現象<strong style="color:var(--text)">相似</strong>。<br>
-            折射效果與容器大小<strong style="color:var(--orange)">無關</strong>，取決於<strong style="color:var(--text)">水的深度</strong>。
-          </div>
+          <div style="font-size:.8rem;line-height:1.65;color:var(--dim)">兩種容器都會看到<strong style="color:var(--text)">2 個硬幣</strong>，現象<strong style="color:var(--text)">相似</strong>！<br>折射效果與容器大小<strong style="color:var(--orange)">無關</strong>。</div>
         </div>
         <button class="btn bo" style="width:100%;font-size:.8rem" onclick="revE2()">💡 了解折射原因</button>
         <div id="e2exp" class="hidden ebox">
@@ -295,9 +292,21 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
     </div>
   </div>
   <div class="sumg">
-    <div class="sc"><div class="sb">🌊</div><div class="st">空氣 → 水</div><div class="sd">折射角小於入射角，光靠近法線</div></div>
-    <div class="sc"><div class="sb">🏊</div><div class="st">游泳池底</div><div class="sd">看起來比實際淺，影像往上浮</div></div>
-    <div class="sc"><div class="sb">🌈</div><div class="st">彩虹</div><div class="sd">不同顏色折射率不同，形成彩虹</div></div>
+    <div class="sc" style="padding:.6rem">
+      <canvas id="cvP1" width="205" height="118" style="border-radius:8px;max-width:100%;display:block;margin:0 auto"></canvas>
+      <div class="st" style="margin-top:.42rem">空氣 → 水的折射</div>
+      <div class="sd">進入較密介質（水），光靠近法線，折射角 ＜ 入射角</div>
+    </div>
+    <div class="sc" style="padding:.6rem">
+      <canvas id="cvP2" width="205" height="118" style="border-radius:8px;max-width:100%;display:block;margin:0 auto"></canvas>
+      <div class="st" style="margin-top:.42rem">游泳池底看起來較淺</div>
+      <div class="sd">折射讓影像「往上浮」，看起來只有實際深度的約 ¾</div>
+    </div>
+    <div class="sc" style="padding:.6rem">
+      <canvas id="cvP3" width="205" height="118" style="border-radius:8px;max-width:100%;display:block;margin:0 auto"></canvas>
+      <div class="st" style="margin-top:.42rem">彩虹的形成</div>
+      <div class="sd">不同顏色光折射率略不同，陽光穿過水珠後分散成七色</div>
+    </div>
   </div>
   <div class="nxt"><button class="btn bp" onclick="go('life')">前往生活應用 →</button></div>
 </div>
@@ -305,8 +314,24 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
 <!-- ════ LIFE ════ -->
 <div class="panel" id="tab-life">
   <h2 class="stitle">🌍 光的折射在生活中</h2>
-  <p style="font-size:.84rem;color:var(--dim);margin-bottom:.75rem">折射現象每天都在你身邊！點擊卡片看更多說明。</p>
-  <div class="life-grid">
+  <div class="life-layout">
+    <!-- Left sidebar -->
+    <div class="life-sb">
+      <div class="life-ni on" onclick="selLife(0)"><span class="life-ni-ic">🥤</span><span>吸管彎折</span></div>
+      <div class="life-ni" onclick="selLife(1)"><span class="life-ni-ic">🏊</span><span>游泳池底</span></div>
+      <div class="life-ni" onclick="selLife(2)"><span class="life-ni-ic">🌈</span><span>彩虹形成</span></div>
+      <div class="life-ni" onclick="selLife(3)"><span class="life-ni-ic">🏜️</span><span>海市蜃樓</span></div>
+      <div class="life-ni" onclick="selLife(4)"><span class="life-ni-ic">🐟</span><span>水族箱的魚</span></div>
+      <div class="life-ni" onclick="selLife(5)"><span class="life-ni-ic">👓</span><span>眼鏡矯正</span></div>
+    </div>
+    <!-- Right content -->
+    <div class="life-ct">
+      <canvas id="cvLifeBig" width="430" height="225" style="border-radius:9px;max-width:100%;display:block"></canvas>
+      <div id="lifeBigDesc" style="font-size:.84rem;line-height:1.72;color:var(--text)"></div>
+    </div>
+  </div>
+  <!-- keep table below -->
+  <div style="display:none" class="life-grid">
     <div class="life-card" onclick="toggleCard(this)">
       <div class="lc-icon">🥤</div><div class="lc-title">吸管看起來彎了</div>
       <div class="lc-brief">吸管插入飲料，在液面看起來彎折了！</div>
@@ -343,7 +368,7 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
       <div class="lc-detail">近視鏡片（凹透鏡）讓光線發散，遠視鏡片（凸透鏡）讓光線會聚。光穿過鏡片發生折射，改變焦距，幫助眼睛看清楚。</div>
       <div class="lc-tap">👆 點擊看更多</div>
     </div>
-  </div>
+  </div><!-- end hidden life-grid -->
   <div class="card" style="margin-top:.8rem">
     <div style="font-weight:700;font-size:.88rem;margin-bottom:.55rem">📊 折射現象總整理</div>
     <div style="overflow-x:auto">
@@ -404,8 +429,8 @@ function go(id){
   document.querySelector(`.tab[data-tab="${id}"]`).classList.add('active');
   document.getElementById('tab-'+id).classList.add('active');
   document.getElementById('content').scrollTop=0;
-  if(id==='principle') setTimeout(()=>drawPrin(1),50);
-  if(id==='life') setTimeout(drawLifeCvs,80);
+  if(id==='principle') setTimeout(()=>{drawPrin(1);drawPCards();},60);
+  if(id==='life') setTimeout(()=>selLife(curLife),60);
 }
 
 function toggleCard(c){
@@ -644,14 +669,7 @@ function drawCont(ctx,bx,by,bw,bh,layers,deg){
 /* ═══════════════════════════════
    EXP 2 — COIN
 ═══════════════════════════════ */
-let coinW2=0, coinBox='large', autoId=null;
-
-function setBox(t){
-  coinBox=t;
-  document.getElementById('bLarge').classList.toggle('on-box',t==='large');
-  document.getElementById('bSmall').classList.toggle('on-box',t==='small');
-  redrawE2();
-}
+let coinW2=0, autoId=null;
 
 function setWater(v){
   coinW2=v;
@@ -674,74 +692,87 @@ function autoFill(){
 
 function updCoinObs(){
   const el=document.getElementById('coinObs');
-  if(coinW2<5) el.innerHTML='容器裡只有空氣，硬幣正常地待在底部。';
+  if(coinW2<5) el.innerHTML='容器裡只有空氣，硬幣正常地在底部。';
   else if(coinW2<30) el.innerHTML='水位還低，硬幣看起來還是 <strong>1 個</strong>...';
   else if(coinW2<55) el.innerHTML='咦？仔細看，好像出現了 <strong style="color:var(--orange)">2 個硬幣</strong>？';
-  else el.innerHTML='可以清楚看到 <strong style="color:var(--green)">2 個硬幣</strong>的影像！<br>上面那個（虛線）是折射產生的虛像。';
+  else el.innerHTML='<strong>大小方形盒都看到 <span style="color:var(--green)">2 個硬幣</span></strong>！<br>現象相同——折射與容器大小無關！';
 }
 
 function revE2(){document.getElementById('e2exp').classList.toggle('hidden');}
 
-function redrawE2(){
-  const cv=document.getElementById('cvCoin'); if(!cv)return;
-  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
-  const rays=document.getElementById('showRays')?.checked;
-  ctx.clearRect(0,0,W,H); ctx.fillStyle='#060f1e'; ctx.roundRect(0,0,W,H,10); ctx.fill();
-  const bw=coinBox==='large'?235:165;
-  const bx=(W-bw)/2,by=18,bh=H-36,bBot=by+bh;
-  const wH=(coinW2/100)*(bh-12),wY=bBot-wH;
+/* 兩個容器的佈局常數 */
+const BOX_L={bx:12, by:20, bw:195, bh:230, lbl:'大方形盒'};
+const BOX_S={bx:248, by:48, bw:140, bh:202, lbl:'小方形盒'};
+
+function drawBox(ctx,box,rays){
+  const {bx,by,bw,bh,lbl}=box;
+  const bBot=by+bh;
+  const wH=(coinW2/100)*(bh-12), wY=bBot-wH;
   if(coinW2>0){
     const g=ctx.createLinearGradient(bx,wY,bx,bBot);
-    g.addColorStop(0,'rgba(0,120,210,.12)'); g.addColorStop(1,'rgba(0,70,165,.33)');
+    g.addColorStop(0,'rgba(0,120,210,.12)'); g.addColorStop(1,'rgba(0,70,165,.32)');
     ctx.fillStyle=g; ctx.fillRect(bx,wY,bw,wH);
-    ctx.strokeStyle='rgba(120,210,255,.65)'; ctx.lineWidth=2;
+    ctx.strokeStyle='rgba(120,210,255,.62)'; ctx.lineWidth=1.8; ctx.setLineDash([]);
     ctx.beginPath();
     for(let x=bx;x<=bx+bw;x+=2){
-      const wy=wY+Math.sin(((x-bx)/bw)*Math.PI*5+waveT)*1.8;
+      const wy=wY+Math.sin(((x-bx)/bw)*Math.PI*5+waveT)*1.6;
       x===bx?ctx.moveTo(x,wy):ctx.lineTo(x,wy);
     }
     ctx.stroke();
   }
   ctx.strokeStyle='rgba(72,202,228,.52)'; ctx.lineWidth=2; ctx.strokeRect(bx,by,bw,bh);
-  const cX=bx+bw/2,cY=bBot-18,rX=Math.min(bw*.3,24),rY=Math.min(rX*.42,9);
+  const cX=bx+bw/2, cY=bBot-17;
+  const rX=Math.min(bw*.28,22), rY=Math.min(rX*.42,8);
   const cg=ctx.createRadialGradient(cX-rX*.3,cY-rY*.5,1,cX,cY,rX);
   cg.addColorStop(0,'#f0c94a'); cg.addColorStop(.7,'#d4a020'); cg.addColorStop(1,'#a07010');
   ctx.fillStyle=cg; ctx.strokeStyle='#8a6010'; ctx.lineWidth=1.5;
   ctx.beginPath(); ctx.ellipse(cX,cY,rX,rY,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
-  ctx.fillStyle='rgba(0,0,0,.3)'; ctx.font=`bold ${Math.round(rX*.5)}px sans-serif`;
-  ctx.textAlign='center'; ctx.fillText('$',cX,cY+rX*.18);
+  ctx.fillStyle='rgba(0,0,0,.3)'; ctx.font=`bold ${Math.round(rX*.48)}px sans-serif`; ctx.textAlign='center';
+  ctx.fillText('$',cX,cY+rX*.18);
   if(coinW2>18){
     const depth=cY-wY;
     const vY2=depth>0?wY-depth*(1/1.33)*(coinW2/100):cY;
     const al=Math.min((coinW2-18)/45,1);
-    if(rays&&coinW2>28){
-      const eX=bx+bw+42,eY=by+28;
+    if(rays&&coinW2>30){
+      const eX=bx+bw+8, eY=by+20;
       ctx.setLineDash([4,4]);
-      [[bx+bw*.36,eY],[bx+bw*.64,eY+14]].forEach(([rx,ey])=>{
-        ctx.strokeStyle=`rgba(255,210,40,${al*.62})`; ctx.lineWidth=1.4;
+      [[bx+bw*.35,eY],[bx+bw*.65,eY+10]].forEach(([rx,ey])=>{
+        ctx.strokeStyle=`rgba(255,210,40,${al*.55})`; ctx.lineWidth=1.3;
         ctx.beginPath(); ctx.moveTo(cX,cY); ctx.lineTo(rx,wY); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(rx,wY); ctx.lineTo(eX,ey); ctx.stroke();
         ctx.strokeStyle=`rgba(255,210,40,${al*.18})`;
         ctx.beginPath(); ctx.moveTo(rx,wY); ctx.lineTo(cX,vY2-10); ctx.stroke();
       });
       ctx.setLineDash([]);
-      ctx.font='20px sans-serif'; ctx.textAlign='left';
-      ctx.fillStyle=`rgba(255,255,255,${al})`; ctx.fillText('👁️',eX,eY+16);
+      ctx.font='16px sans-serif'; ctx.textAlign='left';
+      ctx.fillStyle=`rgba(255,255,255,${al})`; ctx.fillText('👁️',eX,eY+14);
     }
     ctx.fillStyle=`rgba(212,168,40,${al*.35})`; ctx.strokeStyle=`rgba(200,155,20,${al*.6})`; ctx.lineWidth=1.5;
     ctx.setLineDash([4,4]);
     ctx.beginPath(); ctx.ellipse(cX,vY2,rX,rY,0,0,Math.PI*2); ctx.fill(); ctx.stroke(); ctx.setLineDash([]);
-    ctx.fillStyle=`rgba(144,224,239,${al})`; ctx.font=`bold ${Math.round(rX*.45)}px "Noto Sans TC",sans-serif`;
-    ctx.textAlign='center'; ctx.fillText('虛像',cX,vY2-rY-6);
+    ctx.fillStyle=`rgba(144,224,239,${al})`; ctx.font=`bold 9px "Noto Sans TC",sans-serif`;
+    ctx.textAlign='center'; ctx.fillText('虛像',cX,vY2-rY-5);
   }
-  ctx.fillStyle='rgba(200,220,255,.45)'; ctx.font='11px "Noto Sans TC",sans-serif'; ctx.textAlign='left';
-  ctx.fillText('空氣',bx+4,by+14);
-  if(coinW2>4){ctx.fillStyle='rgba(100,185,255,.48)'; ctx.fillText('水',bx+4,wY+14);}
-  ctx.fillStyle='rgba(72,202,228,.72)'; ctx.font='bold 11px sans-serif'; ctx.textAlign='right';
-  ctx.fillText(`水位 ${Math.round(coinW2)}%`,bx+bw-5,by+14);
+  ctx.fillStyle='rgba(200,220,255,.42)'; ctx.font='10px "Noto Sans TC",sans-serif'; ctx.textAlign='left';
+  ctx.fillText('空氣',bx+4,by+13);
+  if(coinW2>4){ctx.fillStyle='rgba(100,185,255,.46)'; ctx.fillText('水',bx+4,wY+13);}
+  ctx.fillStyle='rgba(144,224,239,.75)'; ctx.font='bold 10px "Noto Sans TC",sans-serif'; ctx.textAlign='center';
+  ctx.fillText(lbl,bx+bw/2,by+bh+14);
 }
 
-/* coin canvas click — "find the real coin" game */
+function redrawE2(){
+  const cv=document.getElementById('cvCoin'); if(!cv)return;
+  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
+  const rays=document.getElementById('showRays')?.checked;
+  ctx.clearRect(0,0,W,H); ctx.fillStyle='#060f1e'; ctx.roundRect(0,0,W,H,10); ctx.fill();
+  drawBox(ctx,BOX_L,rays);
+  drawBox(ctx,BOX_S,rays);
+  // Water % label
+  ctx.fillStyle='rgba(72,202,228,.72)'; ctx.font='bold 10px sans-serif'; ctx.textAlign='center';
+  ctx.fillText(`水位 ${Math.round(coinW2)}%`, W/2, 14);
+}
+
+/* coin canvas click — find the real coin */
 document.addEventListener('DOMContentLoaded',()=>{
   const cv=document.getElementById('cvCoin'); if(!cv)return;
   cv.addEventListener('click',e=>{
@@ -749,17 +780,20 @@ document.addEventListener('DOMContentLoaded',()=>{
     const rect=cv.getBoundingClientRect();
     const mx=(e.clientX-rect.left)*(cv.width/rect.width);
     const my=(e.clientY-rect.top)*(cv.height/rect.height);
-    const bw=coinBox==='large'?235:165;
-    const bx=(cv.width-bw)/2,by=18,bh=cv.height-36,bBot=by+bh;
-    const wH=(coinW2/100)*(bh-12),wY=bBot-wH;
-    const cX=bx+bw/2,cY=bBot-18;
-    const depth=cY-wY;
-    const vY2=depth>0?wY-depth*(1/1.33)*(coinW2/100):cY;
-    const dR=Math.hypot(mx-cX,my-cY);
-    const dV=Math.hypot(mx-cX,my-vY2);
-    if(dR<28) setCoinFB('🎉 答對了！那才是硬幣<strong>真正的位置</strong>！','var(--green)');
-    else if(dV<28) setCoinFB('那是折射產生的<strong>虛像</strong>！硬幣實際上在更下面，再試一次！','var(--orange)');
-    else setCoinFB('沒點到！再試試看，仔細觀察上下的影像。','var(--dim)');
+    function check(box){
+      const {bx,by,bw,bh}=box;
+      const bBot=by+bh, wH=(coinW2/100)*(bh-12), wY=bBot-wH;
+      const cX=bx+bw/2, cY=bBot-17;
+      const depth=cY-wY;
+      const vY2=depth>0?wY-depth*(1/1.33)*(coinW2/100):cY;
+      if(Math.hypot(mx-cX,my-cY)<26) return 'real';
+      if(Math.hypot(mx-cX,my-vY2)<26) return 'virt';
+      return null;
+    }
+    const r=check(BOX_L)||check(BOX_S);
+    if(r==='real') setCoinFB('🎉 答對了！那才是硬幣<strong>真正的位置</strong>！','var(--green)');
+    else if(r==='virt') setCoinFB('那是折射產生的<strong>虛像</strong>！硬幣實際上在更下面。','var(--orange)');
+    else setCoinFB('沒點到！再試試看。','var(--dim)');
   });
 });
 
@@ -800,11 +834,16 @@ function drawPrin(p=1){
     if(rP>.65){
       ctx.strokeStyle='rgba(255,215,40,.48)'; ctx.lineWidth=1.5;
       ctx.beginPath(); ctx.arc(mX,iY,46,-Math.PI/2-iA,-Math.PI/2); ctx.stroke();
-      ctx.fillStyle='rgba(255,215,40,.9)'; ctx.font='bold 12px "Noto Sans TC",sans-serif'; ctx.textAlign='center';
-      ctx.fillText('入射角',mX-55,iY-32);
-      ctx.strokeStyle='rgba(255,130,30,.48)'; ctx.lineWidth=1.5;
-      ctx.beginPath(); ctx.arc(mX,iY,46,Math.PI/2,Math.PI/2+rA); ctx.stroke();
-      ctx.fillStyle='rgba(255,130,30,.9)'; ctx.fillText('折射角',mX+57,iY+38);
+      // label at arc midpoint (upper-left for incident)
+      const incMid=-Math.PI/2-iA/2, refMid2=Math.PI/2-rA/2, lR=68;
+      ctx.font='bold 12px "Noto Sans TC",sans-serif'; ctx.textAlign='center';
+      ctx.fillStyle='rgba(255,215,40,.95)';
+      ctx.fillText('入射角',mX+lR*Math.cos(incMid),iY+lR*Math.sin(incMid));
+      // refracted arc: counterclockwise from π/2 to π/2-rA (lower-right)
+      ctx.strokeStyle='rgba(255,130,30,.52)'; ctx.lineWidth=1.5;
+      ctx.beginPath(); ctx.arc(mX,iY,46,Math.PI/2,Math.PI/2-rA,true); ctx.stroke();
+      ctx.fillStyle='rgba(255,130,30,.95)';
+      ctx.fillText('折射角',mX+lR*Math.cos(refMid2),iY+lR*Math.sin(refMid2));
       ctx.fillStyle='rgba(144,224,239,.75)'; ctx.font='12px "Noto Sans TC",sans-serif';
       ctx.fillText('折射角 < 入射角（進入較密介質，光靠近法線）',W/2,H-10);
     }
@@ -813,9 +852,437 @@ function drawPrin(p=1){
 }
 
 /* ═══════════════════════════════
-   LIFE APP CANVASES
+   PRINCIPLE SMALL CARDS
 ═══════════════════════════════ */
-function drawLifeCvs(){drawStraw();drawPool();}
+function drawPCards(){drawPC1();drawPC2();drawPC3();}
+
+function drawPC1(){ // Air→Water
+  const cv=document.getElementById('cvP1');if(!cv)return;
+  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle='#060f1e';ctx.roundRect(0,0,W,H,8);ctx.fill();
+  const iY=H*.5,mX=W*.52;
+  ctx.fillStyle='rgba(200,235,255,.065)';ctx.fillRect(0,0,W,iY);
+  ctx.fillStyle='rgba(0,110,200,.24)';ctx.fillRect(0,iY,W,H-iY);
+  ctx.strokeStyle='rgba(120,210,255,.65)';ctx.lineWidth=1.5;ctx.setLineDash([]);
+  ctx.beginPath();ctx.moveTo(0,iY);ctx.lineTo(W,iY);ctx.stroke();
+  ctx.fillStyle='rgba(200,220,255,.5)';ctx.font='bold 9px "Noto Sans TC",sans-serif';ctx.textAlign='left';
+  ctx.fillText('空氣 n=1.00',5,13);
+  ctx.fillStyle='rgba(100,185,255,.6)';ctx.fillText('水 n=1.33',5,iY+13);
+  // normal line
+  ctx.strokeStyle='rgba(220,80,80,.52)';ctx.lineWidth=1;ctx.setLineDash([4,3]);
+  ctx.beginPath();ctx.moveTo(mX,iY-48);ctx.lineTo(mX,iY+52);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='rgba(220,80,80,.65)';ctx.font='8px "Noto Sans TC",sans-serif';ctx.textAlign='center';
+  ctx.fillText('法線',mX,iY-50);
+  const iA=42*Math.PI/180,rA=Math.asin(Math.sin(iA)/1.33),aR=28,rL=50;
+  // incident ray
+  ctx.strokeStyle='rgba(255,215,40,.9)';ctx.lineWidth=2.2;ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(mX-Math.sin(iA)*rL,iY-Math.cos(iA)*rL);ctx.lineTo(mX,iY);ctx.stroke();
+  // refracted ray
+  ctx.strokeStyle='rgba(255,135,30,.9)';
+  ctx.beginPath();ctx.moveTo(mX,iY);ctx.lineTo(mX+Math.sin(rA)*rL,iY+Math.cos(rA)*rL);ctx.stroke();
+  // arcs
+  ctx.strokeStyle='rgba(255,215,40,.75)';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.arc(mX,iY,aR,-Math.PI/2-iA,-Math.PI/2,false);ctx.stroke();
+  ctx.strokeStyle='rgba(255,135,30,.75)';
+  ctx.beginPath();ctx.arc(mX,iY,aR,Math.PI/2,Math.PI/2-rA,true);ctx.stroke();
+  // labels
+  ctx.font='bold 9px "Noto Sans TC",sans-serif';
+  const iM=-Math.PI/2-iA/2,rM=Math.PI/2-rA/2,lR=44;
+  ctx.fillStyle='rgba(255,215,40,.95)';ctx.textAlign='right';
+  ctx.fillText(`入射 ${Math.round(iA*180/Math.PI)}°`,mX+lR*Math.cos(iM)-2,iY+lR*Math.sin(iM));
+  ctx.fillStyle='rgba(255,135,30,.95)';ctx.textAlign='left';
+  ctx.fillText(`折射 ${Math.round(rA*180/Math.PI)}°`,mX+lR*Math.cos(rM)+2,iY+lR*Math.sin(rM));
+}
+
+function drawPC2(){ // Pool
+  const cv=document.getElementById('cvP2');if(!cv)return;
+  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle='#060f1e';ctx.roundRect(0,0,W,H,8);ctx.fill();
+  const px=18,py=18,pw=W-36,ph=H-28,wY=py+18;
+  ctx.fillStyle='rgba(200,235,255,.055)';ctx.fillRect(px,py,pw,wY-py);
+  const wg=ctx.createLinearGradient(px,wY,px,py+ph);
+  wg.addColorStop(0,'rgba(0,120,210,.14)');wg.addColorStop(1,'rgba(0,70,160,.32)');
+  ctx.fillStyle=wg;ctx.fillRect(px,wY,pw,ph-(wY-py));
+  ctx.strokeStyle='rgba(72,202,228,.45)';ctx.lineWidth=1.5;ctx.strokeRect(px,py,pw,ph);
+  ctx.strokeStyle='rgba(120,210,255,.55)';ctx.lineWidth=1;ctx.setLineDash([]);
+  ctx.beginPath();ctx.moveTo(px,wY);ctx.lineTo(px+pw,wY);ctx.stroke();
+  const realY=py+ph-5,appY=wY+(realY-wY)*.72;
+  ctx.strokeStyle='rgba(180,140,60,.82)';ctx.lineWidth=3;ctx.lineCap='square';
+  ctx.beginPath();ctx.moveTo(px+5,realY);ctx.lineTo(px+pw-5,realY);ctx.stroke();
+  ctx.fillStyle='rgba(180,140,60,.72)';ctx.font='8px "Noto Sans TC",sans-serif';ctx.textAlign='right';
+  ctx.fillText('實際底部',px+pw-4,realY-3);
+  ctx.strokeStyle='rgba(144,224,239,.68)';ctx.lineWidth=1.5;ctx.setLineDash([4,3]);
+  ctx.beginPath();ctx.moveTo(px+5,appY);ctx.lineTo(px+pw-5,appY);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='rgba(144,224,239,.7)';ctx.textAlign='right';
+  ctx.fillText('看起來的底部（約¾）',px+pw-4,appY-3);
+  ctx.font='15px sans-serif';ctx.textAlign='center';ctx.fillText('👁️',px+pw/2,py-2);
+  // arrows
+  const ax=px+8;ctx.strokeStyle='rgba(144,224,239,.55)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(ax,appY);ctx.lineTo(ax,realY);ctx.stroke();
+  ctx.fillStyle='rgba(255,80,80,.8)';ctx.font='8px sans-serif';ctx.textAlign='left';
+  ctx.fillText('差距',ax+2,(appY+realY)/2+3);
+}
+
+function drawPC3(){ // Rainbow
+  const cv=document.getElementById('cvP3');if(!cv)return;
+  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle='#060f1e';ctx.roundRect(0,0,W,H,8);ctx.fill();
+  const dX=W*.62,dY=H*.48,dR=28;
+  ctx.fillStyle='rgba(0,110,200,.22)';ctx.strokeStyle='rgba(100,200,255,.65)';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.arc(dX,dY,dR,0,Math.PI*2);ctx.fill();ctx.stroke();
+  ctx.fillStyle='rgba(144,224,239,.55)';ctx.font='8px "Noto Sans TC",sans-serif';ctx.textAlign='center';
+  ctx.fillText('水珠',dX,dY+dR+10);
+  // white light
+  ctx.strokeStyle='rgba(255,255,255,.85)';ctx.lineWidth=2.2;ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(W-8,dY);ctx.lineTo(dX+dR,dY);ctx.stroke();
+  ctx.fillStyle='rgba(255,255,255,.65)';ctx.font='8px "Noto Sans TC",sans-serif';ctx.textAlign='right';
+  ctx.fillText('白光',W-10,dY-3);
+  ctx.font='13px sans-serif';ctx.textAlign='right';ctx.fillText('☀️',W-8,dY+14);
+  // color rays exiting left
+  const cols=[
+    {c:'rgba(255,35,35,.95)',ang:-24,lbl:'紅'},
+    {c:'rgba(255,130,0,.9)',ang:-15},
+    {c:'rgba(255,220,0,.9)',ang:-6},
+    {c:'rgba(40,190,40,.9)',ang:3},
+    {c:'rgba(20,80,255,.9)',ang:12},
+    {c:'rgba(140,0,255,.9)',ang:22,lbl:'紫'},
+  ];
+  cols.forEach(({c,ang,lbl})=>{
+    const a=ang*Math.PI/180;
+    const eX=dX-dR*Math.cos(a),eY=dY+dR*Math.sin(a);
+    const tx=eX-42*Math.cos(a),ty=eY+42*Math.sin(a);
+    ctx.strokeStyle=c;ctx.lineWidth=1.6;ctx.lineCap='round';
+    ctx.beginPath();ctx.moveTo(eX,eY);ctx.lineTo(tx,ty);ctx.stroke();
+    if(lbl){ctx.fillStyle=c;ctx.font='bold 8px "Noto Sans TC",sans-serif';ctx.textAlign='left';ctx.fillText(lbl,tx-10,ty+3);}
+  });
+}
+
+/* ═══════════════════════════════
+   LIFE SIDEBAR
+═══════════════════════════════ */
+let curLife=0;
+const LIFE_DATA=[
+  {icon:'🥤',title:'吸管看起來彎了',
+   desc:'<strong>🥤 吸管插入水中：光在水面折射，讓吸管影像「偏移」</strong><br><br>把吸管插入裝水的杯子，吸管在水面處看起來彎折了。光從水中往空氣傳播時，在水面發生折射，讓吸管在水中的影像「往旁邊偏移」。我們的大腦以為光是直線傳播的，所以覺得吸管在水面處「斷掉」了！',
+   draw:drawLStraw},
+  {icon:'🏊',title:'游泳池底看起來較淺',
+   desc:'<strong>🏊 游泳池底的折射視覺：看起來只有實際深度的 ¾</strong><br><br>站在泳池邊，水底看起來比實際淺。水底的光往上傳播，在水面折射（n=1.33），讓水底影像「往上浮」，只有實際深度的 1/n = 75%。這讓人容易低估水深，要小心！',
+   draw:drawLPool},
+  {icon:'🌈',title:'彩虹的形成',
+   desc:'<strong>🌈 彩虹：不同顏色光在水珠中折射率略不同</strong><br><br>雨後陽光穿過空氣中的水珠，光在水珠表面折射（進入），再經內部反射，最後折射（射出）。紫光折射率（n≈1.344）略高於紅光（n≈1.331），因此兩者分散角度不同，形成七色彩虹。彩虹永遠出現在太陽的對面。',
+   draw:drawLRainbow},
+  {icon:'🏜️',title:'沙漠海市蜃樓',
+   desc:'<strong>🏜️ 海市蜃樓：熱空氣密度低，光線連續折射彎曲</strong><br><br>沙漠地面附近的熱空氣密度比高處冷空氣低，折射率也低。遠處的光線在不同密度空氣層間不斷折射，漸漸彎向地面，看起來像是從地面「反射」上來，形成好像有水面的幻象。',
+   draw:drawLMirage},
+  {icon:'🐟',title:'水族箱裡的魚',
+   desc:'<strong>🐟 水族箱中的魚：光在水-玻璃-空氣界面折射，位置偏移</strong><br><br>從側面看水族箱，魚看起來比實際位置更靠近玻璃。光從水中穿過玻璃進入空氣時，在界面折射，讓魚的影像偏離了實際位置。漁夫用魚叉捕魚時要「往前瞄準」，就是因為這個！',
+   draw:drawLFish},
+  {icon:'👓',title:'眼鏡矯正視力',
+   desc:'<strong>👓 眼鏡：利用折射讓光線正確聚焦在視網膜上</strong><br><br>近視鏡片（凹透鏡）讓平行光線發散，使焦點後移至視網膜；遠視鏡片（凸透鏡）讓光線會聚，使焦點前移至視網膜。光穿過鏡片發生折射，精確改變了焦距，幫助眼睛清楚成像。',
+   draw:drawLGlasses},
+];
+
+function selLife(idx){
+  curLife=idx;
+  document.querySelectorAll('.life-ni').forEach((el,i)=>el.classList.toggle('on',i===idx));
+  const d=LIFE_DATA[idx];
+  document.getElementById('lifeBigDesc').innerHTML=d.desc;
+  d.draw(document.getElementById('cvLifeBig'));
+}
+
+/* helpers */
+function lbg(cv){
+  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle='#060f1e';ctx.roundRect(0,0,W,H,10);ctx.fill();
+  return{ctx,W,H};
+}
+function waterFill(ctx,bx,by,bw,bh,wY){
+  const g=ctx.createLinearGradient(bx,wY,bx,by+bh);
+  g.addColorStop(0,'rgba(0,120,210,.13)');g.addColorStop(1,'rgba(0,70,165,.32)');
+  ctx.fillStyle=g;ctx.fillRect(bx,wY,bw,by+bh-wY);
+  ctx.strokeStyle='rgba(120,210,255,.6)';ctx.lineWidth=1.5;ctx.setLineDash([]);
+  ctx.beginPath();ctx.moveTo(bx,wY);ctx.lineTo(bx+bw,wY);ctx.stroke();
+}
+
+/* ── Straw ── */
+function drawLStraw(cv){
+  const{ctx,W,H}=lbg(cv);
+  const gx=W/2-55,gy=22,gw=110,gh=178,wY=gy+gh*.4;
+  ctx.fillStyle='rgba(200,235,255,.055)';ctx.fillRect(gx,gy,gw,wY-gy);
+  waterFill(ctx,gx,gy,gw,gh-(wY-gy>0?0:0),wY);
+  ctx.strokeStyle='rgba(72,202,228,.48)';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(gx,gy);ctx.lineTo(gx,gy+gh);ctx.lineTo(gx+gw,gy+gh);ctx.lineTo(gx+gw,gy);ctx.stroke();
+  ctx.fillStyle='rgba(200,220,255,.48)';ctx.font='10px "Noto Sans TC",sans-serif';ctx.textAlign='left';
+  ctx.fillText('空氣 n=1.00',gx+5,gy+14);
+  ctx.fillStyle='rgba(100,185,255,.55)';ctx.fillText('水 n=1.33',gx+5,wY+14);
+  const ang=40*Math.PI/180,rA=Math.asin(Math.sin(ang)/1.33);
+  const eX=gx+gw*.6,eY=wY,airL=wY-gy-8,waterL=gy+gh-18-wY;
+  // straw in air
+  ctx.strokeStyle='rgba(200,230,170,.9)';ctx.lineWidth=7;ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(eX-Math.sin(ang)*airL,eY-Math.cos(ang)*airL);ctx.lineTo(eX,eY);ctx.stroke();
+  // straw in water (refracted)
+  ctx.beginPath();ctx.moveTo(eX,eY);ctx.lineTo(eX+Math.sin(rA)*waterL,eY+Math.cos(rA)*waterL);ctx.stroke();
+  // normal line
+  ctx.strokeStyle='rgba(220,80,80,.52)';ctx.lineWidth=1.2;ctx.setLineDash([5,4]);
+  ctx.beginPath();ctx.moveTo(eX,eY-58);ctx.lineTo(eX,eY+62);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='rgba(220,80,80,.65)';ctx.font='10px "Noto Sans TC",sans-serif';ctx.textAlign='center';
+  ctx.fillText('法線',eX,eY-60);
+  // arcs
+  const aR=34;
+  ctx.strokeStyle='rgba(255,215,40,.82)';ctx.lineWidth=1.8;
+  ctx.beginPath();ctx.arc(eX,eY,aR,-Math.PI/2-ang,-Math.PI/2,false);ctx.stroke();
+  ctx.strokeStyle='rgba(255,135,30,.82)';
+  ctx.beginPath();ctx.arc(eX,eY,aR,Math.PI/2,Math.PI/2-rA,true);ctx.stroke();
+  // labels
+  const iM=-Math.PI/2-ang/2,rM=Math.PI/2-rA/2,lR=52;
+  ctx.font='bold 10px "Noto Sans TC",sans-serif';
+  ctx.fillStyle='rgba(255,215,40,.95)';ctx.textAlign='right';
+  ctx.fillText(`入射角 ${Math.round(ang*180/Math.PI)}°`,eX+lR*Math.cos(iM)-2,eY+lR*Math.sin(iM));
+  ctx.fillStyle='rgba(255,135,30,.95)';ctx.textAlign='left';
+  ctx.fillText(`折射角 ${Math.round(rA*180/Math.PI)}°`,eX+lR*Math.cos(rM)+2,eY+lR*Math.sin(rM));
+  // eye + apparent ray
+  const airTopX=eX-Math.sin(ang)*airL,airTopY=eY-Math.cos(ang)*airL;
+  ctx.font='22px sans-serif';ctx.textAlign='center';ctx.fillText('👁️',gx-28,airTopY+5);
+  ctx.strokeStyle='rgba(255,215,40,.28)';ctx.lineWidth=1.2;ctx.setLineDash([3,3]);
+  ctx.beginPath();ctx.moveTo(gx-28,airTopY+5);ctx.lineTo(eX,eY);ctx.stroke();ctx.setLineDash([]);
+  // refraction dot
+  ctx.fillStyle='rgba(255,60,50,.9)';ctx.beginPath();ctx.arc(eX,eY,5,0,Math.PI*2);ctx.fill();
+  // right side: show apparent vs real
+  const rx=gx+gw+18;
+  ctx.fillStyle='rgba(200,220,255,.55)';ctx.font='bold 10px "Noto Sans TC",sans-serif';ctx.textAlign='left';
+  ctx.fillText('折射現象：',rx,gy+20);
+  ctx.fillStyle='rgba(200,230,170,.7)';ctx.font='9px "Noto Sans TC",sans-serif';
+  ctx.fillText('吸管在水中的',rx,gy+36);ctx.fillText('部分影像偏移',rx,gy+48);
+  ctx.fillText('→ 看起來「斷掉」了',rx,gy+62);
+}
+
+/* ── Pool ── */
+function drawLPool(cv){
+  const{ctx,W,H}=lbg(cv);
+  const px=20,py=28,pw=W-40,ph=H-42,wY=py+22;
+  ctx.fillStyle='rgba(200,235,255,.055)';ctx.fillRect(px,py,pw,wY-py);
+  waterFill(ctx,px,py,pw,ph-(wY-py),wY);
+  ctx.strokeStyle='rgba(72,202,228,.45)';ctx.lineWidth=2;ctx.strokeRect(px,py,pw,ph);
+  const realY=py+ph-5,appY=wY+(realY-wY)*0.73;
+  ctx.strokeStyle='rgba(180,140,60,.85)';ctx.lineWidth=3.5;ctx.lineCap='square';
+  ctx.beginPath();ctx.moveTo(px+6,realY);ctx.lineTo(px+pw-6,realY);ctx.stroke();
+  ctx.fillStyle='rgba(180,140,60,.75)';ctx.font='bold 10px "Noto Sans TC",sans-serif';ctx.textAlign='right';
+  ctx.fillText('實際底部（例：3m）',px+pw-6,realY-4);
+  ctx.strokeStyle='rgba(144,224,239,.72)';ctx.lineWidth=1.8;ctx.setLineDash([5,4]);
+  ctx.beginPath();ctx.moveTo(px+6,appY);ctx.lineTo(px+pw-6,appY);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='rgba(144,224,239,.75)';ctx.textAlign='right';
+  ctx.fillText('看起來的底部（≈2.25m，約¾深）',px+pw-6,appY-4);
+  // eye
+  ctx.font='22px sans-serif';ctx.textAlign='center';ctx.fillText('👁️',px+pw*0.5,py-4);
+  // light rays
+  const eyeX=px+pw*0.5,eyeY=py+12;
+  const r1X=px+pw*0.32,r2X=px+pw*0.62;
+  ctx.strokeStyle='rgba(255,215,40,.45)';ctx.lineWidth=1.4;ctx.setLineDash([3,3]);
+  [[r1X,realY],[r2X,realY]].forEach(([rx,ry])=>{
+    ctx.beginPath();ctx.moveTo(rx,ry);ctx.lineTo(rx,wY);ctx.stroke();
+    const refAng=Math.asin(Math.sin(Math.atan2(Math.abs(rx-eyeX),wY-eyeY))/1.33);
+    const dx2=(wY-eyeY)*Math.tan(refAng)*(rx<eyeX?-1:1);
+    ctx.beginPath();ctx.moveTo(rx,wY);ctx.lineTo(eyeX,eyeY);ctx.stroke();
+  });
+  ctx.setLineDash([]);
+  // depth arrow
+  const ax=px+10;
+  ctx.strokeStyle='rgba(144,224,239,.55)';ctx.lineWidth=1.2;
+  ctx.beginPath();ctx.moveTo(ax,wY);ctx.lineTo(ax,realY);ctx.stroke();
+  [[ax,wY,1],[ax,realY,-1]].forEach(([x,y,d])=>{
+    ctx.fillStyle='rgba(144,224,239,.65)';ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x-4,y+d*7);ctx.lineTo(x+4,y+d*7);ctx.closePath();ctx.fill();
+  });
+  ctx.fillStyle='rgba(200,220,255,.55)';ctx.font='9px "Noto Sans TC",sans-serif';ctx.textAlign='left';
+  ctx.fillText('空氣',px+5,py+14);ctx.fillStyle='rgba(100,185,255,.5)';ctx.fillText('水',px+5,wY+14);
+}
+
+/* ── Rainbow ── */
+function drawLRainbow(cv){
+  const{ctx,W,H}=lbg(cv);
+  const dX=W*.62,dY=H*.46,dR=36;
+  ctx.fillStyle='rgba(0,110,200,.22)';ctx.strokeStyle='rgba(100,200,255,.65)';ctx.lineWidth=1.8;
+  ctx.beginPath();ctx.arc(dX,dY,dR,0,Math.PI*2);ctx.fill();ctx.stroke();
+  ctx.fillStyle='rgba(144,224,239,.52)';ctx.font='bold 10px "Noto Sans TC",sans-serif';ctx.textAlign='center';
+  ctx.fillText('水珠',dX,dY+dR+14);
+  // white light
+  ctx.strokeStyle='rgba(255,255,255,.88)';ctx.lineWidth=2.5;ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(W-10,dY);ctx.lineTo(dX+dR,dY);ctx.stroke();
+  ctx.font='13px sans-serif';ctx.textAlign='right';ctx.fillText('☀️',W-10,dY+14);
+  ctx.fillStyle='rgba(255,255,255,.68)';ctx.font='9px "Noto Sans TC",sans-serif';
+  ctx.fillText('白光',W-12,dY-4);
+  // internal path (simplified)
+  ctx.strokeStyle='rgba(255,255,150,.4)';ctx.lineWidth=1;ctx.setLineDash([3,2]);
+  ctx.beginPath();ctx.moveTo(dX+dR,dY);ctx.lineTo(dX,dY+dR*.8);ctx.lineTo(dX-dR*.9,dY);ctx.stroke();
+  ctx.setLineDash([]);
+  // color rays exiting
+  const cols=[
+    {c:'rgba(255,35,35,.95)',a:-26,l:'紅 n=1.331'},
+    {c:'rgba(255,130,0,.9)',a:-17},
+    {c:'rgba(255,220,0,.9)',a:-8},
+    {c:'rgba(40,190,40,.9)',a:1},
+    {c:'rgba(20,80,255,.9)',a:10},
+    {c:'rgba(140,0,255,.9)',a:20,l:'紫 n=1.344'},
+  ];
+  cols.forEach(({c,a,l})=>{
+    const ang=a*Math.PI/180;
+    const eX=dX-dR*Math.cos(ang),eY=dY+dR*Math.sin(ang);
+    const tx=eX-52*Math.cos(ang),ty=eY+52*Math.sin(ang);
+    ctx.strokeStyle=c;ctx.lineWidth=2;ctx.lineCap='round';
+    ctx.beginPath();ctx.moveTo(eX,eY);ctx.lineTo(tx,ty);ctx.stroke();
+    if(l){ctx.fillStyle=c;ctx.font='bold 9px "Noto Sans TC",sans-serif';ctx.textAlign='right';ctx.fillText(l,tx-4,ty+3);}
+  });
+  // eye
+  ctx.font='18px sans-serif';ctx.textAlign='left';ctx.fillText('👁️',8,dY+5);
+  ctx.fillStyle='rgba(200,220,255,.55)';ctx.font='9px "Noto Sans TC",sans-serif';
+  ctx.fillText('觀察者',8,dY+22);
+  // note
+  ctx.fillStyle='rgba(144,224,239,.65)';ctx.font='9px "Noto Sans TC",sans-serif';ctx.textAlign='center';
+  ctx.fillText('不同顏色折射率略不同 → 出射角不同 → 分色',W/2,H-5);
+}
+
+/* ── Mirage ── */
+function drawLMirage(cv){
+  const{ctx,W,H}=lbg(cv);
+  // sky
+  const sg=ctx.createLinearGradient(0,0,0,H*.55);
+  sg.addColorStop(0,'rgba(20,50,120,.35)');sg.addColorStop(1,'rgba(40,80,150,.15)');
+  ctx.fillStyle=sg;ctx.fillRect(0,0,W,H*.55);
+  // ground (hot)
+  const gg=ctx.createLinearGradient(0,H*.55,0,H);
+  gg.addColorStop(0,'rgba(180,130,40,.5)');gg.addColorStop(1,'rgba(120,80,20,.6)');
+  ctx.fillStyle=gg;ctx.fillRect(0,H*.55,W,H*.45);
+  // air layer labels
+  const layers=[
+    {y:H*.08,lbl:'冷空氣（密度高，n較大）',c:'rgba(144,224,239,.55)'},
+    {y:H*.28,lbl:'暖空氣',c:'rgba(255,200,100,.45)'},
+    {y:H*.48,lbl:'熱空氣（密度低，n較小）',c:'rgba(255,120,40,.45)'},
+  ];
+  layers.forEach(({y,lbl,c})=>{
+    ctx.strokeStyle=c;ctx.lineWidth=1;ctx.setLineDash([6,4]);
+    ctx.beginPath();ctx.moveTo(20,y);ctx.lineTo(W-20,y);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle=c;ctx.font='9px "Noto Sans TC",sans-serif';ctx.textAlign='left';
+    ctx.fillText(lbl,22,y-3);
+  });
+  // tree / object on horizon (right side)
+  ctx.font='22px sans-serif';ctx.textAlign='center';ctx.fillText('🌵',W-35,H*.52);
+  // curved light ray
+  ctx.strokeStyle='rgba(255,215,40,.72)';ctx.lineWidth=2;ctx.setLineDash([]);
+  ctx.beginPath();
+  ctx.moveTo(W-50,H*.28);
+  ctx.bezierCurveTo(W*.6,H*.4,W*.3,H*.5,W*.05,H*.42);
+  ctx.stroke();
+  // arrow on curve (indicate direction)
+  ctx.fillStyle='rgba(255,215,40,.8)';ctx.font='9px sans-serif';ctx.textAlign='left';
+  ctx.fillText('光線彎曲',W*.3,H*.38);
+  // eye on left
+  ctx.font='18px sans-serif';ctx.textAlign='left';ctx.fillText('👁️',5,H*.44);
+  ctx.fillStyle='rgba(200,220,255,.6)';ctx.font='9px "Noto Sans TC",sans-serif';
+  ctx.fillText('觀察者',5,H*.44+16);
+  // apparent image (mirage)
+  ctx.font='9px sans-serif';ctx.fillStyle='rgba(144,224,239,.55)';
+  ctx.textAlign='center';ctx.fillText('（看起來有水面→海市蜃樓）',W*.5,H*.56);
+  // wavy mirage lines
+  ctx.strokeStyle='rgba(100,180,255,.3)';ctx.lineWidth=1.2;ctx.setLineDash([3,4]);
+  for(let i=0;i<3;i++){
+    ctx.beginPath();ctx.moveTo(W*.1,H*.58+i*6);ctx.lineTo(W*.45,H*.58+i*6);ctx.stroke();
+  }
+  ctx.setLineDash([]);
+}
+
+/* ── Fish ── */
+function drawLFish(cv){
+  const{ctx,W,H}=lbg(cv);
+  const tx=W*.2,ty=20,tw=W*.55,th=H-35;
+  const wY=ty;
+  // tank water
+  waterFill(ctx,tx,ty,tw,th,wY);
+  ctx.strokeStyle='rgba(72,202,228,.48)';ctx.lineWidth=2;ctx.strokeRect(tx,ty,tw,th);
+  // fish inside at position A
+  const fishX=tx+tw*.4,fishY=ty+th*.55;
+  ctx.font='22px sans-serif';ctx.textAlign='center';ctx.fillText('🐠',fishX,fishY);
+  ctx.fillStyle='rgba(200,220,255,.6)';ctx.font='bold 10px "Noto Sans TC",sans-serif';
+  ctx.fillText('實際位置 A',fishX,fishY+16);
+  // apparent position B (closer to glass)
+  const appX=tx+tw*.82,appY=ty+th*.45;
+  ctx.fillStyle='rgba(144,224,239,.5)';ctx.font='22px sans-serif';ctx.fillText('🐠',appX,appY);
+  ctx.strokeStyle='rgba(144,224,239,.5)';ctx.lineWidth=1.2;ctx.setLineDash([3,3]);
+  ctx.strokeRect(appX-14,appY-16,28,20);ctx.setLineDash([]);
+  ctx.fillStyle='rgba(144,224,239,.65)';ctx.font='bold 9px "Noto Sans TC",sans-serif';
+  ctx.fillText('看起來的位置 B',appX,appY+16);
+  // wall (glass)
+  const wallX=tx+tw;
+  ctx.strokeStyle='rgba(72,202,228,.25)';ctx.lineWidth=8;
+  ctx.beginPath();ctx.moveTo(wallX,ty);ctx.lineTo(wallX,ty+th);ctx.stroke();
+  ctx.fillStyle='rgba(144,224,239,.4)';ctx.font='8px "Noto Sans TC",sans-serif';ctx.textAlign='center';
+  ctx.fillText('玻璃',wallX,ty-5);
+  // eye outside
+  ctx.font='20px sans-serif';ctx.textAlign='left';ctx.fillText('👁️',wallX+12,ty+th*.4);
+  const eyeX=wallX+22,eyeY=ty+th*.38;
+  // light rays from A to eye
+  ctx.strokeStyle='rgba(255,215,40,.55)';ctx.lineWidth=1.4;ctx.setLineDash([4,3]);
+  [[fishX,fishY],[fishX,fishY-20]].forEach(([fx,fy])=>{
+    ctx.beginPath();ctx.moveTo(fx,fy);ctx.lineTo(wallX,fy+(eyeY-fy)*0.6);
+    ctx.lineTo(eyeX,eyeY);ctx.stroke();
+  });
+  ctx.setLineDash([]);
+  // note
+  ctx.fillStyle='rgba(255,215,40,.7)';ctx.font='9px "Noto Sans TC",sans-serif';ctx.textAlign='center';
+  ctx.fillText('折射讓魚看起來比實際更靠近玻璃',W/2,H-5);
+}
+
+/* ── Glasses ── */
+function drawLGlasses(cv){
+  const{ctx,W,H}=lbg(cv);
+  function half(ox,ow,title,concave){
+    const cx=ox+ow*.38,lx=ox+ow*.55,ex=ox+ow-20,ey=H/2;
+    // title
+    ctx.fillStyle='rgba(200,220,255,.7)';ctx.font='bold 10px "Noto Sans TC",sans-serif';ctx.textAlign='center';
+    ctx.fillText(title,ox+ow/2,15);
+    // parallel rays (3 rays)
+    const rays=[-20,0,20];
+    rays.forEach(dy=>{
+      const ry=ey+dy;
+      // ray in
+      ctx.strokeStyle='rgba(255,215,40,.65)';ctx.lineWidth=1.4;ctx.lineCap='round';
+      ctx.beginPath();ctx.moveTo(ox+8,ry);ctx.lineTo(lx,ry);ctx.stroke();
+      // lens bends ray toward/away from eye
+      let targetY=ey; // converge to focal point
+      if(concave) targetY=ey+dy*1.8; // diverge
+      ctx.strokeStyle='rgba(255,165,30,.75)';
+      ctx.beginPath();ctx.moveTo(lx,ry);ctx.lineTo(ex,targetY);ctx.stroke();
+    });
+    // lens shape
+    ctx.strokeStyle='rgba(100,210,255,.7)';ctx.lineWidth=2;
+    if(concave){
+      // concave lens
+      ctx.beginPath();ctx.moveTo(lx-6,H*.15);
+      ctx.bezierCurveTo(lx+6,H*.35,lx+6,H*.65,lx-6,H*.85);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(lx+6,H*.15);
+      ctx.bezierCurveTo(lx-6,H*.35,lx-6,H*.65,lx+6,H*.85);ctx.stroke();
+    } else {
+      // convex lens
+      ctx.beginPath();ctx.moveTo(lx-6,H*.15);
+      ctx.bezierCurveTo(lx+10,H*.35,lx+10,H*.65,lx-6,H*.85);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(lx+6,H*.15);
+      ctx.bezierCurveTo(lx-10,H*.35,lx-10,H*.65,lx+6,H*.85);ctx.stroke();
+    }
+    // eye
+    ctx.font='20px sans-serif';ctx.textAlign='center';ctx.fillText('👁️',ex,ey+8);
+    // focal/retina note
+    ctx.fillStyle='rgba(144,224,239,.6)';ctx.font='8px "Noto Sans TC",sans-serif';
+    ctx.textAlign='center';ctx.fillText(concave?'近視（凹透鏡）':'遠視（凸透鏡）',ox+ow/2,H-5);
+  }
+  // divider
+  ctx.strokeStyle='rgba(72,202,228,.2)';ctx.lineWidth=1;ctx.setLineDash([4,4]);
+  ctx.beginPath();ctx.moveTo(W/2,10);ctx.lineTo(W/2,H-10);ctx.stroke();ctx.setLineDash([]);
+  half(0,W/2,'近視矯正',true);
+  half(W/2,W/2,'遠視矯正',false);
+}
+
+/* ═══════════════════════════════
+   LIFE APP CANVASES (small cards)
+═══════════════════════════════ */
+function drawLifeCvs(){drawStraw();drawPool();}  // legacy, kept for life card details
 
 function drawStraw(){
   const cv=document.getElementById('lcCv1'); if(!cv||!cv.offsetParent)return;
@@ -882,6 +1349,8 @@ window.addEventListener('load',()=>{
   drawChopScene(38,getLayers(),false);
   redrawE2();
   drawPrin();
+  // pre-draw principle cards when tab becomes visible
+  // (drawn on tab switch via go())
 });
 </script>
 </body>
