@@ -43,7 +43,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text
 .ca{background:rgba(0,180,216,.08);border:1px solid rgba(0,180,216,.25);border-radius:8px;padding:.65rem}
 .cb{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:.65rem}
 .ct{font-weight:700;font-size:.86rem;margin-bottom:.18rem}.cd{font-size:.8rem;color:var(--dim)}
-.sumg{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.6rem;margin-top:.75rem}
+.sumg{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:.85rem}
 .sc{padding:.85rem;border-radius:var(--r);text-align:center;background:rgba(0,100,160,.1);border:1px solid rgba(0,180,216,.2)}
 .sc .sb{font-size:1.8rem;margin-bottom:.22rem}.sc .st{font-weight:700;font-size:.86rem;margin-bottom:.1rem}.sc .sd{font-size:.78rem;color:var(--dim)}
 .rtbl{width:100%;border-collapse:collapse;font-size:.82rem}
@@ -167,7 +167,7 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
   .stitle{font-size:.98rem}
   .q-text{font-size:1.02rem}
   .q-opt-btn{font-size:.92rem;padding:.85rem 1rem}
-  .sumg{grid-template-columns:1fr}
+  .sumg{grid-template-columns:1fr!important}
   .topbar{padding:0 .7rem;gap:.2rem}
 }
 </style>
@@ -345,19 +345,19 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
   </div>
   <div class="sumg">
     <div class="sc" style="padding:.6rem">
-      <canvas id="cvP1" width="205" height="118" style="border-radius:8px;max-width:100%;display:block;margin:0 auto"></canvas>
-      <div class="st" style="margin-top:.42rem">空氣 → 水的折射</div>
-      <div class="sd">進入較密介質（水），光靠近法線，折射角 ＜ 入射角</div>
+      <canvas id="cvP1" width="300" height="175" style="border-radius:9px;max-width:100%;display:block;margin:0 auto"></canvas>
+      <div class="st" style="margin-top:.55rem;font-size:1rem">空氣 → 水的折射</div>
+      <div class="sd" style="font-size:.9rem">進入較密介質（水），光靠近法線，折射角 ＜ 入射角</div>
     </div>
-    <div class="sc" style="padding:.6rem">
-      <canvas id="cvP2" width="205" height="118" style="border-radius:8px;max-width:100%;display:block;margin:0 auto"></canvas>
-      <div class="st" style="margin-top:.42rem">游泳池底看起來較淺</div>
-      <div class="sd">折射讓影像「往上浮」，看起來只有實際深度的約 ¾</div>
+    <div class="sc" style="padding:.7rem">
+      <canvas id="cvP2" width="300" height="175" style="border-radius:9px;max-width:100%;display:block;margin:0 auto"></canvas>
+      <div class="st" style="margin-top:.55rem;font-size:1rem">游泳池底看起來較淺</div>
+      <div class="sd" style="font-size:.9rem">折射讓影像「往上浮」，看起來只有實際深度的約 ¾</div>
     </div>
-    <div class="sc" style="padding:.6rem">
-      <canvas id="cvP3" width="205" height="118" style="border-radius:8px;max-width:100%;display:block;margin:0 auto"></canvas>
-      <div class="st" style="margin-top:.42rem">彩虹的形成</div>
-      <div class="sd">不同顏色光折射率略不同，陽光穿過水珠後分散成七色</div>
+    <div class="sc" style="padding:.7rem">
+      <canvas id="cvP3" width="300" height="175" style="border-radius:9px;max-width:100%;display:block;margin:0 auto"></canvas>
+      <div class="st" style="margin-top:.55rem;font-size:1rem">彩虹的形成</div>
+      <div class="sd" style="font-size:.9rem">不同顏色光折射率略不同，陽光穿過水珠後分散成七色</div>
     </div>
   </div>
   <div class="nxt"><button class="btn bp" onclick="go('life')">前往生活應用 →</button></div>
