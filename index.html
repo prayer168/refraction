@@ -13,11 +13,11 @@
   --orange:#f77f00;--green:#2dc653;--red:#e63946;--text:#caf0f8;--dim:#82c8dc;--r:10px;
 }
 html,body{height:100%;overflow:hidden}
-body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);font-size:17px;line-height:1.65}
 .topbar{position:fixed;top:0;left:0;right:0;height:50px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1rem;gap:.35rem;z-index:999}
 .logo{font-weight:900;font-size:.93rem;color:#fff;white-space:nowrap;margin-right:.5rem;display:flex;align-items:center;gap:.32rem}
 .tabs{display:flex;gap:.15rem;flex:1;overflow-x:auto}.tabs::-webkit-scrollbar{display:none}
-.tab{display:flex;align-items:center;gap:.28rem;padding:.28rem .7rem;border:none;border-radius:7px;background:transparent;color:var(--dim);font-size:.8rem;font-weight:700;cursor:pointer;transition:all .18s;font-family:inherit;white-space:nowrap;border-bottom:2px solid transparent}
+.tab{display:flex;align-items:center;gap:.3rem;padding:.3rem .78rem;border:none;border-radius:7px;background:transparent;color:var(--dim);font-size:.88rem;font-weight:700;cursor:pointer;transition:all .18s;font-family:inherit;white-space:nowrap;border-bottom:2px solid transparent}
 .tab:hover{background:rgba(0,180,216,.1);color:var(--blue2)}
 .tab.active{background:rgba(0,180,216,.18);color:var(--blue);border-bottom-color:var(--blue)}
 .content{position:fixed;top:50px;left:0;right:0;bottom:0;overflow-y:auto;padding:.9rem 1.1rem}
@@ -106,6 +106,39 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
 .life-card.expanded .lc-tap{display:none}
 .lc-canvas{border-radius:6px;max-width:100%;display:block;margin:.4rem auto 0}
 
+/* ── Quiz game ── */
+.quiz-wrap{max-width:700px;margin:0 auto}
+.quiz-prog-row{display:flex;align-items:center;gap:.8rem;margin-bottom:1.3rem}
+.quiz-prog-bar{flex:1;height:12px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden}
+.quiz-prog-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--orange));border-radius:999px;transition:width .4s}
+.quiz-prog-txt{font-size:.95rem;font-weight:700;color:var(--dim);white-space:nowrap}
+.q-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.6rem;margin-bottom:1rem}
+.q-num{font-size:.9rem;color:var(--blue3);font-weight:700;margin-bottom:.7rem;letter-spacing:.05em}
+.q-text{font-size:1.18rem;font-weight:700;line-height:1.65;margin-bottom:1.3rem}
+.q-opts{display:flex;flex-direction:column;gap:.7rem}
+.q-opt-btn{width:100%;padding:1rem 1.2rem;background:rgba(255,255,255,.05);border:2px solid var(--border);border-radius:12px;color:var(--text);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:.85rem;text-align:left;font-family:inherit;font-size:1rem;font-weight:500;line-height:1.5}
+.q-opt-btn:hover:not([disabled]){border-color:var(--blue);background:rgba(0,180,216,.1)}
+.q-opt-btn[disabled]{cursor:default}
+.q-opt-btn.correct{border-color:var(--green)!important;background:rgba(45,198,83,.14)!important;color:var(--green)!important}
+.q-opt-btn.wrong{border-color:var(--red)!important;background:rgba(230,57,70,.12)!important;color:var(--red)!important}
+.q-letter{width:36px;height:36px;border-radius:50%;background:rgba(0,180,216,.18);color:var(--blue);font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem}
+.q-opt-btn.correct .q-letter{background:rgba(45,198,83,.22);color:var(--green)}
+.q-opt-btn.wrong .q-letter{background:rgba(230,57,70,.2);color:var(--red)}
+.q-fb{margin-bottom:.85rem;border-radius:11px;overflow:hidden}
+.fb-ok{padding:.95rem 1.2rem;background:rgba(45,198,83,.12);border:1px solid rgba(45,198,83,.35)}
+.fb-no{padding:.95rem 1.2rem;background:rgba(230,57,70,.1);border:1px solid rgba(230,57,70,.3)}
+.fb-head{font-weight:900;font-size:1.15rem;margin-bottom:.4rem}
+.fb-head.ok{color:var(--green)}.fb-head.no{color:var(--red)}
+.fb-explain{font-size:.92rem;color:var(--text);margin-top:.4rem;line-height:1.68}
+.q-nav{text-align:right;margin-top:.3rem}
+.result-card{text-align:center;padding:2.5rem 1.5rem;background:var(--card);border:1px solid var(--border);border-radius:var(--r)}
+.result-icon{font-size:4rem;margin-bottom:.6rem}
+.result-score{font-size:3rem;font-weight:900;margin-bottom:.5rem}
+.result-msg{font-size:1.5rem;font-weight:700;margin-bottom:.65rem}
+.result-sub{font-size:1rem;color:var(--dim);margin-bottom:1.5rem;line-height:1.65}
+.result-list{display:flex;flex-direction:column;gap:.45rem;margin:.8rem 0;text-align:left}
+.rli{font-size:.92rem;padding:.3rem 0;display:flex;gap:.6rem;align-items:flex-start}
+
 /* ── Life sidebar ── */
 .life-layout{display:grid;grid-template-columns:165px 1fr;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:var(--card);margin-bottom:.65rem}
 .life-sb{border-right:1px solid var(--border);padding:.3rem 0}
@@ -125,7 +158,18 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
   .card{border:1px solid #bbb}.rtbl th{background:#ddd;color:#000}
   .ri,.ni{border:1px solid #999;background:#fff;color:#000}
 }
-@media(max-width:660px){.lab-main{grid-template-columns:1fr}.g3{grid-template-columns:1fr}.g2{grid-template-columns:1fr}}
+@media(max-width:720px){
+  .lab-main{grid-template-columns:1fr}
+  .g3{grid-template-columns:1fr}
+  .g2{grid-template-columns:1fr}
+  .scene-btns{grid-template-columns:repeat(2,1fr)}
+  canvas{max-width:100%!important}
+  .stitle{font-size:.98rem}
+  .q-text{font-size:1.02rem}
+  .q-opt-btn{font-size:.92rem;padding:.85rem 1rem}
+  .sumg{grid-template-columns:1fr}
+  .topbar{padding:0 .7rem;gap:.2rem}
+}
 </style>
 </head>
 <body>
@@ -138,7 +182,7 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
     <button class="tab" data-tab="exp2" onclick="go('exp2')">🪙 實驗二：硬幣</button>
     <button class="tab" data-tab="principle" onclick="go('principle')">💡 折射原理</button>
     <button class="tab" data-tab="life" onclick="go('life')">🌍 生活應用</button>
-    <button class="tab" data-tab="record" onclick="go('record')">📋 記錄表</button>
+    <button class="tab" data-tab="record" onclick="go('record')">🏆 闖關大挑戰</button>
   </nav>
 </header>
 
@@ -384,35 +428,36 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
       </table>
     </div>
   </div>
-  <div class="nxt"><button class="btn bp" onclick="go('record')">前往記錄表 →</button></div>
+  <div class="nxt"><button class="btn bp" onclick="go('record')">前往闖關大挑戰 →</button></div>
 </div>
 
-<!-- ════ RECORD ════ -->
+<!-- ════ QUIZ ════ -->
 <div class="panel" id="tab-record">
-  <h2 class="stitle">📋 觀察記錄表</h2>
-  <div class="card">
-    <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.8rem">
-      <span style="font-size:.82rem;color:var(--dim)">姓名：</span><input class="ni" style="width:125px" placeholder="填寫姓名">
-      <span style="font-size:.82rem;color:var(--dim)">班級：</span><input class="ni" style="width:80px" placeholder="年班">
-      <span style="font-size:.82rem;color:var(--dim)">座號：</span><input class="ni" style="width:52px" placeholder="號">
-      <button class="btn bo" style="margin-left:auto" onclick="window.print()">🖨️ 列印</button>
+  <h2 class="stitle">🏆 闖關大挑戰</h2>
+  <p style="font-size:.95rem;color:var(--dim);margin-bottom:1.2rem">完成學習後來挑戰吧！共 8 題選擇題，測試你對光的折射的理解。</p>
+
+  <!-- Quiz running UI -->
+  <div class="quiz-wrap" id="quizBox">
+    <div class="quiz-prog-row">
+      <div class="quiz-prog-bar"><div class="quiz-prog-fill" id="progFill" style="width:0%"></div></div>
+      <div class="quiz-prog-txt" id="progTxt">第 1 題 / 共 8 題</div>
     </div>
-    <div style="overflow-x:auto">
-      <table class="rtbl">
-        <thead><tr><th style="min-width:110px">實驗情境</th><th style="min-width:140px">我的猜測（實驗前）</th><th style="min-width:140px">實際觀察結果</th></tr></thead>
-        <tbody>
-          <tr><td>竹籤插入<strong>空氣</strong>中</td><td><textarea class="ri" rows="2" placeholder="竹籤看起來會…"></textarea></td><td><textarea class="ri" rows="2" placeholder="我觀察到…"></textarea></td></tr>
-          <tr><td>竹籤插入<strong>水＋空氣</strong></td><td><textarea class="ri" rows="2" placeholder="竹籤看起來會…"></textarea></td><td><textarea class="ri" rows="2" placeholder="我觀察到…"></textarea></td></tr>
-          <tr><td>竹籤插入<strong>油＋空氣</strong></td><td><textarea class="ri" rows="2" placeholder="竹籤看起來會…"></textarea></td><td><textarea class="ri" rows="2" placeholder="我觀察到…"></textarea></td></tr>
-          <tr><td>竹籤插入<strong>水＋油＋空氣</strong></td><td><textarea class="ri" rows="2" placeholder="竹籤看起來會…"></textarea></td><td><textarea class="ri" rows="2" placeholder="我觀察到…"></textarea></td></tr>
-          <tr><td>硬幣放入<strong>大方形盒</strong>加水</td><td><textarea class="ri" rows="2" placeholder="硬幣看起來會…"></textarea></td><td><textarea class="ri" rows="2" placeholder="我觀察到…"></textarea></td></tr>
-          <tr><td>硬幣放入<strong>小方形盒</strong>加水</td><td><textarea class="ri" rows="2" placeholder="硬幣看起來會…"></textarea></td><td><textarea class="ri" rows="2" placeholder="我觀察到…"></textarea></td></tr>
-        </tbody>
-      </table>
+    <div class="q-card" id="qCard">
+      <!-- injected by JS -->
     </div>
-    <div style="margin-top:.8rem">
-      <div style="font-weight:700;font-size:.86rem;margin-bottom:.32rem">✏️ 我的結論：</div>
-      <textarea class="ri" rows="3" placeholder="光從________進入________時，會發生________現象。這讓我們看到竹籤好像________，硬幣好像________。原因是……"></textarea>
+    <div class="q-fb" id="qFB"></div>
+    <div class="q-nav"><button class="btn bp" id="nextBtn" onclick="nextQ()" style="display:none;font-size:1rem;padding:.7rem 1.8rem">下一題 →</button></div>
+  </div>
+
+  <!-- Results UI -->
+  <div class="quiz-wrap hidden" id="quizResults">
+    <div class="result-card">
+      <div class="result-icon" id="resIcon">🏆</div>
+      <div class="result-score" id="resScore"></div>
+      <div class="result-msg" id="resMsg"></div>
+      <div class="result-sub" id="resSub"></div>
+      <div class="result-list" id="resList"></div>
+      <button class="btn bp" onclick="restartQuiz()" style="font-size:1rem;padding:.75rem 2rem;margin-top:.5rem">🔄 再挑戰一次！</button>
     </div>
   </div>
 </div>
@@ -431,6 +476,7 @@ function go(id){
   document.getElementById('content').scrollTop=0;
   if(id==='principle') setTimeout(()=>{drawPrin(1);drawPCards();},60);
   if(id==='life') setTimeout(()=>selLife(curLife),60);
+  if(id==='record') setTimeout(initQuiz,50);
 }
 
 function toggleCard(c){
@@ -1329,6 +1375,162 @@ function drawPool(){
   ctx.fillStyle='rgba(144,224,239,.65)'; ctx.textAlign='right';
   ctx.fillText('看起來的底部',px+pw-4,appY-3);
   ctx.font='16px sans-serif'; ctx.textAlign='center'; ctx.fillText('👁️',px+pw/2,py-2);
+}
+
+/* ═══════════════════════════════
+   QUIZ GAME
+═══════════════════════════════ */
+const QUIZ=[
+  {q:'竹籤插入只有空氣的容器中，從側面觀察，看起來會怎樣？',
+   o:['好像在界面處斷掉了','完全沒有變化，仍然是直的','竹籤在空氣中消失了','竹籤變得更細更短'],
+   a:1,
+   ex:'光只在空氣中傳播，沒有穿越不同介質的界面，不會發生折射，竹籤看起來完全正常！'},
+
+  {q:'竹籤斜插入裝了水的方形盒中，從水面上方觀察，竹籤看起來怎樣？',
+   o:['完全沒有任何變化','竹籤在水中的部分消失了','好像在水面的地方斷掉了','竹籤整個都彎成弧線'],
+   a:2,
+   ex:'光從水中穿過水面折射後才進入眼睛，讓竹籤水中的影像「偏移」，看起來在水面處斷掉了！'},
+
+  {q:'光從空氣進入水中時，它的傳播速度和方向會怎樣改變？',
+   o:['速度加快，方向遠離法線','速度不變，方向改變','速度減慢，方向靠近法線','速度減慢，方向遠離法線'],
+   a:2,
+   ex:'光進入折射率較高（較密）的介質時，速度減慢，方向靠近法線，這就是折射現象！'},
+
+  {q:'食用油折射率 n=1.47，水的折射率 n=1.33。竹籤插入食用油中，彎折程度和插入水中相比？',
+   o:['彎折程度比在水中小','彎折程度和在水中一樣','彎折程度比在水中大','無法比較'],
+   a:2,
+   ex:'折射率越高，光速越慢，彎折角度越大。食用油 n=1.47 > 水 n=1.33，所以在油中竹籤彎折更大！'},
+
+  {q:'竹籤同時插入「空氣＋食用油＋水」三層介質中，竹籤看起來會斷成幾段？',
+   o:['1段（完全是直的）','2段（有1個彎折點）','3段（有2個彎折點）','4段（有3個彎折點）'],
+   a:2,
+   ex:'三層介質有兩個界面（空氣-油、油-水），每個界面都折射一次，所以竹籤看起來斷成3段！'},
+
+  {q:'硬幣放入裝水的方形盒中加水後，我們可以看到幾個硬幣的影像？',
+   o:['0個（完全看不到了）','1個（和平常一樣）','2個（多了一個折射產生的虛像）','3個或更多'],
+   a:2,
+   ex:'光沿兩條路徑進入眼睛：一條穿過水面（折射，形成虛像），一條不穿水面（接近實際位置），所以看到2個影像！'},
+
+  {q:'大方形盒和小方形盒都裝水並放入硬幣，兩者的折射現象比較？',
+   o:['只有大方形盒才看得到硬幣變兩個','只有小方形盒才看得到硬幣變兩個','兩種方形盒都看得到硬幣變兩個，現象相似','兩種方形盒都看不到硬幣變兩個'],
+   a:2,
+   ex:'折射效果與容器大小無關，取決於水的深度和觀察角度。大小方形盒加水後，現象相似！'},
+
+  {q:'彩虹是怎麼形成的？',
+   o:['太陽光照射雲朵時，雲朵把光分成七色反射出來','雨水中的色素把白光染成七種顏色','不同顏色的光在水珠中折射率略不同，因此分散成七色','空氣中的水珠像鏡子反射陽光七次'],
+   a:2,
+   ex:'陽光（白光）進入水珠時，不同顏色的光折射率略不同（紫光最大，紅光最小），因此分散成不同角度，形成七色彩虹！'},
+];
+
+let qIdx=0, qScore=0, qWrong=[];
+
+function initQuiz(){
+  qIdx=0; qScore=0; qWrong=[];
+  document.getElementById('quizBox').classList.remove('hidden');
+  document.getElementById('quizResults').classList.add('hidden');
+  renderQ(0);
+}
+
+function renderQ(i){
+  const q=QUIZ[i];
+  const pct=Math.round((i/QUIZ.length)*100);
+  document.getElementById('progFill').style.width=pct+'%';
+  document.getElementById('progTxt').textContent=`第 ${i+1} 題 / 共 ${QUIZ.length} 題`;
+  document.getElementById('qFB').innerHTML='';
+  document.getElementById('nextBtn').style.display='none';
+  document.getElementById('qCard').innerHTML=`
+    <div class="q-num">🔎 第 ${i+1} 題</div>
+    <div class="q-text">${q.q}</div>
+    <div class="q-opts" id="qOpts">
+      ${'ABCD'.split('').map((L,j)=>`
+        <button class="q-opt-btn" onclick="answerQ(${i},${j})" id="qo${j}">
+          <span class="q-letter">${L}</span>
+          <span>${q.o[j]}</span>
+        </button>`).join('')}
+    </div>`;
+}
+
+function answerQ(qi,chosen){
+  const q=QUIZ[qi];
+  const ok=chosen===q.a;
+  // Disable all + highlight
+  'ABCD'.split('').forEach((_,j)=>{
+    const btn=document.getElementById('qo'+j);
+    btn.disabled=true;
+    if(j===q.a) btn.classList.add('correct');
+    else if(j===chosen&&!ok) btn.classList.add('wrong');
+  });
+  const fb=document.getElementById('qFB');
+  if(ok){
+    qScore++;
+    fb.innerHTML=`<div class="fb-ok"><div class="fb-head ok">🎉 恭喜！答對了！</div><div class="fb-explain">${q.ex}</div></div>`;
+  } else {
+    qWrong.push(qi);
+    fb.innerHTML=`<div class="fb-no"><div class="fb-head no">❌ 答錯了！正確答案是 ${'ABCD'[q.a]}</div><div class="fb-explain">${q.ex}</div></div>`;
+  }
+  const btn=document.getElementById('nextBtn');
+  btn.style.display='inline-flex';
+  btn.textContent=qi>=QUIZ.length-1?'看我的成績 🏆':'下一題 →';
+}
+
+function nextQ(){
+  qIdx++;
+  if(qIdx<QUIZ.length) renderQ(qIdx);
+  else showResults();
+}
+
+function showResults(){
+  document.getElementById('progFill').style.width='100%';
+  document.getElementById('quizBox').classList.add('hidden');
+  document.getElementById('quizResults').classList.remove('hidden');
+  const perfect=qScore===QUIZ.length;
+  const good=qScore>=6;
+  document.getElementById('resIcon').textContent=perfect?'🎊':good?'🎖️':'📚';
+  document.getElementById('resScore').innerHTML=`<span style="color:${perfect?'var(--green)':good?'var(--blue)':'var(--orange)'}">${qScore}</span> / ${QUIZ.length}`;
+  document.getElementById('resMsg').textContent=perfect?'完美滿分！太棒了！':good?'很棒！繼續加油！':'再複習一次，你可以的！';
+  document.getElementById('resSub').innerHTML=perfect?'你完全掌握了光的折射！🌟<br>恭喜你！👏👏👏':`你答對了 ${qScore} 題，${QUIZ.length-qScore} 題還需要複習。`;
+  // Wrong list
+  const list=document.getElementById('resList');
+  if(qWrong.length>0){
+    list.innerHTML='<div style="font-weight:700;font-size:.95rem;margin-bottom:.4rem">📝 答錯的題目：</div>'+
+      qWrong.map(i=>`<div class="rli"><span style="color:var(--red)">✗</span><span>第${i+1}題：${QUIZ[i].q.substring(0,30)}…<br><span style="color:var(--green);font-size:.88rem">✓ 正確答案：${'ABCD'[QUIZ[i].a]}. ${QUIZ[i].o[QUIZ[i].a]}</span></span></div>`).join('');
+  } else {
+    list.innerHTML='';
+  }
+  if(perfect) launchConfetti();
+}
+
+function restartQuiz(){ initQuiz(); }
+
+function launchConfetti(){
+  const cv=document.createElement('canvas');
+  cv.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9998';
+  cv.width=window.innerWidth; cv.height=window.innerHeight;
+  document.body.appendChild(cv);
+  const ctx=cv.getContext('2d');
+  const cols=['#ff6b6b','#ffd93d','#6bcb77','#4d96ff','#ff6bb5','#ff9f43','#a855f7','#48cae4'];
+  const pieces=Array.from({length:180},()=>({
+    x:Math.random()*cv.width, y:Math.random()*-cv.height-20,
+    w:Math.random()*14+5, h:Math.random()*9+4,
+    c:cols[Math.floor(Math.random()*cols.length)],
+    spd:Math.random()*4+2, ang:Math.random()*360,
+    spin:(Math.random()-.5)*12, drift:(Math.random()-.5)*2.5,
+  }));
+  const start=Date.now();
+  (function loop(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    let alive=false;
+    pieces.forEach(p=>{
+      p.y+=p.spd; p.ang+=p.spin; p.x+=p.drift;
+      if(p.y<cv.height+20) alive=true;
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.ang*Math.PI/180);
+      ctx.globalAlpha=Math.max(0,1-(Date.now()-start)/4500);
+      ctx.fillStyle=p.c; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      ctx.restore();
+    });
+    if(alive&&Date.now()-start<5000) requestAnimationFrame(loop);
+    else cv.remove();
+  })();
 }
 
 /* ═══════════════════════════════
