@@ -330,9 +330,17 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
   <h2 class="stitle">💡 光的折射原理</h2>
   <div class="card">
     <p style="font-size:.86rem;margin-bottom:.7rem">光在不同介質中傳播速度不同。進入較密介質（如水）時速度<strong>減慢</strong>，方向<strong>靠近法線</strong>；進入較疏介質時速度加快，方向<strong>遠離法線</strong>。</p>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:.6rem">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:.75rem">
       <canvas id="cvPrin" width="490" height="245" style="border-radius:9px;max-width:100%"></canvas>
-      <button class="btn bo" onclick="animPrin()">▶ 播放光線動畫</button>
+      <!-- Angle slider row -->
+      <div style="display:flex;align-items:center;gap:.85rem;flex-wrap:wrap;justify-content:center;padding:.5rem .8rem;background:rgba(255,255,255,.04);border-radius:10px;border:1px solid var(--border)">
+        <span style="font-size:.95rem;color:rgba(255,215,40,.85);font-weight:700">入射角</span>
+        <input type="range" id="slPrinAng" min="5" max="80" value="42" oninput="updPrinAng()" style="width:150px">
+        <span id="prinIncVal" style="font-weight:900;color:rgba(255,215,40,.95);font-size:1.1rem;min-width:3em">42°</span>
+        <span style="color:var(--dim);font-size:.95rem">→ 折射角</span>
+        <span id="prinRefVal" style="font-weight:900;color:rgba(255,135,30,.95);font-size:1.1rem;min-width:3em">30°</span>
+        <button class="btn bo" onclick="animPrin()" style="font-size:.85rem;padding:.42rem 1rem">▶ 播放動畫</button>
+      </div>
     </div>
   </div>
   <div class="sumg">
@@ -852,12 +860,30 @@ function setCoinFB(msg,color){
    PRINCIPLE CANVAS
 ═══════════════════════════════ */
 let prinAnim=null,prinP=1;
-function animPrin(){if(prinAnim)cancelAnimationFrame(prinAnim);prinP=0;(function s(){prinP+=.014;drawPrin(Math.min(prinP,1));if(prinP<1)prinAnim=requestAnimationFrame(s);})();}
+
+function updPrinAng(){
+  const deg=+document.getElementById('slPrinAng').value;
+  const rA=Math.asin(Math.sin(deg*Math.PI/180)/1.33);
+  document.getElementById('prinIncVal').textContent=deg+'°';
+  document.getElementById('prinRefVal').textContent=Math.round(rA*180/Math.PI)+'°';
+  if(prinAnim){cancelAnimationFrame(prinAnim);prinAnim=null;}
+  drawPrin(1);
+}
+
+function animPrin(){
+  if(prinAnim)cancelAnimationFrame(prinAnim);
+  prinP=0;
+  (function s(){prinP+=.014;drawPrin(Math.min(prinP,1));if(prinP<1)prinAnim=requestAnimationFrame(s);})();
+}
+
 function drawPrin(p=1){
   const cv=document.getElementById('cvPrin'); if(!cv)return;
   const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
   ctx.clearRect(0,0,W,H); ctx.fillStyle='#060f1e'; ctx.roundRect(0,0,W,H,10); ctx.fill();
   const iY=H*.5,mX=W*.5;
+  // read incident angle from slider (default 42° on first load)
+  const slEl=document.getElementById('slPrinAng');
+  const incDeg=slEl?+slEl.value:42;
   ctx.fillStyle='rgba(200,235,255,.055)'; ctx.fillRect(0,0,W,iY);
   ctx.fillStyle='rgba(0,110,200,.22)'; ctx.fillRect(0,iY,W,H-iY);
   ctx.fillStyle='rgba(200,220,255,.52)'; ctx.font='bold 13px "Noto Sans TC",sans-serif'; ctx.textAlign='left';
@@ -869,7 +895,7 @@ function drawPrin(p=1){
   ctx.beginPath(); ctx.moveTo(mX,iY-90); ctx.lineTo(mX,iY+100); ctx.stroke(); ctx.setLineDash([]);
   ctx.fillStyle='rgba(220,100,100,.68)'; ctx.font='12px "Noto Sans TC",sans-serif'; ctx.textAlign='center';
   ctx.fillText('法線',mX+46,iY-80);
-  const iA=42*Math.PI/180,rL=105,sx=mX-Math.sin(iA)*rL,sy=iY-Math.cos(iA)*rL,ip=Math.min(p*2,1);
+  const iA=incDeg*Math.PI/180,rL=105,sx=mX-Math.sin(iA)*rL,sy=iY-Math.cos(iA)*rL,ip=Math.min(p*2,1);
   ctx.strokeStyle='rgba(255,215,40,.9)'; ctx.lineWidth=3; ctx.lineCap='round';
   ctx.beginPath(); ctx.moveTo(sx,sy); ctx.lineTo(sx+(mX-sx)*ip,sy+(iY-sy)*ip); ctx.stroke();
   if(p>.5){
@@ -1551,8 +1577,9 @@ window.addEventListener('load',()=>{
   drawChopScene(38,getLayers(),false);
   redrawE2();
   drawPrin();
-  // pre-draw principle cards when tab becomes visible
-  // (drawn on tab switch via go())
+  // init principle angle display
+  const slP=document.getElementById('slPrinAng');
+  if(slP){ const rA=Math.asin(Math.sin(+slP.value*Math.PI/180)/1.33); document.getElementById('prinRefVal').textContent=Math.round(rA*180/Math.PI)+'°'; }
 });
 </script>
 </body>
