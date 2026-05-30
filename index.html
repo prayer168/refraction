@@ -604,9 +604,7 @@ let waveT=0;
 
 function drawChopScene(deg,layers,cmp){
   const cv=document.getElementById('cvChop'); if(!cv)return;
-  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
-  ctx.clearRect(0,0,W,H);
-  ctx.fillStyle='#060f1e'; ctx.roundRect(0,0,W,H,10); ctx.fill();
+  const {ctx,W,H}=lbg(cv);
   if(cmp&&(hasWater||hasOil)){
     const airL=[{label:'空氣',bg:'rgba(200,235,255,0.07)',n:1.00,tc:'#90e0ef',hR:1}];
     drawCont(ctx,18,14,140,H-28,airL,deg);
@@ -816,9 +814,8 @@ function drawBox(ctx,box,rays){
 
 function redrawE2(){
   const cv=document.getElementById('cvCoin'); if(!cv)return;
-  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
+  const {ctx,W,H}=lbg(cv);
   const rays=document.getElementById('showRays')?.checked;
-  ctx.clearRect(0,0,W,H); ctx.fillStyle='#060f1e'; ctx.roundRect(0,0,W,H,10); ctx.fill();
   drawBox(ctx,BOX_L,rays);
   drawBox(ctx,BOX_S,rays);
   // Water % label
@@ -878,8 +875,7 @@ function animPrin(){
 
 function drawPrin(p=1){
   const cv=document.getElementById('cvPrin'); if(!cv)return;
-  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
-  ctx.clearRect(0,0,W,H); ctx.fillStyle='#060f1e'; ctx.roundRect(0,0,W,H,10); ctx.fill();
+  const {ctx,W,H}=lbg(cv);
   const iY=H*.5,mX=W*.5;
   // read incident angle from slider (default 42° on first load)
   const slEl=document.getElementById('slPrinAng');
@@ -930,8 +926,7 @@ function drawPCards(){drawPC1();drawPC2();drawPC3();}
 
 function drawPC1(){ // Air→Water
   const cv=document.getElementById('cvP1');if(!cv)return;
-  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
-  ctx.clearRect(0,0,W,H);ctx.fillStyle='#060f1e';ctx.roundRect(0,0,W,H,8);ctx.fill();
+  const {ctx,W,H}=lbg(cv);
   const iY=H*.5,mX=W*.52;
   ctx.fillStyle='rgba(200,235,255,.065)';ctx.fillRect(0,0,W,iY);
   ctx.fillStyle='rgba(0,110,200,.24)';ctx.fillRect(0,iY,W,H-iY);
@@ -968,8 +963,7 @@ function drawPC1(){ // Air→Water
 
 function drawPC2(){ // Pool
   const cv=document.getElementById('cvP2');if(!cv)return;
-  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
-  ctx.clearRect(0,0,W,H);ctx.fillStyle='#060f1e';ctx.roundRect(0,0,W,H,8);ctx.fill();
+  const {ctx,W,H}=lbg(cv);
   const px=18,py=18,pw=W-36,ph=H-28,wY=py+18;
   ctx.fillStyle='rgba(200,235,255,.055)';ctx.fillRect(px,py,pw,wY-py);
   const wg=ctx.createLinearGradient(px,wY,px,py+ph);
@@ -997,8 +991,7 @@ function drawPC2(){ // Pool
 
 function drawPC3(){ // Rainbow
   const cv=document.getElementById('cvP3');if(!cv)return;
-  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
-  ctx.clearRect(0,0,W,H);ctx.fillStyle='#060f1e';ctx.roundRect(0,0,W,H,8);ctx.fill();
+  const {ctx,W,H}=lbg(cv);
   const dX=W*.62,dY=H*.48,dR=28;
   ctx.fillStyle='rgba(0,110,200,.22)';ctx.strokeStyle='rgba(100,200,255,.65)';ctx.lineWidth=1.5;
   ctx.beginPath();ctx.arc(dX,dY,dR,0,Math.PI*2);ctx.fill();ctx.stroke();
@@ -1062,9 +1055,17 @@ function selLife(idx){
   d.draw(document.getElementById('cvLifeBig'));
 }
 
-/* helpers */
+/* helpers — DPR-aware canvas setup */
 function lbg(cv){
-  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
+  if(!cv)return{ctx:null,W:0,H:0};
+  const dpr=window.devicePixelRatio||1;
+  // Store original logical dimensions the first time
+  if(!cv.dataset.lw){cv.dataset.lw=cv.getAttribute('width')||cv.width;cv.dataset.lh=cv.getAttribute('height')||cv.height;}
+  const W=+cv.dataset.lw, H=+cv.dataset.lh;
+  cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
+  cv.style.width=W+'px'; cv.style.height=H+'px';
+  const ctx=cv.getContext('2d');
+  ctx.scale(dpr,dpr);
   ctx.clearRect(0,0,W,H);ctx.fillStyle='#060f1e';ctx.roundRect(0,0,W,H,10);ctx.fill();
   return{ctx,W,H};
 }
