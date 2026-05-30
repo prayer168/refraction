@@ -453,7 +453,7 @@ function e1Upd(){
   const deg=+document.getElementById('slAng').value;
   document.getElementById('angDisp').textContent=deg+'°';
   const layers=getLayers();
-  updateLayerPanel(layers);
+  updateLayerPanel(layers,deg);
   drawChopScene(deg,layers,cmpMode);
 }
 
@@ -474,7 +474,21 @@ function getLayers(){
   ];
 }
 
-function updateLayerPanel(layers){
+/* 計算各界面的入射角與折射角（斯涅爾定律） */
+function getAngles(deg,layers){
+  const res=[];
+  let a=deg*Math.PI/180, n=layers[0].n;
+  for(let i=0;i<layers.length-1;i++){
+    const n2=layers[i+1].n;
+    const sn=Math.sin(a)*n/n2;
+    const a2=Math.abs(sn)<=1?Math.asin(sn):a;
+    res.push({from:layers[i].label,to:layers[i+1].label,inc:Math.round(a*180/Math.PI),ref:Math.round(a2*180/Math.PI)});
+    a=a2; n=n2;
+  }
+  return res;
+}
+
+function updateLayerPanel(layers,deg){
   const nI=layers.length-1;
   document.getElementById('layerInfo').innerHTML=layers.map(l=>
     `<div class="layer-row">
@@ -483,10 +497,25 @@ function updateLayerPanel(layers){
       <span style="margin-left:auto;font-size:.75rem;color:var(--dim)">n = ${l.n.toFixed(2)}</span>
     </div>`
   ).join('');
-  const msgs=['🟢 無折射界面 — 竹籤看起來<strong>完全是直的</strong>',
-    '🔴 1 個折射界面 — 竹籤在界面有 <strong style="color:var(--orange)">1 個彎折點</strong>，看起來斷一次',
-    '🔴🔴 2 個折射界面 — 竹籤有 <strong style="color:var(--orange)">2 個彎折點</strong>，看起來<strong>斷成三段</strong>！'];
-  document.getElementById('rfInfo').innerHTML=msgs[nI]||'';
+  const statusMsgs=['🟢 無折射界面 — 竹籤看起來<strong>完全是直的</strong>',
+    '🔴 1 個折射界面 — 竹籤有 <strong style="color:var(--orange)">1 個彎折點</strong>，看起來斷一次',
+    '🔴🔴 2 個折射界面 — 竹籤有 <strong style="color:var(--orange)">2 個彎折點</strong>，看起來斷成三段！'];
+  let rfHTML=statusMsgs[nI]||'';
+  if(deg!==undefined&&nI>0){
+    const angles=getAngles(deg,layers);
+    rfHTML+='<div style="margin-top:.42rem;display:flex;flex-direction:column;gap:.26rem">';
+    angles.forEach((a,i)=>{
+      const lbl=angles.length>1?` <span style="font-size:.72rem;color:var(--dim)">(界面${i+1})</span>`:'';
+      rfHTML+=`<div style="padding:.3rem .55rem;background:rgba(0,0,0,.22);border-radius:6px;border-left:2px solid rgba(255,215,40,.45);font-size:.8rem">
+        <span style="color:var(--dim);font-size:.75rem">${a.from} → ${a.to}</span>${lbl}<br>
+        <span style="color:rgba(255,215,40,.95)">入射角 <strong>${a.inc}°</strong></span>
+        <span style="color:var(--dim);margin:0 .25rem">→</span>
+        <span style="color:rgba(255,140,30,.95)">折射角 <strong>${a.ref}°</strong></span>
+      </div>`;
+    });
+    rfHTML+='</div>';
+  }
+  document.getElementById('rfInfo').innerHTML=rfHTML;
 }
 
 function revE1(){document.getElementById('e1exp').classList.toggle('hidden');}
@@ -547,12 +576,12 @@ function drawCont(ctx,bx,by,bw,bh,layers,deg){
     ctx.fillText('n='+l.n,bx+6,my+11);
     ly+=lh;
   });
-  // chopstick
+  // chopstick — track interface data for normal/arcs
   const rad=deg*Math.PI/180;
   let curAng=rad, curN=layers[0].n;
   const f1h=(layers[0].hR||1)*bh;
   let cx2=bx+bw*0.56-Math.tan(rad)*(f1h-7), cy2=by+5;
-  const ifPts=[];
+  const ifData=[]; // {x,y,angB=before,angA=after}
   ctx.lineCap='round'; ly=by;
   layers.forEach((l,i)=>{
     const lh=(l.hR||1)*bh;
@@ -563,16 +592,52 @@ function drawCont(ctx,bx,by,bw,bh,layers,deg){
     ctx.strokeStyle=g; ctx.lineWidth=Math.max(5,bw*0.028);
     ctx.beginPath(); ctx.moveTo(cx2,cy2); ctx.lineTo(ex,ey); ctx.stroke();
     if(i<layers.length-1){
-      ifPts.push({x:ex,y:ey});
+      const angB=curAng;
       const sn=Math.sin(curAng)*curN/layers[i+1].n;
-      curAng=Math.abs(sn)<=1?Math.asin(sn):curAng; curN=layers[i+1].n;
+      const angA=Math.abs(sn)<=1?Math.asin(sn):curAng;
+      ifData.push({x:ex,y:ey,angB,angA});
+      curAng=angA; curN=layers[i+1].n;
     }
     cx2=ex; cy2=ey; ly+=lh;
   });
-  // refraction dots
-  ifPts.forEach(p=>{
+
+  // — Normal lines, angle arcs, labels —
+  const arcR=Math.max(24,Math.min(36,bw*0.14));
+  const lfs=Math.max(9,Math.min(11,bw*0.052));
+  ifData.forEach(({x:px,y:py,angB,angA})=>{
+    // clip drawing to container so normal line / arcs don't overflow
+    ctx.save();
+    ctx.beginPath(); ctx.rect(bx,by,bw,bh); ctx.clip();
+    // normal line (dashed red)
+    ctx.strokeStyle='rgba(220,75,75,0.55)'; ctx.lineWidth=1.2; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.moveTo(px,py-68); ctx.lineTo(px,py+68); ctx.stroke();
+    ctx.setLineDash([]);
+    // incident arc: clockwise from (-π/2 - angB) to (-π/2) → upper-left region
+    ctx.strokeStyle='rgba(255,215,40,0.85)'; ctx.lineWidth=1.8;
+    ctx.beginPath(); ctx.arc(px,py,arcR,-Math.PI/2-angB,-Math.PI/2,false); ctx.stroke();
+    // refracted arc: counterclockwise from (π/2) to (π/2 - angA) → lower-right region
+    ctx.strokeStyle='rgba(255,135,30,0.85)'; ctx.lineWidth=1.8;
+    ctx.beginPath(); ctx.arc(px,py,arcR,Math.PI/2,Math.PI/2-angA,true); ctx.stroke();
+    ctx.restore();
+    // labels (outside clip so text can bleed slightly)
+    const incDeg=Math.round(angB*180/Math.PI);
+    const refDeg=Math.round(angA*180/Math.PI);
+    ctx.font=`bold ${lfs}px "Noto Sans TC",sans-serif`;
+    // 法線 label above
+    ctx.fillStyle='rgba(220,75,75,0.7)'; ctx.textAlign='center';
+    ctx.fillText('法線',px,Math.max(by+9,py-70));
+    // incident angle label: left of arc, above interface
+    ctx.fillStyle='rgba(255,215,40,0.97)'; ctx.textAlign='right';
+    ctx.fillText(`入射 ${incDeg}°`,px-arcR-4,py-10);
+    // refracted angle label: right of arc, below interface
+    ctx.fillStyle='rgba(255,135,30,0.97)'; ctx.textAlign='left';
+    ctx.fillText(`折射 ${refDeg}°`,px+arcR+4,py+17);
+  });
+
+  // refraction dots on top of everything
+  ifData.forEach(({x:px,y:py})=>{
     ctx.fillStyle='rgba(255,60,50,.9)'; ctx.strokeStyle='rgba(255,150,140,.6)'; ctx.lineWidth=1.5;
-    ctx.beginPath(); ctx.arc(p.x,p.y,Math.max(4,bw*0.022),0,Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.beginPath(); ctx.arc(px,py,Math.max(4,bw*0.022),0,Math.PI*2); ctx.fill(); ctx.stroke();
   });
 }
 
@@ -813,7 +878,7 @@ function drawPool(){
 
 /* init */
 window.addEventListener('load',()=>{
-  updateLayerPanel(getLayers());
+  updateLayerPanel(getLayers(),38);
   drawChopScene(38,getLayers(),false);
   redrawE2();
   drawPrin();
