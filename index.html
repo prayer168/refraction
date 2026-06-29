@@ -196,7 +196,6 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
     <button class="tab" data-tab="exp1" onclick="go('exp1')">💡 實驗一：光線</button>
     <button class="tab" data-tab="exp2" onclick="go('exp2')">🪙 實驗二：硬幣</button>
     <button class="tab" data-tab="principle" onclick="go('principle')">💡 折射原理</button>
-    <button class="tab" data-tab="life" onclick="go('life')">🌍 生活應用</button>
     <button class="tab" data-tab="record" onclick="go('record')">🏆 闖關大挑戰</button>
   </nav>
 </header>
@@ -209,7 +208,7 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
   <div class="g3">
     <div class="card goal-card"><div class="goal-icon">👁️</div><div class="goal-title">觀察折射現象</div><div class="goal-desc">觀察光線穿越不同介質交界面時的彎折現象</div></div>
     <div class="card goal-card"><div class="goal-icon">🔍</div><div class="goal-title">探究折射原因</div><div class="goal-desc">了解竹籤插水中看起來斷掉、硬幣變兩個的科學原因</div></div>
-    <div class="card goal-card"><div class="goal-icon">🌏</div><div class="goal-title">連結生活經驗</div><div class="goal-desc">能解釋生活中常見的光折射現象</div></div>
+    <div class="card goal-card"><div class="goal-icon">📐</div><div class="goal-title">整理折射規律</div><div class="goal-desc">能用入射角、折射角與介質差異說明光路變化</div></div>
   </div>
   <h2 class="stitle" style="margin-top:.9rem">🧰 實驗器材</h2>
   <div class="card">
@@ -249,7 +248,7 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
       </div>
       <div class="ctrl-grp">
         <span class="cg-lbl">💡 入射角度：<strong id="angDisp" style="color:var(--blue)">38°</strong></span>
-        <input type="range" id="slAng" min="8" max="68" value="38" oninput="e1Upd()">
+        <input type="range" id="slAng" min="0" max="68" value="38" oninput="e1Upd()">
       </div>
       <div class="ctrl-grp">
         <span class="cg-lbl">🔭 比較模式</span>
@@ -355,7 +354,7 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
       <!-- Angle slider row -->
       <div style="display:flex;align-items:center;gap:.85rem;flex-wrap:wrap;justify-content:center;padding:.5rem .8rem;background:rgba(255,255,255,.04);border-radius:10px;border:1px solid var(--border)">
         <span style="font-size:.95rem;color:rgba(255,215,40,.85);font-weight:700">入射角</span>
-        <input type="range" id="slPrinAng" min="5" max="80" value="42" oninput="updPrinAng()" style="width:150px">
+        <input type="range" id="slPrinAng" min="0" max="80" value="42" oninput="updPrinAng()" style="width:150px">
         <span id="prinIncVal" style="font-weight:900;color:rgba(255,215,40,.95);font-size:1.1rem;min-width:3em">42°</span>
         <span style="color:var(--dim);font-size:.95rem">→ 折射角</span>
         <span id="prinRefVal" style="font-weight:900;color:rgba(255,135,30,.95);font-size:1.1rem;min-width:3em">30°</span>
@@ -380,7 +379,7 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
       <div class="sd" style="font-size:.9rem">不同顏色光折射率略不同，陽光穿過水珠後分散成七色</div>
     </div>
   </div>
-  <div class="nxt"><button class="btn bp" onclick="go('life')">前往生活應用 →</button></div>
+  <div class="nxt"><button class="btn bp" onclick="go('record')">前往闖關大挑戰 →</button></div>
 </div>
 
 <!-- ════ LIFE ════ -->
@@ -541,6 +540,10 @@ function toggleCard(c){
    EXP 1 — CHOPSTICK
 ═══════════════════════════════ */
 let hasWater=false, hasOil=false, cmpMode=false;
+const E1_AIR_BG='rgba(92,118,145,0.36)';
+const E1_AIR_TEXT='#b7c9dc';
+const E1_WATER_BG='rgba(0,82,170,0.50)';
+const E1_WATER_TEXT='#7dd3fc';
 
 function toggleLiq(t){
   if(t==='water'){
@@ -581,19 +584,19 @@ function e1Upd(){
 }
 
 function getLayers(){
-  if(!hasWater&&!hasOil) return [{label:'空氣',bg:'rgba(200,235,255,0.07)',n:1.00,tc:'#90e0ef',hR:1}];
+  if(!hasWater&&!hasOil) return [{label:'空氣',bg:E1_AIR_BG,n:1.00,tc:E1_AIR_TEXT,hR:1}];
   if(hasWater&&!hasOil) return [
-    {label:'空氣',bg:'rgba(200,235,255,0.07)',n:1.00,tc:'#90e0ef',hR:0.44},
-    {label:'水',bg:'rgba(0,110,200,0.27)',n:1.33,tc:'#48cae4',hR:0.56}
+    {label:'空氣',bg:E1_AIR_BG,n:1.00,tc:E1_AIR_TEXT,hR:0.44},
+    {label:'水',bg:E1_WATER_BG,n:1.33,tc:E1_WATER_TEXT,hR:0.56}
   ];
   if(!hasWater&&hasOil) return [
-    {label:'空氣',bg:'rgba(200,235,255,0.07)',n:1.00,tc:'#90e0ef',hR:0.44},
+    {label:'空氣',bg:E1_AIR_BG,n:1.00,tc:E1_AIR_TEXT,hR:0.44},
     {label:'食用油',bg:'rgba(200,158,0,0.30)',n:1.47,tc:'#e0b84a',hR:0.56}
   ];
   return [
-    {label:'空氣',bg:'rgba(200,235,255,0.07)',n:1.00,tc:'#90e0ef',hR:0.30},
+    {label:'空氣',bg:E1_AIR_BG,n:1.00,tc:E1_AIR_TEXT,hR:0.30},
     {label:'食用油',bg:'rgba(200,158,0,0.30)',n:1.47,tc:'#e0b84a',hR:0.30},
-    {label:'水',bg:'rgba(0,110,200,0.27)',n:1.33,tc:'#48cae4',hR:0.40}
+    {label:'水',bg:E1_WATER_BG,n:1.33,tc:E1_WATER_TEXT,hR:0.40}
   ];
 }
 
@@ -649,8 +652,10 @@ let waveT=0;
 function drawChopScene(deg,layers,cmp){
   const cv=document.getElementById('cvChop'); if(!cv)return;
   const {ctx,W,H}=lbg(cv,355,292);
+  ctx.fillStyle=E1_AIR_BG;
+  ctx.fillRect(0,0,W,H);
   if(cmp&&(hasWater||hasOil)){
-    const airL=[{label:'空氣',bg:'rgba(200,235,255,0.07)',n:1.00,tc:'#90e0ef',hR:1}];
+    const airL=[{label:'空氣',bg:E1_AIR_BG,n:1.00,tc:E1_AIR_TEXT,hR:1}];
     drawCont(ctx,18,14,140,H-28,airL,deg);
     drawCont(ctx,182,14,140,H-28,layers,deg);
     ctx.fillStyle='rgba(200,220,255,.5)'; ctx.font='bold 11px sans-serif'; ctx.textAlign='center';
@@ -953,8 +958,8 @@ function drawPrin(p=1){
   // read incident angle from slider (default 42° on first load)
   const slEl=document.getElementById('slPrinAng');
   const incDeg=slEl?+slEl.value:42;
-  ctx.fillStyle='rgba(200,235,255,.055)'; ctx.fillRect(0,0,W,iY);
-  ctx.fillStyle='rgba(0,110,200,.22)'; ctx.fillRect(0,iY,W,H-iY);
+  ctx.fillStyle=E1_AIR_BG; ctx.fillRect(0,0,W,iY);
+  ctx.fillStyle=E1_WATER_BG; ctx.fillRect(0,iY,W,H-iY);
   ctx.fillStyle='rgba(200,220,255,.52)'; ctx.font='bold 13px "Noto Sans TC",sans-serif'; ctx.textAlign='left';
   ctx.fillText('空氣  n = 1.00',14,21);
   ctx.fillStyle='rgba(100,185,255,.62)'; ctx.fillText('水  n = 1.33',14,iY+21);
@@ -986,7 +991,8 @@ function drawPrin(p=1){
       ctx.fillStyle='rgba(255,130,30,.95)';
       ctx.fillText('折射角',mX+lR*Math.cos(refMid2),iY+lR*Math.sin(refMid2));
       ctx.fillStyle='rgba(144,224,239,.75)'; ctx.font='12px "Noto Sans TC",sans-serif';
-      ctx.fillText('折射角 < 入射角（進入較密介質，光靠近法線）',W/2,H-10);
+      const relation=incDeg===0?'入射角 = 折射角 = 0°（沿法線直進，不偏折）':'折射角 < 入射角（進入較密介質，光靠近法線）';
+      ctx.fillText(relation,W/2,H-10);
     }
   }
   if(ip>.85){const ang=Math.atan2(iY-sy,mX-sx),s=9;ctx.fillStyle='rgba(255,215,40,.9)';ctx.beginPath();ctx.moveTo(mX,iY);ctx.lineTo(mX-s*Math.cos(ang-.4),iY-s*Math.sin(ang-.4));ctx.lineTo(mX-s*Math.cos(ang+.4),iY-s*Math.sin(ang+.4));ctx.closePath();ctx.fill();}
@@ -1506,7 +1512,22 @@ const QUIZ=[
 
 let qIdx=0, qScore=0, qWrong=[];
 
+function validateQuiz(){
+  const errors=[];
+  QUIZ.forEach((q,i)=>{
+    if(!q.q||!Array.isArray(q.o)||q.o.length<2) errors.push(`第 ${i+1} 題題目或選項不完整`);
+    if(!Number.isInteger(q.a)||q.a<0||q.a>=q.o.length) errors.push(`第 ${i+1} 題答案索引錯誤`);
+    if(!q.ex) errors.push(`第 ${i+1} 題缺少解析`);
+  });
+  if(errors.length){
+    console.warn('闖關大挑戰題庫檢查未通過：\n'+errors.join('\n'));
+    return false;
+  }
+  return true;
+}
+
 function initQuiz(){
+  validateQuiz();
   qIdx=0; qScore=0; qWrong=[];
   document.getElementById('quizBox').classList.remove('hidden');
   document.getElementById('quizResults').classList.add('hidden');
