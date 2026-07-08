@@ -656,14 +656,14 @@ function drawChopScene(deg,layers,cmp){
   ctx.fillRect(0,0,W,H);
   if(cmp&&(hasWater||hasOil)){
     const airL=[{label:'空氣',bg:E1_AIR_BG,n:1.00,tc:E1_AIR_TEXT,hR:1}];
-    drawCont(ctx,18,14,140,H-28,airL,deg);
-    drawCont(ctx,182,14,140,H-28,layers,deg);
+    drawCont(ctx,0,0,156,H-20,airL,deg);
+    drawCont(ctx,199,0,156,H-20,layers,deg);
     ctx.fillStyle='rgba(200,220,255,.5)'; ctx.font='bold 11px sans-serif'; ctx.textAlign='center';
-    ctx.fillText('只有空氣',88,H-5); ctx.fillText('目前配置',252,H-5);
+    ctx.fillText('只有空氣',78,H-5); ctx.fillText('目前配置',277,H-5);
     ctx.strokeStyle='rgba(72,202,228,.18)'; ctx.lineWidth=1; ctx.setLineDash([4,4]);
     ctx.beginPath(); ctx.moveTo(168,16); ctx.lineTo(168,H-16); ctx.stroke(); ctx.setLineDash([]);
   } else {
-    drawCont(ctx,38,14,238,H-28,layers,deg);
+    drawCont(ctx,0,0,W,H,layers,deg);
   }
 }
 
@@ -685,12 +685,7 @@ function drawCont(ctx,bx,by,bw,bh,layers,deg){
     }
     ctx.stroke();
   }
-  // glass shine
-  const sh=ctx.createLinearGradient(bx,by,bx+14,by);
-  sh.addColorStop(0,'rgba(255,255,255,.1)'); sh.addColorStop(1,'rgba(255,255,255,0)');
-  ctx.fillStyle=sh; ctx.fillRect(bx,by,14,bh);
-  // border
-  ctx.strokeStyle='rgba(72,202,228,.52)'; ctx.lineWidth=2; ctx.strokeRect(bx,by,bw,bh);
+  // No container is drawn here; the simulation focuses only on medium interfaces.
   // labels
   ly=by;
   const fs=Math.max(10,Math.min(12,bw*0.065));
@@ -710,7 +705,7 @@ function drawCont(ctx,bx,by,bw,bh,layers,deg){
   const ifData=[];
   ctx.lineCap='round'; ly=by;
 
-  // incoming ray from above the container
+  // incoming ray from above the medium area
   const inLen=54;
   const ix0=cx2-Math.tan(rad)*inLen, iy0=cy2-inLen;
   ctx.save();
@@ -759,9 +754,7 @@ function drawCont(ctx,bx,by,bw,bh,layers,deg){
   const arcR=Math.max(24,Math.min(36,bw*0.14));
   const lfs=Math.max(9,Math.min(11,bw*0.052));
   ifData.forEach(({x:px,y:py,angB,angA})=>{
-    // clip drawing to container so normal line / arcs don't overflow
     ctx.save();
-    ctx.beginPath(); ctx.rect(bx,by,bw,bh); ctx.clip();
     // normal line (dashed red)
     ctx.strokeStyle='rgba(220,75,75,0.55)'; ctx.lineWidth=1.2; ctx.setLineDash([5,4]);
     ctx.beginPath(); ctx.moveTo(px,py-68); ctx.lineTo(px,py+68); ctx.stroke();
@@ -773,7 +766,7 @@ function drawCont(ctx,bx,by,bw,bh,layers,deg){
     ctx.strokeStyle='rgba(255,135,30,0.85)'; ctx.lineWidth=1.8;
     ctx.beginPath(); ctx.arc(px,py,arcR,Math.PI/2,Math.PI/2-angA,true); ctx.stroke();
     ctx.restore();
-    // labels (outside clip so text can bleed slightly)
+    // labels
     const incDeg=Math.round(angB*180/Math.PI);
     const refDeg=Math.round(angA*180/Math.PI);
     ctx.font=`bold ${lfs}px "Noto Sans TC",sans-serif`;
@@ -1469,12 +1462,12 @@ function drawPool(){
    QUIZ GAME
 ═══════════════════════════════ */
 const QUIZ=[
-  {q:'竹籤插入只有空氣的容器中，從側面觀察，看起來會怎樣？',
+  {q:'光線只穿過空氣時，從側面觀察，看起來會怎樣？',
    o:['好像在界面處斷掉了','完全沒有變化，仍然是直的','竹籤在空氣中消失了','竹籤變得更細更短'],
    a:1,
    ex:'光只在空氣中傳播，沒有穿越不同介質的界面，不會發生折射，竹籤看起來完全正常！'},
 
-  {q:'竹籤斜插入裝了水的方形盒中，從水面上方觀察，竹籤看起來怎樣？',
+  {q:'光線斜斜進入水層時，從水面上方觀察，竹籤看起來怎樣？',
    o:['完全沒有任何變化','竹籤在水中的部分消失了','好像在水面的地方斷掉了','竹籤整個都彎成弧線'],
    a:2,
    ex:'光從水中穿過水面折射後才進入眼睛，讓竹籤水中的影像「偏移」，看起來在水面處斷掉了！'},
