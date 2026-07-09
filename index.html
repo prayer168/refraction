@@ -139,20 +139,19 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
 .result-list{display:flex;flex-direction:column;gap:.45rem;margin:.8rem 0;text-align:left}
 .rli{font-size:.92rem;padding:.3rem 0;display:flex;gap:.6rem;align-items:flex-start}
 
-/* ── Exp1 & Exp2: fill viewport, no scroll — ONLY when .active
+/* ── Exp1: fill viewport, no scroll — ONLY when .active
    (Must add .active so ID-selector doesn't override .panel{display:none}) ── */
-#tab-exp1.active,#tab-exp2.active{display:flex!important;flex-direction:column;height:calc(100vh - 50px - 1.8rem);overflow:hidden}
-#tab-exp1.active>.ebadge,#tab-exp1.active>.stitle,#tab-exp1.active>.nxt,
-#tab-exp2.active>.ebadge,#tab-exp2.active>.stitle,#tab-exp2.active>.nxt{flex-shrink:0}
-#tab-exp1.active>.stitle,#tab-exp2.active>.stitle{margin-bottom:.5rem}
-#tab-exp1.active>.card,#tab-exp2.active>.card{flex:1;min-height:0;display:flex;flex-direction:column;margin-bottom:0;overflow:hidden}
-#tab-exp1.active .lab-strip,#tab-exp2.active .lab-strip{flex-shrink:0}
-#tab-exp1.active .lab-main,#tab-exp2.active .lab-main{flex:1;min-height:0;align-items:stretch!important}
-#tab-exp1.active .lab-main>div:first-child,#tab-exp2.active .lab-main>div:first-child{display:flex;flex-direction:column;min-height:0}
-#tab-exp1.active #cvChop,#tab-exp2.active #cvCoin{flex:1;min-height:0;width:100%;display:block}
-#tab-exp1.active .cv-label,#tab-exp2.active .cv-label{flex-shrink:0;font-size:.75rem}
-#tab-exp1.active .lab-side,#tab-exp2.active .lab-side{overflow-y:auto;min-height:0}
-#tab-exp1.active>.nxt,#tab-exp2.active>.nxt{padding-top:.35rem}
+#tab-exp1.active{display:flex!important;flex-direction:column;height:calc(100vh - 50px - 1.8rem);overflow:hidden}
+#tab-exp1.active>.ebadge,#tab-exp1.active>.stitle,#tab-exp1.active>.nxt{flex-shrink:0}
+#tab-exp1.active>.stitle{margin-bottom:.5rem}
+#tab-exp1.active>.card{flex:1;min-height:0;display:flex;flex-direction:column;margin-bottom:0;overflow:hidden}
+#tab-exp1.active .lab-strip{flex-shrink:0}
+#tab-exp1.active .lab-main{flex:1;min-height:0;align-items:stretch!important}
+#tab-exp1.active .lab-main>div:first-child{display:flex;flex-direction:column;min-height:0}
+#tab-exp1.active #cvChop{flex:1;min-height:0;width:100%;display:block}
+#tab-exp1.active .cv-label{flex-shrink:0;font-size:.75rem}
+#tab-exp1.active .lab-side{overflow-y:auto;min-height:0}
+#tab-exp1.active>.nxt{padding-top:.35rem}
 
 /* ── Life sidebar ── */
 .life-layout{display:grid;grid-template-columns:195px 1fr;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:var(--card);margin-bottom:.65rem}
@@ -194,7 +193,6 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
   <nav class="tabs">
     <button class="tab active" data-tab="intro" onclick="go('intro')">📌 學習目標</button>
     <button class="tab" data-tab="exp1" onclick="go('exp1')">💡 實驗一：光線</button>
-    <button class="tab" data-tab="exp2" onclick="go('exp2')">🪙 實驗二：硬幣</button>
     <button class="tab" data-tab="principle" onclick="go('principle')">💡 折射原理</button>
     <button class="tab" data-tab="record" onclick="go('record')">🏆 闖關大挑戰</button>
   </nav>
@@ -207,16 +205,13 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
   <h2 class="stitle">📌 學習目標</h2>
   <div class="g3">
     <div class="card goal-card"><div class="goal-icon">👁️</div><div class="goal-title">觀察折射現象</div><div class="goal-desc">觀察光線穿越不同介質交界面時的彎折現象</div></div>
-    <div class="card goal-card"><div class="goal-icon">🔍</div><div class="goal-title">探究折射原因</div><div class="goal-desc">了解竹籤插水中看起來斷掉、硬幣變兩個的科學原因</div></div>
+    <div class="card goal-card"><div class="goal-icon">🔍</div><div class="goal-title">探究折射原因</div><div class="goal-desc">了解光穿越不同介質時看起來偏折的科學原因</div></div>
     <div class="card goal-card"><div class="goal-icon">📐</div><div class="goal-title">整理折射規律</div><div class="goal-desc">能用入射角、折射角與介質差異說明光路變化</div></div>
   </div>
   <h2 class="stitle" style="margin-top:.9rem">🧰 實驗器材</h2>
   <div class="card">
     <div class="mat-grid">
       <div class="mat-item"><div class="mi">💡</div><div class="mn">光線</div></div>
-      <div class="mat-item"><div class="mi">🪙</div><div class="mn">硬幣（數個）</div></div>
-      <div class="mat-item"><div class="mi">📦</div><div class="mn">大方形盒</div></div>
-      <div class="mat-item"><div class="mi">📦</div><div class="mn">小方形盒</div></div>
       <div class="mat-item"><div class="mi">💧</div><div class="mn">水</div></div>
       <div class="mat-item"><div class="mi">🫒</div><div class="mn">食用油</div></div>
     </div>
@@ -280,62 +275,6 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
           <p>光從空氣（n=1.00）進入水（n=1.33）或油（n=1.47）時，速度<strong>減慢</strong>，傳播方向<strong>靠近法線</strong>，產生折射。</p>
           <p>光穿越不同介質的界面時，傳播方向改變，在界面處產生<strong>彎折</strong>！</p>
           <p>介質越多、界面越多，光線就彎折越多次。</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="nxt" style="margin-top:.65rem"><button class="btn bp" onclick="go('exp2')">前往實驗二 →</button></div>
-</div>
-
-<!-- ════ EXP 2: COIN — fully interactive ════ -->
-<div class="panel" id="tab-exp2">
-  <div class="ebadge b2">🪙 實驗二</div>
-  <h2 class="stitle">硬幣放入水中：找到真正的硬幣！</h2>
-  <div class="card">
-
-    <!-- Controls -->
-    <div class="lab-strip">
-      <div class="ctrl-grp">
-        <span class="cg-lbl">💧 水位：<strong id="wPct" style="color:var(--blue)">0%</strong></span>
-        <input type="range" id="slWater" min="0" max="100" value="0" oninput="setWater(+this.value)">
-      </div>
-      <div class="ctrl-grp">
-        <span class="cg-lbl">⚙️ 顯示</span>
-        <label class="chk-lbl"><input type="checkbox" id="showRays" onchange="redrawE2()"> 光線路徑</label>
-      </div>
-      <div class="ctrl-grp">
-        <span class="cg-lbl">&nbsp;</span>
-        <button class="lbtn" id="bAuto" onclick="autoFill()">▶ 自動加水</button>
-      </div>
-    </div>
-
-    <!-- Two-box canvas + side panel -->
-    <div class="lab-main">
-      <div>
-        <canvas id="cvCoin" width="520" height="325" style="cursor:crosshair;max-width:100%"></canvas>
-        <div class="cv-label">👆 點擊圖中，找找硬幣<strong>真正在的位置</strong>（兩個容器都可以點）</div>
-      </div>
-      <div class="lab-side">
-        <div class="side-blk">
-          <div class="sb-ttl">👁️ 你看到幾個硬幣？</div>
-          <div id="coinObs" style="font-size:.82rem;color:var(--dim);line-height:1.65">加水後仔細觀察...</div>
-        </div>
-        <div class="side-blk">
-          <div class="sb-ttl">🎯 尋找真正的硬幣</div>
-          <p style="font-size:.78rem;color:var(--dim)">點擊圖中，你認為硬幣<strong>真正在哪裡</strong>？</p>
-          <div id="coinFB" style="min-height:2.2rem;margin-top:.4rem;font-size:.82rem;font-weight:700;line-height:1.55"></div>
-        </div>
-        <div class="side-blk">
-          <div class="sb-ttl">📊 大小方形盒比較</div>
-          <div style="font-size:.8rem;line-height:1.65;color:var(--dim)">兩種容器都會看到<strong style="color:var(--text)">2 個硬幣</strong>，現象<strong style="color:var(--text)">相似</strong>！<br>折射效果與容器大小<strong style="color:var(--orange)">無關</strong>。</div>
-        </div>
-        <button class="btn bo" style="width:100%;font-size:.8rem" onclick="revE2()">💡 了解折射原因</button>
-        <div id="e2exp" class="hidden ebox">
-          <p>硬幣的光沿<strong>兩條路徑</strong>進入眼睛：</p>
-          <p>① 穿過水面（折射）→ 影像偏高 = <strong>虛像</strong></p>
-          <p>② 不穿水面 → 位置接近真實硬幣</p>
-          <p>所以看到<strong>兩個影像</strong>！</p>
         </div>
       </div>
     </div>
@@ -448,7 +387,6 @@ input[type=range]{accent-color:var(--blue);width:130px;display:block}
         <tbody>
           <tr><td>吸管/竹籤看起來彎折</td><td>空氣 → 水</td><td>光靠近法線，影像偏移</td></tr>
           <tr><td>游泳池底看起來較淺</td><td>水 → 空氣</td><td>光遠離法線，影像偏上</td></tr>
-          <tr><td>硬幣看起來變兩個</td><td>水 → 空氣（兩條路徑）</td><td>產生虛像，偏離真實位置</td></tr>
           <tr><td>彩虹</td><td>空氣 → 水珠 → 空氣</td><td>不同顏色折射率不同</td></tr>
           <tr><td>海市蜃樓</td><td>冷空氣 → 熱空氣</td><td>連續折射，光線彎曲</td></tr>
         </tbody>
@@ -502,7 +440,6 @@ function go(id){
   document.getElementById('tab-'+id).classList.add('active');
   document.getElementById('content').scrollTop=0;
   if(id==='exp1') setTimeout(resizeChopCv,80);
-  if(id==='exp2') setTimeout(resizeCoinCv,80);
   if(id==='principle') setTimeout(()=>{drawPrin(1);drawPCards();},60);
   if(id==='life') setTimeout(()=>selLife(curLife),60);
   if(id==='record') setTimeout(initQuiz,50);
@@ -517,16 +454,6 @@ function resizeChopCv(){
     delete cv.dataset.lw;delete cv.dataset.lh;
     cv.setAttribute('width',w);cv.setAttribute('height',h);
     e1Upd();
-  });
-}
-function resizeCoinCv(){
-  const cv=document.getElementById('cvCoin');if(!cv)return;
-  requestAnimationFrame(()=>{
-    const w=Math.round(cv.clientWidth),h=Math.round(cv.clientHeight);
-    if(!w||!h)return;
-    delete cv.dataset.lw;delete cv.dataset.lh;
-    cv.setAttribute('width',w);cv.setAttribute('height',h);
-    redrawE2();
   });
 }
 
@@ -786,142 +713,6 @@ function drawCont(ctx,bx,by,bw,bh,layers,deg){
     ctx.fillStyle='rgba(255,60,50,.9)'; ctx.strokeStyle='rgba(255,150,140,.6)'; ctx.lineWidth=1.5;
     ctx.beginPath(); ctx.arc(px,py,Math.max(4,bw*0.022),0,Math.PI*2); ctx.fill(); ctx.stroke();
   });
-}
-
-/* ═══════════════════════════════
-   EXP 2 — COIN
-═══════════════════════════════ */
-let coinW2=0, autoId=null;
-
-function setWater(v){
-  coinW2=v;
-  document.getElementById('wPct').textContent=v+'%';
-  updCoinObs();
-  redrawE2();
-}
-
-function autoFill(){
-  if(autoId){clearInterval(autoId);autoId=null;document.getElementById('bAuto').textContent='▶ 自動加水';return;}
-  document.getElementById('bAuto').textContent='⏹ 停止';
-  autoId=setInterval(()=>{
-    if(coinW2<100){
-      coinW2++; document.getElementById('slWater').value=coinW2;
-      document.getElementById('wPct').textContent=coinW2+'%';
-      updCoinObs(); redrawE2();
-    } else {clearInterval(autoId);autoId=null;document.getElementById('bAuto').textContent='▶ 自動加水';}
-  },45);
-}
-
-function updCoinObs(){
-  const el=document.getElementById('coinObs');
-  if(coinW2<5) el.innerHTML='容器裡只有空氣，硬幣正常地在底部。';
-  else if(coinW2<30) el.innerHTML='水位還低，硬幣看起來還是 <strong>1 個</strong>...';
-  else if(coinW2<55) el.innerHTML='咦？仔細看，好像出現了 <strong style="color:var(--orange)">2 個硬幣</strong>？';
-  else el.innerHTML='<strong>大小方形盒都看到 <span style="color:var(--green)">2 個硬幣</span></strong>！<br>現象相同——折射與容器大小無關！';
-}
-
-function revE2(){document.getElementById('e2exp').classList.toggle('hidden');}
-
-/* 兩個容器的佈局常數 */
-const BOX_L={bx:12, by:20, bw:195, bh:230, lbl:'大方形盒'};
-const BOX_S={bx:248, by:48, bw:140, bh:202, lbl:'小方形盒'};
-
-function drawBox(ctx,box,rays){
-  const {bx,by,bw,bh,lbl}=box;
-  const bBot=by+bh;
-  const wH=(coinW2/100)*(bh-12), wY=bBot-wH;
-  if(coinW2>0){
-    const g=ctx.createLinearGradient(bx,wY,bx,bBot);
-    g.addColorStop(0,'rgba(0,120,210,.12)'); g.addColorStop(1,'rgba(0,70,165,.32)');
-    ctx.fillStyle=g; ctx.fillRect(bx,wY,bw,wH);
-    ctx.strokeStyle='rgba(120,210,255,.62)'; ctx.lineWidth=1.8; ctx.setLineDash([]);
-    ctx.beginPath();
-    for(let x=bx;x<=bx+bw;x+=2){
-      const wy=wY+Math.sin(((x-bx)/bw)*Math.PI*5+waveT)*1.6;
-      x===bx?ctx.moveTo(x,wy):ctx.lineTo(x,wy);
-    }
-    ctx.stroke();
-  }
-  ctx.strokeStyle='rgba(72,202,228,.52)'; ctx.lineWidth=2; ctx.strokeRect(bx,by,bw,bh);
-  const cX=bx+bw/2, cY=bBot-17;
-  const rX=Math.min(bw*.28,22), rY=Math.min(rX*.42,8);
-  const cg=ctx.createRadialGradient(cX-rX*.3,cY-rY*.5,1,cX,cY,rX);
-  cg.addColorStop(0,'#f0c94a'); cg.addColorStop(.7,'#d4a020'); cg.addColorStop(1,'#a07010');
-  ctx.fillStyle=cg; ctx.strokeStyle='#8a6010'; ctx.lineWidth=1.5;
-  ctx.beginPath(); ctx.ellipse(cX,cY,rX,rY,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
-  ctx.fillStyle='rgba(0,0,0,.3)'; ctx.font=`bold ${Math.round(rX*.48)}px sans-serif`; ctx.textAlign='center';
-  ctx.fillText('$',cX,cY+rX*.18);
-  if(coinW2>18){
-    const depth=cY-wY;
-    const vY2=depth>0?wY-depth*(1/1.33)*(coinW2/100):cY;
-    const al=Math.min((coinW2-18)/45,1);
-    if(rays&&coinW2>30){
-      const eX=bx+bw+8, eY=by+20;
-      ctx.setLineDash([4,4]);
-      [[bx+bw*.35,eY],[bx+bw*.65,eY+10]].forEach(([rx,ey])=>{
-        ctx.strokeStyle=`rgba(255,210,40,${al*.55})`; ctx.lineWidth=1.3;
-        ctx.beginPath(); ctx.moveTo(cX,cY); ctx.lineTo(rx,wY); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(rx,wY); ctx.lineTo(eX,ey); ctx.stroke();
-        ctx.strokeStyle=`rgba(255,210,40,${al*.18})`;
-        ctx.beginPath(); ctx.moveTo(rx,wY); ctx.lineTo(cX,vY2-10); ctx.stroke();
-      });
-      ctx.setLineDash([]);
-      ctx.font='16px sans-serif'; ctx.textAlign='left';
-      ctx.fillStyle=`rgba(255,255,255,${al})`; ctx.fillText('👁️',eX,eY+14);
-    }
-    ctx.fillStyle=`rgba(212,168,40,${al*.35})`; ctx.strokeStyle=`rgba(200,155,20,${al*.6})`; ctx.lineWidth=1.5;
-    ctx.setLineDash([4,4]);
-    ctx.beginPath(); ctx.ellipse(cX,vY2,rX,rY,0,0,Math.PI*2); ctx.fill(); ctx.stroke(); ctx.setLineDash([]);
-    ctx.fillStyle=`rgba(144,224,239,${al})`; ctx.font=`bold 9px "Noto Sans TC",sans-serif`;
-    ctx.textAlign='center'; ctx.fillText('虛像',cX,vY2-rY-5);
-  }
-  ctx.fillStyle='rgba(200,220,255,.42)'; ctx.font='10px "Noto Sans TC",sans-serif'; ctx.textAlign='left';
-  ctx.fillText('空氣',bx+4,by+13);
-  if(coinW2>4){ctx.fillStyle='rgba(100,185,255,.46)'; ctx.fillText('水',bx+4,wY+13);}
-  ctx.fillStyle='rgba(144,224,239,.75)'; ctx.font='bold 10px "Noto Sans TC",sans-serif'; ctx.textAlign='center';
-  ctx.fillText(lbl,bx+bw/2,by+bh+14);
-}
-
-function redrawE2(){
-  const cv=document.getElementById('cvCoin'); if(!cv)return;
-  const {ctx,W,H}=lbg(cv,440,275);
-  const rays=document.getElementById('showRays')?.checked;
-  drawBox(ctx,BOX_L,rays);
-  drawBox(ctx,BOX_S,rays);
-  // Water % label
-  ctx.fillStyle='rgba(72,202,228,.72)'; ctx.font='bold 10px sans-serif'; ctx.textAlign='center';
-  ctx.fillText(`水位 ${Math.round(coinW2)}%`, W/2, 14);
-}
-
-/* coin canvas click — find the real coin */
-document.addEventListener('DOMContentLoaded',()=>{
-  const cv=document.getElementById('cvCoin'); if(!cv)return;
-  cv.addEventListener('click',e=>{
-    if(coinW2<20){setCoinFB('先加一些水（至少 20%），再來找找看！','var(--dim)');return;}
-    const rect=cv.getBoundingClientRect();
-    // Normalize to design space (440×275) regardless of canvas size/DPR
-    const mx=(e.clientX-rect.left)*(440/rect.width);
-    const my=(e.clientY-rect.top)*(275/rect.height);
-    function check(box){
-      const {bx,by,bw,bh}=box;
-      const bBot=by+bh, wH=(coinW2/100)*(bh-12), wY=bBot-wH;
-      const cX=bx+bw/2, cY=bBot-17;
-      const depth=cY-wY;
-      const vY2=depth>0?wY-depth*(1/1.33)*(coinW2/100):cY;
-      if(Math.hypot(mx-cX,my-cY)<26) return 'real';
-      if(Math.hypot(mx-cX,my-vY2)<26) return 'virt';
-      return null;
-    }
-    const r=check(BOX_L)||check(BOX_S);
-    if(r==='real') setCoinFB('🎉 答對了！那才是硬幣<strong>真正的位置</strong>！','var(--green)');
-    else if(r==='virt') setCoinFB('那是折射產生的<strong>虛像</strong>！硬幣實際上在更下面。','var(--orange)');
-    else setCoinFB('沒點到！再試試看。','var(--dim)');
-  });
-});
-
-function setCoinFB(msg,color){
-  const el=document.getElementById('coinFB');
-  el.innerHTML=msg; el.style.color=color;
 }
 
 /* ═══════════════════════════════
@@ -1487,16 +1278,6 @@ const QUIZ=[
    a:2,
    ex:'三層介質有兩個界面（空氣-油、油-水），每個界面都折射一次，所以竹籤看起來斷成3段！'},
 
-  {q:'硬幣放入裝水的方形盒中加水後，我們可以看到幾個硬幣的影像？',
-   o:['0個（完全看不到了）','1個（和平常一樣）','2個（多了一個折射產生的虛像）','3個或更多'],
-   a:2,
-   ex:'光沿兩條路徑進入眼睛：一條穿過水面（折射，形成虛像），一條不穿水面（接近實際位置），所以看到2個影像！'},
-
-  {q:'大方形盒和小方形盒都裝水並放入硬幣，兩者的折射現象比較？',
-   o:['只有大方形盒才看得到硬幣變兩個','只有小方形盒才看得到硬幣變兩個','兩種方形盒都看得到硬幣變兩個，現象相似','兩種方形盒都看不到硬幣變兩個'],
-   a:2,
-   ex:'折射效果與容器大小無關，取決於水的深度和觀察角度。大小方形盒加水後，現象相似！'},
-
   {q:'彩虹是怎麼形成的？',
    o:['太陽光照射雲朵時，雲朵把光分成七色反射出來','雨水中的色素把白光染成七種顏色','不同顏色的光在水珠中折射率略不同，因此分散成七色','空氣中的水珠像鏡子反射陽光七次'],
    a:2,
@@ -1635,16 +1416,13 @@ function launchConfetti(){
 (function loop(){
   waveT+=0.055;
   const e1=document.getElementById('tab-exp1')?.classList.contains('active');
-  const e2=document.getElementById('tab-exp2')?.classList.contains('active');
   if(e1) drawChopScene(+document.getElementById('slAng').value,getLayers(),cmpMode);
-  if(e2) redrawE2();
   requestAnimationFrame(loop);
 })();
 
 /* init */
 window.addEventListener('load',()=>{
   updateLayerPanel(getLayers(),38);
-  redrawE2();
   drawPrin();
   const slP=document.getElementById('slPrinAng');
   if(slP){ const rA=Math.asin(Math.sin(+slP.value*Math.PI/180)/1.33); document.getElementById('prinRefVal').textContent=Math.round(rA*180/Math.PI)+'°'; }
@@ -1654,7 +1432,6 @@ window.addEventListener('load',()=>{
 
 window.addEventListener('resize',()=>{
   if(document.getElementById('tab-exp1')?.classList.contains('active')) resizeChopCv();
-  if(document.getElementById('tab-exp2')?.classList.contains('active')) resizeCoinCv();
 });
 </script>
 </body>
